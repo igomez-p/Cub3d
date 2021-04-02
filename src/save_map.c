@@ -76,13 +76,13 @@ char	*info_map(char *line, char *stc)
 static void player_dir(t_cub *c, int x, int y)
 {
 	if (c->map[x][y] == NORTE)
-		c->player.dirx = -1.0;
+		c->mov.dirx = -1.0;
 	else if (c->map[x][y] == SUR)
-		c->player.dirx = 1.0;
+		c->mov.dirx = 1.0;
 	else if (c->map[x][y] == ESTE)
-		c->player.diry = 1.0;
+		c->mov.diry = 1.0;
 	else if (c->map[x][y] == OESTE)
-		c->player.diry = -1.0;
+		c->mov.diry = -1.0;
 }
 
 void searchPlayer(t_cub *cub)
@@ -95,8 +95,8 @@ void searchPlayer(t_cub *cub)
 		{
 			if (cub->map[k][i] == NORTE || cub->map[k][i] == SUR || cub->map[k][i] == OESTE || cub->map[k][i] == ESTE)
 			{
-				cub->player.x = k;
-				cub->player.y = i;
+				cub->mov.posx = k;
+				cub->mov.posy = i;
 				player_dir(cub, k, i);
 				return ;
 			}
@@ -104,4 +104,5 @@ void searchPlayer(t_cub *cub)
 		}
 		k++;
 	}
+	clean_exit(cub, "No se encuentra jugador\n", 1);
 }

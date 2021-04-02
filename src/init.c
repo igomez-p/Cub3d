@@ -19,17 +19,19 @@ static void init_file_vble(t_cub *info)
 
 static void init_mov_vble(t_cub *info)
 {
-    info->player.left = 0;
-    info->player.right = 0;
-    info->player.up = 0;
-    info->player.down = 0;
-    info->player.x = 0;
-    info->player.y = 0;
-    info->player.dirx = 0.0;
-    info->player.diry = 0.0;
-    info->player.angle = 0.0;
-    info->player.v = 0.0;
-    info->player.turn = 0.0;
+    info->mov.left = 0;
+    info->mov.right = 0;
+    info->mov.up = 0;
+    info->mov.down = 0;
+    info->mov.posx = 0.0;
+    info->mov.posy = 0.0;
+    info->mov.dirx = 0.0;
+    info->mov.diry = 0.0;
+    info->mov.planex = 0.0;
+    info->mov.planey = 0.0;
+    /*info->mov.angle = 0.0;
+    info->mov.v = 0.0;
+    info->mov.turn = 0.0;*/
 
     info->cam.left = 0;
     info->cam.right = 0;
@@ -37,15 +39,15 @@ static void init_mov_vble(t_cub *info)
 
 static void init_raycast_vble(t_cub *info)
 {
-    info->ray.alt_ant = 0.0;
+   /* info->ray.alt_ant = 0.0;
     info->ray.ntecho_ant = 0.0;
     info->ray.nsuelo_ant = 0.0;
     info->ray.last_time = 0.0;
-    info->ray.delta = 0.0;
+    info->ray.delta = 0.0;*/
 
     info->libx.mlx = NULL;
 	info->libx.window = NULL;
-	info->libx.img = NULL;
+	info->win.img = NULL;
 }
 
 void	init_struct(t_cub *info)
@@ -55,6 +57,6 @@ void	init_struct(t_cub *info)
     init_raycast_vble(info);
 
     info->nrows = 0;
-    info->resz_map = 0;
-    info->resz_player = 0;
+   // info->resz_map = 0;
+   // info->resz_player = 0;
 }

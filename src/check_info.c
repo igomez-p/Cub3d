@@ -52,3 +52,27 @@
 	}
 	return 0;
 }*/
+
+void eliminarEspacios(t_cub *cub)
+{
+    char **map_aux = NULL;
+    int filas = 0, colum = 0, y = 0, x = 0;
+    while (cub->map[filas])
+    {
+        while (cub->map[filas][colum])
+        {
+            if (cub->map[filas][colum] != NADA)
+            {
+                map_aux[y][x] = cub->map[filas][colum];
+                x++;
+            }
+            colum++;
+        }
+        y++;
+        filas++;
+    }
+	cub->nrows = filas;
+    cub->map = map_aux;
+}
+
+// TODO: Comprobar que el mapa esté rodeado por muros

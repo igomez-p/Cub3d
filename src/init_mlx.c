@@ -63,16 +63,16 @@ static void get_textures_addr(t_cub *c)
 
 void    init_mlx_func(t_cub *c)
 {
-    c->libx.height = c->res.rend_y/2;
-    c->libx.width = c->res.rend_x/2;
+    c->win.hei = c->res.rend_y/2;
+    c->win.wid = c->res.rend_x/2;
 
     if (!(c->libx.mlx = mlx_init()))
 		clean_exit(c, "Error al inicializar MLX\n", 1);
 	if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->res.rend_x, c->res.rend_y, "Cub3D")))
 		clean_exit(c, "Error new window\n", 1);
-	if (!(c->libx.img = mlx_new_image(c->libx.mlx, c->libx.width, c->libx.height)))
+	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))  // o c->win.hei y c->win.wid
 		clean_exit(c, "Error new image\n", 1);
-	c->win.data = (int *)mlx_get_data_addr(c->libx.img, &c->win.bpp, &c->win.sz_line, &c->win.endian);
+	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
 
     init_tex_vble(c);
     init_tex_vble2(c);

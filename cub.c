@@ -51,28 +51,6 @@ void	read_cub(char *filename, t_cub *info)
 	}
 }
 
-void eliminarEspacios(t_cub *cub)
-{
-    char **map_aux = NULL;
-    int filas = 0, colum = 0, y = 0, x = 0;
-    while (cub->map[filas])
-    {
-        while (cub->map[filas][colum])
-        {
-            if (cub->map[filas][colum] != NADA)
-            {
-                map_aux[y][x] = cub->map[filas][colum];
-                x++;
-            }
-            colum++;
-        }
-        y++;
-        filas++;
-    }
-	cub->nrows = filas;
-    cub->map = map_aux;
-}
-
 int		main(int argc, char *argv[])
 {
 	// argumento 1: archivo rt con info sobre el elemento
@@ -98,7 +76,7 @@ int		main(int argc, char *argv[])
 	mlx_hook(cub.libx.window, 3, 3, key_handler, &cub);	// KEYRELESASE
 	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, 0);	// CLOSE WINDOW
 
-	mlx_put_image_to_window(cub.libx.mlx, cub.libx.window, cub.no.img, 50, 50);
+	//mlx_put_image_to_window(cub.libx.mlx, cub.libx.window, cub.no.img, 50, 50);
 	
 	//mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
 

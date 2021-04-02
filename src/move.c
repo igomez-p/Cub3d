@@ -3,34 +3,34 @@
 void move_keys(t_cub *c, int speed)
 {
     //move forward if no wall in front of you
-    if(c->player.up)
+    if(c->mov.up)
     {
-      if(worldMap[int(c->player.x + c->player.dirx * speed)][int(c->player.y)] == false) c->player.x += c->player.dirx * speed;
-      if(worldMap[int(c->player.x)][int(c->player.y + c->player.diry * speed)] == false) c->player.y += c->player.diry * speed;
+      if(c->map[int(c->mov.x + c->mov.dirx * speed)][int(c->mov.y)] == false) c->mov.x += c->mov.dirx * speed;
+      if(c->map[int(c->mov.x)][int(c->mov.y + c->mov.diry * speed)] == false) c->mov.y += c->mov.diry * speed;
     }
     //move backwards if no wall behind you
-    if(c->player.down)
+    if(c->mov.down)
     {
-      if(worldMap[int(c->player.x - c->player.dirx * speed)][int(c->player.y)] == false) c->player.x -= c->player.dirx * speed;
-      if(worldMap[int(c->player.x)][int(c->player.y - c->player.diry * speed)] == false) c->player.y -= c->player.diry * speed;
+      if(c->map[int(c->mov.x - c->mov.dirx * speed)][int(c->mov.y)] == false) c->mov.x -= c->mov.dirx * speed;
+      if(c->map[int(c->mov.x)][int(c->mov.y - c->mov.diry * speed)] == false) c->mov.y -= c->mov.diry * speed;
     }
 }
 
 int rotate_keys(t_cub *c, int speed)
 {
     //rotate to the right
-    if(keyDown(SDLK_RIGHT))
+    if(keyDown(c->cam.right))
     {
       //both camera direction and camera plane must be rotated
-      double oldDirX = c->player.dirx;
-      c->player.dirx = c->player.dirx * cos(-speed) - c->player.diry * sin(-speed);
-      c->player.dirx = oldDirX * sin(-speed) + c->player.diry * cos(-speed);
+      double oldDirX = c->mov.dirx;
+      c->mov.dirx = c->mov.dirx * cos(-speed) - c->mov.diry * sin(-speed);
+      c->mov.dirx = oldDirX * sin(-speed) + c->mov.diry * cos(-speed);
       double oldPlaneX = planex;
       planex = planex * cos(-speed) - planey * sin(-speed);
       planey = oldPlaneX * sin(-speed) + planey * cos(-speed);
     }
     //rotate to the left
-    if(keyDown(SDLK_LEFT))
+    if(keyDown(c->cam.left))
     {
       //both camera direction and camera plane must be rotated
       double oldDirX = dirx;

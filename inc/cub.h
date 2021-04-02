@@ -56,16 +56,6 @@ typedef struct	s_resolucion {
 				int rend_y;
 }				t_resolucion;
 
-typedef struct	s_img_tex {
-				void *img;
-				int *addr;
-				int hei;
-				int wid;
-				int sz;
-				int endian;
-				int bpp;
-} t_img_tex;
-
 typedef struct	s_texturas {
 				char *path_no;
 				char *path_so;
@@ -79,42 +69,35 @@ typedef struct	s_colores {
 				int rgb_techo[3];
 }				t_colores;
 
-typedef struct	mlx_img_list_s
-{
-  int			width;
-  int			height;
-  char			*buffer;
-  float			vertexes[8];
-  struct mlx_img_list_s	*next;
-} mlx_img_list_t;
-
 typedef struct	s_minilibx {
 				void	*mlx;
 				void	*window;
-				void	*img;
-				int		height;
-				int		width;
 }				t_minilix;
 
-typedef struct	s_window {
-				int sz_line;
+typedef struct	s_img {
+				void *img;
+				int *addr;
+				int hei;
+				int wid;
+				int sz;
 				int endian;
 				int bpp;
-				int *data;
-}				t_window;
+} t_img;
 
 typedef struct	s_mov {
 				int left;
 				int right;
 				int up;
 				int down;
-				int x;
-				int y;
+				float posx;
+				float posy;
 				float dirx;
 				float diry;
-				float angle;
+				float planex;
+				float planey;
+				/*float angle;
 				float v;
-				float turn;
+				float turn;*/
 }				t_mov;
 
 typedef struct	s_camera {
@@ -123,11 +106,11 @@ typedef struct	s_camera {
 }				t_camera;
 
 typedef struct	s_raycasting {
-				float alt_ant;
+			/*	float alt_ant;
 				float ntecho_ant;
 				float nsuelo_ant;
 				float last_time;
-				float delta;
+				float delta;*/
 }				t_raycasting;
 
 typedef struct	s_cub {
@@ -137,18 +120,18 @@ typedef struct	s_cub {
 				char **map;
 				int	nrows;
 				t_minilix libx;
-				t_window	win;
-				t_mov		player;
+				t_img win;
+				t_img no;
+				t_img so;
+				t_img ea;
+				t_img we;
+				t_img sp;
+				t_mov		mov;
 				t_camera	cam;
 				t_raycasting ray;
-				t_img_tex no;
-				t_img_tex so;
-				t_img_tex ea;
-				t_img_tex we;
-				t_img_tex sp;
 
-				int	resz_map;
-				int resz_player;
+				/*int	resz_map;
+				int resz_player;*/
 }				t_cub;
 
 void			info_tex(char *line, t_cub *info);

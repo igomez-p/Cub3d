@@ -16,13 +16,13 @@ int key_handler(int key, t_cub *c)
 {
 	printf("key %d\n\r", key);
 	if (key == (int)KEY_W_)
-		c->player.up ^= 1;
+		c->mov.up ^= 1;
 	else if (key == (int)KEY_A_)
-		c->player.left ^= 1;
+		c->mov.left ^= 1;
 	else if (key == (int)KEY_S_)
-		c->player.down ^= 1;
+		c->mov.down ^= 1;
 	else if (key == (int)KEY_D_)
-		c->player.right ^= 1;
+		c->mov.right ^= 1;
 	else if (key == (int)KEY_RIGHT_)
 		c->cam.right ^= 1;
 	else if (key == (int)KEY_LEFT_)
@@ -96,8 +96,8 @@ void	clean_exit(t_cub *c, char *str, int error)
 
 	if (c->libx.window)
 		mlx_destroy_window(c->libx.mlx, c->libx.window);
-	if (c->libx.img)
-		mlx_destroy_image(c->libx.mlx, c->libx.img);
+	if (c->win.img)
+		mlx_destroy_image(c->libx.mlx, c->win.img);
 	
 	destroy_textures(c);
 		
