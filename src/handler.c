@@ -12,46 +12,94 @@
 
 #include "../inc/cub.h"
 
-// Tanto para KeyPress como para KeyRelease (^: xor)
 int key_handler(int key, t_cub *c)
 {
 	printf("key %d\n\r", key);
-	if (key == (int)KEY_W || key == (int)'w')
+	if (key == (int)KEY_W_)
 		c->player.up ^= 1;
-	else if (key == (int)KEY_A || key == (int)'a')
+	else if (key == (int)KEY_A_)
 		c->player.left ^= 1;
-	else if (key == (int)KEY_S || key == (int)'s')
+	else if (key == (int)KEY_S_)
 		c->player.down ^= 1;
-	else if (key == (int)KEY_D || key == (int)'d')
+	else if (key == (int)KEY_D_)
 		c->player.right ^= 1;
-	else if (key == (int)KEY_RIGHT)
+	else if (key == (int)KEY_RIGHT_)
 		c->cam.right ^= 1;
-	else if (key == (int)KEY_LEFT)
+	else if (key == (int)KEY_LEFT_)
 		c->cam.left ^= 1;	
-	/*else if (key == (int)KEY_SPACE)
+	else if (key == (int)KEY_SPACE_)
 		printf("key space %d\n\r", key);
-	else if (key == (int)KEY_ESC)
-		exit_program(c);
-*/
-	return 1;
+	else if (key == (int)KEY_ESC_)
+		exit_handler(c);
+
+    return 1;
 }
 
-int			exit_handler(t_cub *c)
+int	exit_handler(t_cub *c)
 {
-	//int			i;
+	clean_exit(c, "Closing program...\n", 0);
+    return (0);
+}
 
-	write(1, "Closing program...\n", 19);
-	//i = 0;
+static void	free_map_textures(t_cub *c)
+{
+	int i;
 
-//	TODO: LIBERAR MAPA
+	i = 0;
+	if (c->map)
+	{
+		while (c->map[i])
+			free(c->map[i++]);
 
-//	if (t->fd > 0)
-//		close(t->fd);
-	if (c->libx.img)
-		mlx_destroy_image(c->libx.mlx, c->libx.img);
+		free(c->map);
+	}
+	
+	if (c->tex.path_no)
+		free(c->tex.path_no);
+	if (c->tex.path_so)
+		free(c->tex.path_so);
+	if (c->tex.path_ea)
+		free(c->tex.path_ea);
+	if (c->tex.path_we)
+		free(c->tex.path_we);
+	if (c->tex.path_sp)
+		free(c->tex.path_sp);
+}
+
+static void destroy_textures(t_cub *c)
+{
+	if (c->no.img)
+		mlx_destroy_image(c->libx.mlx, c->no.img);
+	if (c->so.img)
+		mlx_destroy_image(c->libx.mlx, c->so.img);
+	if (c->we.img)
+		mlx_destroy_image(c->libx.mlx, c->we.img);
+	if (c->ea.img)
+		mlx_destroy_image(c->libx.mlx, c->ea.img);
+	if (c->sp.img)
+		mlx_destroy_image(c->libx.mlx, c->sp.img);
+}
+
+void	clean_exit(t_cub *c, char *str, int error)
+{
+	int		len;
+
+	len = ft_strlen(str);
+	if (error)
+		write(1, "Error\n", 6);
+	if (!str)
+		perror("");
+	else
+		write(1, str, len);
+
+	free_map_textures(c);
+
 	if (c->libx.window)
 		mlx_destroy_window(c->libx.mlx, c->libx.window);
-
-	exit(0);
-	return (0);
+	if (c->libx.img)
+		mlx_destroy_image(c->libx.mlx, c->libx.img);
+	
+	destroy_textures(c);
+		
+	exit(1);
 }

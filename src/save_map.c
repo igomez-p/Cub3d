@@ -12,7 +12,7 @@
 
 #include "../inc/cub.h"
 
-int		len_linea(char *line)
+static int	len_linea(char *line)
 {
 	int i;
 	int cont;
@@ -29,7 +29,7 @@ int		len_linea(char *line)
 	return (cont);
 }
 
-char	*fill_map(char *line)
+static char	*fill_map(char *line)
 {
 	char	*aux;
 	int		p;
@@ -73,23 +73,16 @@ char	*info_map(char *line, char *stc)
 	return (stc);
 }
 
-int		check_errors(t_cub cub)
+static void player_dir(t_cub *c, int x, int y)
 {
-	// Mapa debe estar rodeado por muros
-	int i, j;
-
-	i = 0;
-	j = 0;
-
-	while (cub.map[0][i] && cub.map[cub.nrows-1][j])
-	{
-		if (cub.map[0][i] != MURO || cub.map[cub.nrows-1][j] != MURO)
-			return -1;
-
-		i++;
-		j++;
-	}
-	return 0;
+	if (c->map[x][y] == NORTE)
+		c->player.dirx = -1.0;
+	else if (c->map[x][y] == SUR)
+		c->player.dirx = 1.0;
+	else if (c->map[x][y] == ESTE)
+		c->player.diry = 1.0;
+	else if (c->map[x][y] == OESTE)
+		c->player.diry = -1.0;
 }
 
 void searchPlayer(t_cub *cub)
@@ -104,8 +97,7 @@ void searchPlayer(t_cub *cub)
 			{
 				cub->player.x = k;
 				cub->player.y = i;
-				cub->player.dir = cub->map[k][i];
-				printf("(%d, %d) - %c\n\r", cub->player.x, cub->player.y, cub->player.dir);
+				player_dir(cub, k, i);
 				return ;
 			}
 			i++;

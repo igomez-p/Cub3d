@@ -12,16 +12,13 @@
 
 NAME = cub3d
 
-SRC = cub.c \
-	  src/check_info.c \
-	  src/parse_info.c \
-	  src/save_info.c \
-	  src/windows.c \
-	  src/simple_map.c \
-	  src/ray.c \
-	  src/init.c \
-	  src/save_map.c \
-	  src/handler.c
+SRC = cub.c				\
+	  src/init.c		\
+	  src/init_mlx.c	\
+	  src/save_info.c	\
+	  src/save_map.c	\
+	  src/handler.c		\
+	  src/check_info.c	\
 
 LIB = library/libft.a \
 	  library/libftprintf.a \

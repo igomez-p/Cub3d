@@ -13,30 +13,42 @@
 #include "../inc/cub.h"
 #include "../inc/libftprintf.h"
 
-void	check_error(t_cub *c, char *str)
+/*static void comprobar_lecturaCub(t_cub cub)
 {
-	//int		i;
-	int		len;
-
-	len = ft_strlen(str);
-	write(1, "Error\n", 6);
-	if (!str)
-		perror("");
-	else
-		write(1, str, len);
-
-	//i = -1;
-	/*if (c->map)
+	printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
+	printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n", 
+	cub.tex.path_norte, cub.tex.path_sur, cub.tex.path_oeste, cub.tex.path_este, cub.tex.path_sprite);
+	printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_suelo[0], cub.col.rgb_suelo[1], cub.col.rgb_suelo[2],
+	cub.col.rgb_techo[0], cub.col.rgb_techo[1], cub.col.rgb_techo[2]);
+	int k = 0;
+	while (cub.map[k])
 	{
-		while (++i < c->nrows)
-			free(c->map[i]);
-		free(c->map);
-	}*/
-//	if (t->fd > 0)
-//		close(t->fd);
-	if (c->libx.window)
-		mlx_destroy_window(c->libx.mlx, c->libx.window);
-	if (c->libx.mlx)
-		mlx_destroy_image(c->libx.mlx, c->libx.img);
-	exit(1);
-}
+		int i = 0;
+		while (cub.map[k][i])
+		{
+			printf("%c", cub.map[k][i]);
+			i++;
+		}
+		printf("\n");
+		k++;
+	}
+}*/
+
+/*int		check_walls(t_cub cub)
+{
+	// Mapa debe estar rodeado por muros
+	int i, j;
+
+	i = 0;
+	j = 0;
+
+	while (cub.map[0][i] && cub.map[cub.nrows-1][j])
+	{
+		if (cub.map[0][i] != MURO || cub.map[cub.nrows-1][j] != MURO)
+			return -1;
+
+		i++;
+		j++;
+	}
+	return 0;
+}*/

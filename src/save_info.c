@@ -29,21 +29,37 @@ static char	*path_tex(char *line)
 		line[i] = '\0';
 		i--;
 	}
+
 	return (strdup(line));
 }
 
 void		info_tex(char *line, t_cub *info)
 {
 	if (!ft_strncmp(line, "NO", 2))
-		info->tex.path_norte = path_tex(line);
+	{
+		if (!(info->tex.path_no = path_tex(line)))
+			clean_exit(info, "Textura norte incorrecta\n", 1);
+	}
 	else if (!ft_strncmp(line, "SO", 2))
-		info->tex.path_sur = path_tex(line);
+	{
+		if (!(info->tex.path_so = path_tex(line)))
+			clean_exit(info, "Textura sur incorrecta\n", 1);
+	}
 	else if (!ft_strncmp(line, "WE", 2))
-		info->tex.path_oeste = path_tex(line);
+	{
+		if (!(info->tex.path_we = path_tex(line)))
+			clean_exit(info, "Textura oeste incorrecta\n", 1);
+	}
 	else if (!ft_strncmp(line, "EA", 2))
-		info->tex.path_este = path_tex(line);
+	{
+		if (!(info->tex.path_ea = path_tex(line)))
+			clean_exit(info, "Textura este incorrecta\n", 1);
+	}
 	else if (!ft_strncmp(line, "S", 1))
-		info->tex.path_sprite = path_tex(line);
+	{
+		if (!(info->tex.path_sp = path_tex(line)))
+			clean_exit(info, "Textura sprite incorrecta\n", 1);
+	}
 }
 
 static int	save_int(char **line)
@@ -74,7 +90,7 @@ void	info_res(char *line, t_cub *info)
 		info->res.rend_x = save_int(&line);
 		info->res.rend_y = save_int(&line);
 		if (info->res.rend_x <= 0 || info->res.rend_y <= 0)
-			perror("Error\nResolución incorrecta\n");
+			clean_exit(info, "Resolución de pantalla incorrecta\n", 1);
 	}
 }
 
@@ -84,25 +100,25 @@ void	info_color(char *line, t_cub *info)
 	{
 		info->col.rgb_suelo[0] = save_int(&line);
 		if (!(info->col.rgb_suelo[0] >= 0 && info->col.rgb_suelo[0] <= 255))
-			perror("Error\nValor RGB incorrecto\n");
+			clean_exit(info, "Valor R suelo incorrecto\n", 1);
 		info->col.rgb_suelo[1] = save_int(&line);
 		if (!(info->col.rgb_suelo[1] >= 0 && info->col.rgb_suelo[1] <= 255))
-			perror("Error\nValor RGB incorrecto\n");
+			clean_exit(info, "Valor G suelo incorrecto\n", 1);
 		info->col.rgb_suelo[2] = save_int(&line);
 		if (!(info->col.rgb_suelo[2] >= 0 && info->col.rgb_suelo[2] <= 255))
-			perror("Error\nValor RGB incorrecto\n");
+			clean_exit(info, "Valor B suelo incorrecto\n", 1);
 
 	}
 	else if (ft_strnstr(line, "C", 1))
 	{
 		info->col.rgb_techo[0] = save_int(&line);
 		if (!(info->col.rgb_techo[0] >= 0 && info->col.rgb_techo[0] <= 255))
-			perror("Error\nValor RGB incorrecto\n");
+			clean_exit(info, "Valor R techo incorrecto\n", 1);
 		info->col.rgb_techo[1] = save_int(&line);
 		if (!(info->col.rgb_techo[1] >= 0 && info->col.rgb_techo[1] <= 255))
-			perror("Error\nValor RGB incorrecto\n");
+			clean_exit(info, "Valor G techo incorrecto\n", 1);
 		info->col.rgb_techo[2] = save_int(&line);
 		if (!(info->col.rgb_techo[2] >= 0 && info->col.rgb_techo[2] <= 255))
-			perror("Error\nValor RGB incorrecto\n");
+			clean_exit(info, "Valor B techo incorrecto\n", 1);
 	}
 }

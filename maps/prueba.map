@@ -1,5 +1,5 @@
-R 1920 1080
-NO ./images/niño_redes.xpm
+R 1000 1000
+NO ./images/niño_redes.xpm 
 SO ./images/ladrillo.xpm
 WE ./images/niña_globo.xpm
 EA ./images/niña_globo.xpm

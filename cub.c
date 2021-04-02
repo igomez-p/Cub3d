@@ -71,76 +71,36 @@ void eliminarEspacios(t_cub *cub)
     }
 	cub->nrows = filas;
     cub->map = map_aux;
-   // mapaColum = x;
-   // mapaFilas = y;
-}
-
-static void comprobar_lecturaCub(t_cub cub)
-{
-	printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
-	printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n", 
-	cub.tex.path_norte, cub.tex.path_sur, cub.tex.path_oeste, cub.tex.path_este, cub.tex.path_sprite);
-	printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_suelo[0], cub.col.rgb_suelo[1], cub.col.rgb_suelo[2],
-	cub.col.rgb_techo[0], cub.col.rgb_techo[1], cub.col.rgb_techo[2]);
-	int k = 0;
-	while (cub.map[k])
-	{
-		int i = 0;
-		while (cub.map[k][i])
-		{
-			printf("%c", cub.map[k][i]);
-			i++;
-		}
-		printf("\n");
-		k++;
-	}
 }
 
 int		main(int argc, char *argv[])
 {
 	// argumento 1: archivo rt con info sobre el elemento
 	// argumento 2: --save
+	t_cub	cub;
+	init_struct(&cub);
 
 	if (argc < 2)
 	{
-		perror("Error\nNumero de argumentos invalido\n");
+		clean_exit(&cub, "Numero de argumentos invalido\n", 1);
 		return (-1);
 	}
 
-	t_cub	cub;
-	init_struct(&cub);
-	read_cub("maps/prueba.map", &cub);
-	comprobar_lecturaCub(cub);
+	read_cub(argv[1], &cub);
 	searchPlayer(&cub);
 
-	if (!(cub.libx.mlx = mlx_init()))
-		check_error(&cub, "Error al inicializar MLX\n");
-
-	if(!(cub.libx.window = mlx_new_window(cub.libx.mlx, cub.res.rend_x, cub.res.rend_y, "Cub3D")))
-		check_error(&cub, "Error new window\n");
-	if (!(cub.libx.img = mlx_new_image(cub.libx.mlx, cub.res.rend_x, cub.res.rend_y)))
-		check_error(&cub, "Error new image\n");
-
-	cub.win.data = (int *)mlx_get_data_addr(cub.libx.img, &cub.win.bpp, &cub.win.sz_line, &cub.win.endian);
+	init_mlx_func(&cub);
 
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
-		return 1;	//save_bmp(&cub);
+		return 1;	//save_bmp(&cub);	
 
-cub.libx.img = mlx_xpm_file_to_image(cub.libx.mlx, cub.tex.path_sprite, &cub.res.rend_x, &cub.res.rend_y);	// Para cargar las texturas desde xpm
+	mlx_hook(cub.libx.window, 2, 1, key_handler, &cub);	// KEYPRESS
+	mlx_hook(cub.libx.window, 3, 3, key_handler, &cub);	// KEYRELESASE
+	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, 0);	// CLOSE WINDOW
+
+	mlx_put_image_to_window(cub.libx.mlx, cub.libx.window, cub.no.img, 50, 50);
 	
-	if (cub.libx.img)
-		mlx_put_image_to_window(cub.libx.mlx, cub.libx.window, cub.libx.img, 0, 0);
-
-	mlx_do_key_autorepeatoff(cub.libx.mlx);
-// raycast();
-	//if (!cub.win.bpp)
-	//{
-		printf("entra\n\r");
-		mlx_hook(cub.libx.window, 2, 1, key_handler, &cub);	// KEYPRESS
-		mlx_hook(cub.libx.window, 3, 3, key_handler, &cub);	// KEYRELESASE
-		mlx_hook(cub.libx.window, 17, 0, exit_handler, 0);	// CLOSE WINDOW
-		//mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
-	//}
+	//mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
 
 	mlx_loop(cub.libx.mlx);
 	return (0);
