@@ -5,11 +5,6 @@
 #define SQUARES_SEC 5.0
 #define RADIANS_SEC 3.0
 
-static double frame_time(double time, double old_time)
-{
-    return ((time - old_time) / FRAME_TIME);
-}
-
 static void dda(t_cub *c)
 {
     while (c->ray.hit == 0)
@@ -49,7 +44,7 @@ static void ray_pos_dir(t_cub *c, int x)
         if (c->ray.dirx == 0)
             c->ray.deltax = 1;
         else
-            c->ray.deltax = abs(1/c->ray.dirx);
+            c->ray.deltax = fabs(1 / c->ray.dirx);
     }
 
     if (c->ray.dirx == 0)
@@ -59,7 +54,7 @@ static void ray_pos_dir(t_cub *c, int x)
         if (c->ray.diry == 0)
             c->ray.deltay = 1;
         else
-            c->ray.deltay = abs(1/c->ray.diry);
+            c->ray.deltay = fabs(1/c->ray.diry);
     }
 }
 
@@ -78,7 +73,7 @@ static void draw_calculus(t_cub *c)
     c->draw.start = -c->ray.lineh / 2 + c->res.rend_y / 2;
     if (c->draw.start < 0)
         c->draw.start = 0;
-    
+
     c->draw.end = c->ray.lineh / 2 + c->res.rend_y / 2;
     if (c->draw.end >= c->res.rend_y)
         c->draw.end = c->res.rend_y - 1;
@@ -128,23 +123,23 @@ static void draw_textures(t_cub *c, t_img tex, int x)
     {
         tex.y = (int)tex.pos & (tex.hei - 1);
         tex.pos += c->ray.step;
-        int color = tex.addr[tex.num][tex.hei * tex.y + tex.x];
+        int color = tex.addr[tex.wid * tex.y + tex.x];
         if (c->ray.side == 1)
             color = (color >> 1) & AND_ING;
-        
-        c->win.addr[y][x] = color;
+
+        c->win.addr[c->win.wid * y + x] = color;
     }
 }
 
 int raycaster(t_cub *c)
 {
-    double time, old_time;
+    //double time, old_time;
 
     while (1)
     {
         for (int x = 0; x < c->res.rend_x; x++)
         {
-            ray_pos_dir(c);
+            ray_pos_dir(c, x);
             step_initialSide(c);
             dda(c);
             perpRay_distance(c);
@@ -153,8 +148,8 @@ int raycaster(t_cub *c)
             wallx_value(c);
             xcoord_texture(c);
             draw_textures(c, c->no, x);
-            move_keys(c, frame_time(time, old_time) * SQUARES_SEC);
-            rotate_keys(c, frame_time(time, old_time) * RADIANS_SEC);
+            move_keys(c, 2); //, frame_time(time, old_time) * SQUARES_SEC);
+            rotate_keys(c, 2); //, frame_time(time, old_time) * RADIANS_SEC);
         }
     }
 }

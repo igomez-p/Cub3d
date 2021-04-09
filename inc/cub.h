@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/01/31 19:48:43 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/09 20:19:19 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);
 
-void step_initialSide(t_cub c);
+void step_initialSide(t_cub *c);
 void move_keys(t_cub *c, int speed);
 void rotate_keys(t_cub *c, int speed);
 int raycaster(t_cub *c);

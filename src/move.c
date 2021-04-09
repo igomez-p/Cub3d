@@ -1,29 +1,29 @@
 #include "../inc/cub.h"
 
-void step_initialSide(t_cub c)
+void step_initialSide(t_cub *c)
 {
-    c.ray.hit = 0;
+    c->ray.hit = 0;
 
-    if(c.ray.dirx < 0)
+    if(c->ray.dirx < 0)
     {
-      c.ray.stepx = -1;
-      c.ray.sidex = (c.mov.posx - c.mov.mapx) * c.ray.deltax;
+      c->ray.stepx = -1;
+      c->ray.sidex = (c->mov.posx - c->mov.mapx) * c->ray.deltax;
     }
     else
     {
-      c.ray.stepx = 1;
-      c.ray.sidex = (c.mov.mapx + 1.0 - c.mov.posx) * c.ray.deltax;
+      c->ray.stepx = 1;
+      c->ray.sidex = (c->mov.mapx + 1.0 - c->mov.posx) * c->ray.deltax;
     }
 
-    if(c.ray.diry < 0)
+    if(c->ray.diry < 0)
     {
-      c.ray.stepy = -1;
-      c.ray.sidey = (c.mov.posy - c.mov.mapy) * c.ray.deltay;
+      c->ray.stepy = -1;
+      c->ray.sidey = (c->mov.posy - c->mov.mapy) * c->ray.deltay;
     }
     else
     {
-      c.ray.stepy = 1;
-      c.ray.sidey = (c.mov.mapy + 1.0 - c.mov.posy) * c.ray.deltay;
+      c->ray.stepy = 1;
+      c->ray.sidey = (c->mov.mapy + 1.0 - c->mov.posy) * c->ray.deltay;
     }
 }
 
