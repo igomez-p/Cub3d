@@ -82,6 +82,10 @@ typedef struct	s_img {
 				int sz;
 				int endian;
 				int bpp;
+				int num;
+				int x;
+				int y;
+				double pos;
 } t_img;
 
 typedef struct	s_mov {
@@ -89,29 +93,46 @@ typedef struct	s_mov {
 				int right;
 				int up;
 				int down;
-				float posx;
-				float posy;
-				float dirx;
-				float diry;
-				float planex;
-				float planey;
-				/*float angle;
-				float v;
-				float turn;*/
+
+				int posx;
+				int posy;
+				int dirx;
+				int diry;
+				int planex;
+				int planey;
+				int mapx;
+				int mapy;
 }				t_mov;
 
 typedef struct	s_camera {
 				int left;
 				int right;
+
+				double x;
 }				t_camera;
 
 typedef struct	s_raycasting {
-			/*	float alt_ant;
-				float ntecho_ant;
-				float nsuelo_ant;
-				float last_time;
-				float delta;*/
+				double dirx;
+				double diry;
+				double sidex;
+				double sidey;
+				double deltax;
+				double deltay;
+				double perp;
+				int stepx;
+				int stepy;
+				double step;
+				int hit;
+				int side;
+				int lineh;
 }				t_raycasting;
+
+typedef struct	s_draw {
+				int start;
+				int end;
+				double wallx;
+				double wally;
+}				t_draw;
 
 typedef struct	s_cub {
 				t_resolucion res;
@@ -129,9 +150,7 @@ typedef struct	s_cub {
 				t_mov		mov;
 				t_camera	cam;
 				t_raycasting ray;
-
-				/*int	resz_map;
-				int resz_player;*/
+				t_draw draw;
 }				t_cub;
 
 void			info_tex(char *line, t_cub *info);
@@ -146,6 +165,11 @@ int				key_handler(int key, t_cub *c);
 int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);
+
+void step_initialSide(t_cub c);
+void move_keys(t_cub *c, int speed);
+void rotate_keys(t_cub *c, int speed);
+int raycaster(t_cub *c);
 
 void			eliminarEspacios(t_cub *cub);
 int				paint(t_cub *c);

@@ -1,0 +1,23 @@
+- Cuando las texturas se refieren a norte, sur, etc. quiere decir que desde la posición
+inicial del jugador hacia "arriba" es norte, hacia "abajo" es sur, etc o cada vez que el
+jugador se mueve, su frente es norte, etc?
+
+- diferencia entre planeX (camara) y dirX (mov jugador) ??
+
+- resize imagenes ?
+
+- los espacios del mapa como se gestionan ?
+
+- hay que gestionar las texturas como array de texturas ?? yo tengo una estructura
+para cada una
+
+- El tamaño de renderizado del fichero, se refiere al tamaño de pantalla o al tamaño 
+de imagen que va a ocupar el mapa ??
+
+- el loop de raycaster lo hace la minilib ?
+    - while: si hay algo nuevo que pintar
+    - for: loop minilib
+
+- h y w -> resolucion leida de fichero o tamaño recogido de imagen?
+
+- cálculo del número de textura ??

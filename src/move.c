@@ -1,43 +1,82 @@
 #include "../inc/cub.h"
 
+void step_initialSide(t_cub c)
+{
+    c.ray.hit = 0;
+
+    if(c.ray.dirx < 0)
+    {
+      c.ray.stepx = -1;
+      c.ray.sidex = (c.mov.posx - c.mov.mapx) * c.ray.deltax;
+    }
+    else
+    {
+      c.ray.stepx = 1;
+      c.ray.sidex = (c.mov.mapx + 1.0 - c.mov.posx) * c.ray.deltax;
+    }
+
+    if(c.ray.diry < 0)
+    {
+      c.ray.stepy = -1;
+      c.ray.sidey = (c.mov.posy - c.mov.mapy) * c.ray.deltay;
+    }
+    else
+    {
+      c.ray.stepy = 1;
+      c.ray.sidey = (c.mov.mapy + 1.0 - c.mov.posy) * c.ray.deltay;
+    }
+}
+
 void move_keys(t_cub *c, int speed)
 {
     //move forward if no wall in front of you
     if(c->mov.up)
     {
-      if(c->map[int(c->mov.x + c->mov.dirx * speed)][int(c->mov.y)] == false) c->mov.x += c->mov.dirx * speed;
-      if(c->map[int(c->mov.x)][int(c->mov.y + c->mov.diry * speed)] == false) c->mov.y += c->mov.diry * speed;
+      if(c->map[(int)c->mov.posx + c->mov.dirx * speed][(int)c->mov.posy] == 0) c->mov.posx += c->mov.dirx * speed;
+      if(c->map[(int)c->mov.posx][(int)c->mov.posy + c->mov.diry * speed] == 0) c->mov.posy += c->mov.diry * speed;
     }
     //move backwards if no wall behind you
     if(c->mov.down)
     {
-      if(c->map[int(c->mov.x - c->mov.dirx * speed)][int(c->mov.y)] == false) c->mov.x -= c->mov.dirx * speed;
-      if(c->map[int(c->mov.x)][int(c->mov.y - c->mov.diry * speed)] == false) c->mov.y -= c->mov.diry * speed;
+      if(c->map[(int)c->mov.posx - c->mov.dirx * speed][(int)c->mov.posy] == 0) c->mov.posx -= c->mov.dirx * speed;
+      if(c->map[(int)c->mov.posx][(int)c->mov.posy - c->mov.diry * speed] == 0) c->mov.posy -= c->mov.diry * speed;
+    }
+    //move to the right if no wall next to your right
+    if(c->mov.right)
+    {
+      if(c->map[(int)c->mov.posx + c->mov.planex * speed][(int)c->mov.posy] == 0) c->mov.posx += c->mov.planex * speed;
+      if(c->map[(int)c->mov.posx][(int)c->mov.posy + c->mov.planey * speed] == 0) c->mov.posy += c->mov.planey * speed;
+    }
+    //move to the left if no wall next to your left
+    if(c->mov.left)
+    {
+      if(c->map[(int)c->mov.posx - c->mov.planex * speed][(int)c->mov.posy] == 0) c->mov.posx -= c->mov.planex * speed;
+      if(c->map[(int)c->mov.posx][(int)c->mov.posy - c->mov.planey * speed] == 0) c->mov.posy -= c->mov.planey * speed;
     }
 }
 
-int rotate_keys(t_cub *c, int speed)
+void rotate_keys(t_cub *c, int speed)
 {
     //rotate to the right
-    if(keyDown(c->cam.right))
+    if(c->cam.right)
     {
       //both camera direction and camera plane must be rotated
       double oldDirX = c->mov.dirx;
       c->mov.dirx = c->mov.dirx * cos(-speed) - c->mov.diry * sin(-speed);
       c->mov.dirx = oldDirX * sin(-speed) + c->mov.diry * cos(-speed);
-      double oldPlaneX = planex;
-      planex = planex * cos(-speed) - planey * sin(-speed);
-      planey = oldPlaneX * sin(-speed) + planey * cos(-speed);
+      double oldPlaneX = c->mov.planex;
+      c->mov.planex = c->mov.planex * cos(-speed) - c->mov.planey * sin(-speed);
+      c->mov.planey = oldPlaneX * sin(-speed) + c->mov.planey * cos(-speed);
     }
     //rotate to the left
-    if(keyDown(c->cam.left))
+    if(c->cam.left)
     {
       //both camera direction and camera plane must be rotated
-      double oldDirX = dirx;
-      dirx = dirx * cos(speed) - diry * sin(speed);
-      diry = oldDirX * sin(speed) + diry * cos(speed);
-      double oldPlaneX = planex;
-      planex = planex * cos(speed) - planey * sin(speed);
-      planey = oldPlaneX * sin(speed) + planey * cos(speed);
+      double oldDirX = c->mov.dirx;
+      c->mov.dirx = c->mov.dirx * cos(speed) - c->mov.diry * sin(speed);
+      c->mov.diry = oldDirX * sin(speed) + c->mov.diry * cos(speed);
+      double oldPlaneX = c->mov.planex;
+      c->mov.planex = c->mov.planex * cos(speed) - c->mov.planey * sin(speed);
+      c->mov.planey = oldPlaneX * sin(speed) + c->mov.planey * cos(speed);
     }
 }

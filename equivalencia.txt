@@ -1,0 +1,45 @@
+EQUIVALENCIAS DE LAS VARIABLES DEL CÓDIGO raycaster_textured.cpp CON
+LAS VARIABLES DECLARADAS EN MI CÓDIGO
+
+- posX: c.mov.posx  (int)
+- posY: c.mov.posy  (int)
+- dirX: c.mov.dirx  
+- dirY: c.mov.diry
+- planeX: c.mov.planex
+- planeY: c.mov.planey
+- mapX: c.mov.mapx
+- mapY: c.mov.mapy
+
+- vector textured[]: c.no, c.so, c.ea, c.we, c.sp, c.win (t_img)
+
+- texNum: c.no.num, c.so.num, etc (t_img)   (int)
+- texX ? coord x de la textura  (int)
+- texY ? coord y de la textura  (int)
+- texPos: c.no.pos, etc ?   (double)
+
+- w: width pantalla
+(doubles)
+- frameTime:
+- time:
+- oldTime:
+
+- cameraX: c.cam.x  (double)
+
+- rayDirX: c.ray.dirx   (double)
+- rayDirY: c.ray.diry   (double)
+- sideDistX: c.ray.sidex    (double)
+- sideDistY: c.ray.sidey    (double)
+- deltaDistX: c.ray.deltax  (double)
+- deltaDistY: c.ray.deltay  (double)
+- perpWallDist: c.ray.perp  (double)
+- stepX: c.ray.stepx (+1 o -1)  (int)
+- stepY: c.ray.stepy (+1 o -1)  (int)
+- step: c.ray.step ?    (double)
+- hit: c.ray.hit ?  (int)
+- side: c.ray.side ?    (int)
+- lineHeight: c.ray.lineh   (int)
+
+- drawStart: c.draw.start   (int)
+- drawEnd: c.draw.end   (int)
+- wallX: c.draw.wallx  (double)
+- wallY: c.draw.wally   (double)
