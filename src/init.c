@@ -23,12 +23,12 @@ static void init_mov_vble(t_cub *info)
     info->mov.right = 0;
     info->mov.up = 0;
     info->mov.down = 0;
-    info->mov.posx = 0;
-    info->mov.posy = 0;
-    info->mov.dirx = 0;
-    info->mov.diry = 0;
-    info->mov.planex = 0;
-    info->mov.planey = 0;
+    info->mov.posx = 0.0;
+    info->mov.posy = 0.0;
+    info->mov.dirx = 0.0;
+    info->mov.diry = 0.0;
+    info->mov.planex = 0.0;
+    info->mov.planey = 0.0;
     info->mov.mapx = 0;
     info->mov.mapy = 0;
 
@@ -52,12 +52,15 @@ void init_raycast_vble(t_cub *info)
     info->ray.hit = 0;
     info->ray.side = 0;
     info->ray.lineh = 0;
+    info->ray.texnum = 0;
+    info->ray.x = 0;
+    info->ray.y = 0;
+    info->ray.pos = 0.0;
 
     info->draw.start = 0;
     info->draw.end = 0;
     info->draw.wallx = 0;
     info->draw.wally = 0;
-
     info->mov.mapx = 0;
     info->mov.mapy = 0;
     info->cam.x = 0.0;

@@ -1,6 +1,38 @@
 #include "../inc/cub.h"
 
+#define NO  1
+#define SO  2
+#define EA  3
+#define WE  4
+
 static void init_tex_vble(t_cub *c)
+{
+    int x;
+
+    x = 0;
+    while (x < MAX_TEXTURES)
+    {
+        c->twall[x].img = NULL;
+        c->twall[x].addr = NULL;
+        c->twall[x].wid = 0;
+        c->twall[x].hei = 0;
+        c->twall[x].bpp = 0;
+        c->twall[x].sz = 0;
+        c->twall[x].endian = 0;
+        x++;
+    }
+    c->sp.img = NULL;
+    c->sp.addr = NULL;
+    c->sp.wid = 0;
+    c->sp.hei = 0;
+    c->sp.bpp = 0;
+    c->sp.sz = 0;
+    c->sp.endian = 0;
+}
+
+// TODO: init_tex_sprite(t_cub *c)
+
+/*static void init_tex_vble(t_cub *c)
 {
     c->no.img = NULL;
     c->no.addr = NULL;
@@ -41,23 +73,37 @@ static void init_tex_vble2(t_cub *c)
     c->we.bpp = 0;
     c->we.sz = 0;
     c->we.endian = 0;
-}
+}*/
 
 static void xpm2image(t_cub *c)
 {
-    c->no.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_no, &c->no.wid, &c->no.hei);
+    /*c->no.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_no, &c->no.wid, &c->no.hei);
     c->so.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_so, &c->so.wid, &c->so.hei);
     c->ea.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_ea, &c->ea.wid, &c->ea.hei);
     c->we.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_we, &c->we.wid, &c->we.hei);
+    c->sp.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_sp, &c->sp.wid, &c->sp.hei);*/
+    c->twall[NO].img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_no, &c->twall[NO].wid, &c->twall[NO].hei);
+    c->twall[SO].img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_so, &c->twall[SO].wid, &c->twall[SO].hei);
+    c->twall[EA].img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_ea, &c->twall[EA].wid, &c->twall[EA].hei);
+    c->twall[WE].img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_we, &c->twall[WE].wid, &c->twall[WE].hei);
     c->sp.img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_sp, &c->sp.wid, &c->sp.hei);
+
+    // TODO: comprobar q las imagenes se han cargado (c->twall[].img != null)
 }
 
 static void get_textures_addr(t_cub *c)
 {
-    c->no.addr = (int *)mlx_get_data_addr(c->no.img, &c->no.bpp, &c->no.sz, &c->no.endian);
+    /*c->no.addr = (int *)mlx_get_data_addr(c->no.img, &c->no.bpp, &c->no.sz, &c->no.endian);
     c->so.addr = (int *)mlx_get_data_addr(c->so.img, &c->so.bpp, &c->so.sz, &c->so.endian);
     c->ea.addr = (int *)mlx_get_data_addr(c->ea.img, &c->ea.bpp, &c->ea.sz, &c->ea.endian);
     c->we.addr = (int *)mlx_get_data_addr(c->we.img, &c->we.bpp, &c->we.sz, &c->we.endian);
+    c->sp.addr = (int *)mlx_get_data_addr(c->sp.img, &c->sp.bpp, &c->sp.sz, &c->sp.endian);*/
+    int x;
+
+    x = -1;
+    while (++x < MAX_TEXTURES)
+        c->twall[x].addr = (int *)mlx_get_data_addr(c->twall[x].img, &c->twall[x].bpp, &c->twall[x].sz, &c->twall[x].endian);
+    
     c->sp.addr = (int *)mlx_get_data_addr(c->sp.img, &c->sp.bpp, &c->sp.sz, &c->sp.endian);
 }
 
@@ -83,7 +129,7 @@ void    init_mlx_func(t_cub *c)
 	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
 
     init_tex_vble(c);
-    init_tex_vble2(c);
+    //init_tex_vble2(c);
     xpm2image(c);
     get_textures_addr(c);
 

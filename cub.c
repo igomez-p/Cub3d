@@ -63,19 +63,27 @@ int		main(int argc, char *argv[])
 		clean_exit(&cub, "Numero de argumentos invalido\n", 1);
 		return (-1);
 	}
-
+printf("cub1");
 	read_cub(argv[1], &cub);
+	printf("cub2");
 	refill_map(&cub);
+	printf("cub3");
 	searchPlayer(&cub);
+	printf("cub4");
 
 	init_mlx_func(&cub);
+	printf("cub5");
 
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
 		return 1;	//save_bmp(&cub);	
 
+printf("cub5");
 	mlx_hook(cub.libx.window, 2, 1, key_handler, &cub);	// KEYPRESS
+	printf("cub6");
 	mlx_hook(cub.libx.window, 3, 3, key_handler, &cub);	// KEYRELESASE
+	printf("cub7");
 	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, 0);	// CLOSE WINDOW
+	printf("cub8");
 
 	//mlx_put_image_to_window(cub.libx.mlx, cub.libx.window, cub.no.img, 50, 50);
 	

@@ -20,6 +20,7 @@
 # define SUR	'S'
 # define OESTE	'w'
 # define ESTE	'E'
+# define MAX_TEXTURES	4
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -83,10 +84,10 @@ typedef struct	s_img {
 				int sz;
 				int endian;
 				int bpp;
-				int num;
-				int x;
-				int y;
-				double pos;
+				//int num;
+				//int x;
+				//int y;
+				//double pos;
 } t_img;
 
 typedef struct	s_mov {
@@ -95,12 +96,12 @@ typedef struct	s_mov {
 				int up;
 				int down;
 
-				int posx;
-				int posy;
-				int dirx;
-				int diry;
-				int planex;
-				int planey;
+				double posx;
+				double posy;
+				double dirx;
+				double diry;
+				double planex;
+				double planey;
 				int mapx;
 				int mapy;
 }				t_mov;
@@ -126,6 +127,11 @@ typedef struct	s_raycasting {
 				int hit;
 				int side;
 				int lineh;
+
+				int texnum;
+				int x;
+				int y;
+				double pos;
 }				t_raycasting;
 
 typedef struct	s_draw {
@@ -143,11 +149,12 @@ typedef struct	s_cub {
 				int	nrows;
 				t_minilix libx;
 				t_img win;
-				//t_img t[5];
-				t_img no;
+				t_img twall[MAX_TEXTURES];
+				//t_img tsp[2];
+				/*t_img no;
 				t_img so;
 				t_img ea;
-				t_img we;
+				t_img we;*/
 				t_img sp;
 				t_mov		mov;
 				t_camera	cam;
@@ -172,8 +179,8 @@ void free_map(t_cub *c);
 void refill_map(t_cub *c);
 void init_raycast_vble(t_cub *info);
 void step_initialSide(t_cub *c);
-void move_keys(t_cub *c, int speed);
-void rotate_keys(t_cub *c, int speed);
+void move_keys(t_cub *c, double speed);
+void rotate_keys(t_cub *c, double speed);
 int raycaster(t_cub *c, int x);
 
 void			eliminarEspacios(t_cub *cub);

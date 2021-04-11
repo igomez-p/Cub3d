@@ -2,61 +2,58 @@
 
 void step_initialSide(t_cub *c)
 {
-    c->ray.hit = 0;
+  if(c->ray.dirx < 0)
+  {
+    c->ray.stepx = -1;
+    c->ray.sidex = (c->mov.posx - c->mov.mapx) * c->ray.deltax;
+  }
+  else
+  {
+    c->ray.stepx = 1;
+    c->ray.sidex = (c->mov.mapx + 1.0 - c->mov.posx) * c->ray.deltax;
+  }
 
-    if(c->ray.dirx < 0)
-    {
-      c->ray.stepx = -1;
-      c->ray.sidex = (c->mov.posx - c->mov.mapx) * c->ray.deltax;
-    }
-    else
-    {
-      c->ray.stepx = 1;
-      c->ray.sidex = (c->mov.mapx + 1.0 - c->mov.posx) * c->ray.deltax;
-    }
-
-    if(c->ray.diry < 0)
-    {
-      c->ray.stepy = -1;
-      c->ray.sidey = (c->mov.posy - c->mov.mapy) * c->ray.deltay;
-    }
-    else
-    {
-      c->ray.stepy = 1;
-      c->ray.sidey = (c->mov.mapy + 1.0 - c->mov.posy) * c->ray.deltay;
-    }
-    printf("stepx %d y %d | sidex %f y %f\n", c->ray.stepx, c->ray.stepy, c->ray.sidex, c->ray.sidey);
+  if(c->ray.diry < 0)
+  {
+    c->ray.stepy = -1;
+    c->ray.sidey = (c->mov.posy - c->mov.mapy) * c->ray.deltay;
+  }
+  else
+  {
+    c->ray.stepy = 1;
+    c->ray.sidey = (c->mov.mapy + 1.0 - c->mov.posy) * c->ray.deltay;
+  }
 }
 
-void move_keys(t_cub *c, int speed)
+void move_keys(t_cub *c, double speed)
 {
     //move forward if no wall in front of you
     if(c->mov.up)
     {
-      if(c->map[(int)c->mov.posx + c->mov.dirx * speed][(int)c->mov.posy] == 0) c->mov.posx += c->mov.dirx * speed;
-      if(c->map[(int)c->mov.posx][(int)c->mov.posy + c->mov.diry * speed] == 0) c->mov.posy += c->mov.diry * speed;
+      if(c->map[(int)(c->mov.posx + c->mov.dirx * speed)][(int)c->mov.posy] == VACIO) c->mov.posx += c->mov.dirx * speed;
+      if(c->map[(int)c->mov.posx][(int)(c->mov.posy + c->mov.diry * speed)] == VACIO) c->mov.posy += c->mov.diry * speed;
     }
     //move backwards if no wall behind you
     if(c->mov.down)
     {
-      if(c->map[(int)c->mov.posx - c->mov.dirx * speed][(int)c->mov.posy] == 0) c->mov.posx -= c->mov.dirx * speed;
-      if(c->map[(int)c->mov.posx][(int)c->mov.posy - c->mov.diry * speed] == 0) c->mov.posy -= c->mov.diry * speed;
+      if(c->map[(int)(c->mov.posx - c->mov.dirx * speed)][(int)c->mov.posy] == VACIO) c->mov.posx -= c->mov.dirx * speed;
+      if(c->map[(int)c->mov.posx][(int)(c->mov.posy - c->mov.diry * speed)] == VACIO) c->mov.posy -= c->mov.diry * speed;
     }
     //move to the right if no wall next to your right
     if(c->mov.right)
     {
-      if(c->map[(int)c->mov.posx + c->mov.planex * speed][(int)c->mov.posy] == 0) c->mov.posx += c->mov.planex * speed;
-      if(c->map[(int)c->mov.posx][(int)c->mov.posy + c->mov.planey * speed] == 0) c->mov.posy += c->mov.planey * speed;
+      if(c->map[(int)(c->mov.posx + c->mov.planex * speed)][(int)c->mov.posy] == VACIO) c->mov.posx += c->mov.planex * speed;
+      if(c->map[(int)c->mov.posx][(int)(c->mov.posy + c->mov.planey * speed)] == VACIO) c->mov.posy += c->mov.planey * speed;
     }
     //move to the left if no wall next to your left
     if(c->mov.left)
     {
-      if(c->map[(int)c->mov.posx - c->mov.planex * speed][(int)c->mov.posy] == 0) c->mov.posx -= c->mov.planex * speed;
-      if(c->map[(int)c->mov.posx][(int)c->mov.posy - c->mov.planey * speed] == 0) c->mov.posy -= c->mov.planey * speed;
+      if(c->map[(int)(c->mov.posx - c->mov.planex * speed)][(int)c->mov.posy] == VACIO) c->mov.posx -= c->mov.planex * speed;
+      if(c->map[(int)c->mov.posx][(int)(c->mov.posy - c->mov.planey * speed)] == VACIO) c->mov.posy -= c->mov.planey * speed;
     }
 }
 
-void rotate_keys(t_cub *c, int speed)
+void rotate_keys(t_cub *c, double speed)
 {
     //rotate to the right
     if(c->cam.right)

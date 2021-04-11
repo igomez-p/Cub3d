@@ -75,16 +75,18 @@ char	*info_map(char *line, char *stc)
 
 static void player_dir(t_cub *c, int x, int y)
 {
-	if (c->map[x][y] == NORTE)
-		c->mov.diry = 1.0; //c->mov.dirx = -1.0;
-	else if (c->map[x][y] == SUR)
-		c->mov.diry = -1.0; //c->mov.dirx = 1.0;
-	else if (c->map[x][y] == ESTE)
-		c->mov.dirx = 1.0; //c->mov.diry = 1.0;
-	else if (c->map[x][y] == OESTE)
-		c->mov.dirx = -1.0; //c->mov.diry = -1.0;
-
 	// TODO: comprobar si esta bien la logica
+	if (c->map[x][y] == NORTE)
+		c->mov.diry = 1.0;
+	else if (c->map[x][y] == SUR)
+		c->mov.diry = -1.0;
+	else if (c->map[x][y] == ESTE)
+		c->mov.dirx = 1.0;
+	else if (c->map[x][y] == OESTE)
+		c->mov.dirx = -1.0;
+
+	c->mov.planex = c->mov.diry * -0.66;
+	c->mov.planey = c->mov.dirx * 0.66;
 }
 
 void searchPlayer(t_cub *cub)
@@ -97,8 +99,8 @@ void searchPlayer(t_cub *cub)
 		{
 			if (cub->map[k][i] == NORTE || cub->map[k][i] == SUR || cub->map[k][i] == OESTE || cub->map[k][i] == ESTE)
 			{
-				cub->mov.posx = k;
-				cub->mov.posy = i;
+				cub->mov.posx = k + 0.5;
+				cub->mov.posy = i + 0.5;
 				player_dir(cub, k, i);
 				return ;
 			}
@@ -139,7 +141,7 @@ void free_map(t_cub *c)
 		}
 
 printf("a3\n");
-		free(c->map);
+		c->map = NULL;
 	}
 }
 
@@ -159,5 +161,6 @@ void refill_map(t_cub *c)
 		k++;
 	}
 	free_map(c);
-	c->map = map;
+	printf("free map ok\n");
+	c->map = &map[0];
 }
