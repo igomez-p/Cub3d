@@ -42,18 +42,7 @@ int	exit_handler(t_cub *c)
 }
 
 static void	free_map_textures(t_cub *c)
-{
-	int i;
-
-	i = 0;
-	if (c->map)
-	{
-		while (c->map[i])
-			free(c->map[i++]);
-
-		free(c->map);
-	}
-	
+{	
 	if (c->tex.path_no)
 		free(c->tex.path_no);
 	if (c->tex.path_so)
@@ -64,6 +53,9 @@ static void	free_map_textures(t_cub *c)
 		free(c->tex.path_we);
 	if (c->tex.path_sp)
 		free(c->tex.path_sp);
+
+	printf("a1\n");
+	free_map(c);
 }
 
 static void destroy_textures(t_cub *c)
@@ -91,15 +83,15 @@ void	clean_exit(t_cub *c, char *str, int error)
 		perror("");
 	else
 		write(1, str, len);
-
+printf("a\n");
 	free_map_textures(c);
-
+printf("b\n");
 	if (c->libx.window)
 		mlx_destroy_window(c->libx.mlx, c->libx.window);
 	if (c->win.img)
 		mlx_destroy_image(c->libx.mlx, c->win.img);
-	
+printf("c\n");
 	destroy_textures(c);
-		
+		printf("d\n");
 	exit(1);
 }

@@ -61,16 +61,24 @@ static void get_textures_addr(t_cub *c)
     c->sp.addr = (int *)mlx_get_data_addr(c->sp.img, &c->sp.bpp, &c->sp.sz, &c->sp.endian);
 }
 
+static void resize_window(t_cub *c)
+{
+    if (c->res.rend_x <= c->win.wid)
+        c->win.wid = c->res.rend_x;
+
+    if (c->res.rend_y <= c->win.hei)
+        c->win.hei = c->res.rend_y;
+}
+
 void    init_mlx_func(t_cub *c)
 {
-    c->win.hei = c->res.rend_y/2;
-    c->win.wid = c->res.rend_x/2;
-
     if (!(c->libx.mlx = mlx_init()))
 		clean_exit(c, "Error al inicializar MLX\n", 1);
-	if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->res.rend_x, c->res.rend_y, "Cub3D")))
+    mlx_get_screen_size(c->libx.mlx, &c->win.wid, &c->win.hei);
+    resize_window(c);
+	if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, c->win.hei, "Cub3D")))
 		clean_exit(c, "Error new window\n", 1);
-	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))  // o c->win.hei y c->win.wid
+	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))
 		clean_exit(c, "Error new image\n", 1);
 	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
 

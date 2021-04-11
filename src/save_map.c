@@ -76,13 +76,15 @@ char	*info_map(char *line, char *stc)
 static void player_dir(t_cub *c, int x, int y)
 {
 	if (c->map[x][y] == NORTE)
-		c->mov.dirx = -1.0;
+		c->mov.diry = 1.0; //c->mov.dirx = -1.0;
 	else if (c->map[x][y] == SUR)
-		c->mov.dirx = 1.0;
+		c->mov.diry = -1.0; //c->mov.dirx = 1.0;
 	else if (c->map[x][y] == ESTE)
-		c->mov.diry = 1.0;
+		c->mov.dirx = 1.0; //c->mov.diry = 1.0;
 	else if (c->map[x][y] == OESTE)
-		c->mov.diry = -1.0;
+		c->mov.dirx = -1.0; //c->mov.diry = -1.0;
+
+	// TODO: comprobar si esta bien la logica
 }
 
 void searchPlayer(t_cub *cub)
@@ -105,4 +107,57 @@ void searchPlayer(t_cub *cub)
 		k++;
 	}
 	clean_exit(cub, "No se encuentra jugador\n", 1);
+}
+
+static int map_dimensions(t_cub *c)
+{
+	int max = ft_strlen(c->map[0]);
+	int i = 1;
+	int len = 0;
+	while (c->map[i])
+	{
+		len = ft_strlen(c->map[i]);
+		if (len > max)
+			max = len;
+
+		i++;
+	}
+	c->nrows = i;
+	return max;
+}
+
+void free_map(t_cub *c)
+{
+	int i;
+
+	i = 0;
+	if (c->map)
+	{
+		while (c->map[i]) {
+			printf("a11\n");
+			free(c->map[i++]);
+		}
+
+printf("a3\n");
+		free(c->map);
+	}
+}
+
+void refill_map(t_cub *c)
+{
+	int w = map_dimensions(c);
+	char **map = malloc(c->nrows);
+	int k = 0;
+	while (c->map[k])
+	{
+		map[k] = malloc(w);
+		int len = ft_strlen(c->map[k]);
+		memcpy(map[k], c->map[k], len);
+		if (len < w)
+			memset(&map[k][len], ' ', w-len);
+		
+		k++;
+	}
+	free_map(c);
+	c->map = map;
 }

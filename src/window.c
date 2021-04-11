@@ -12,25 +12,33 @@
 
 #include "../inc/cub.h"
 
-int	paint(t_cub *c)
+int	paint_screen(t_cub *c)
 {
 	int		x;
 	int		y;
 
-	y = 0;
-	while (y < c->res.rend_y)
+	y = -1;
+	while (++y < c->win.hei)
 	{
-		x = 0;
-		while (x < c->res.rend_x)
-		{
-			c->win.data[y * c->res.rend_x + x] = 0x026600;
-			x++;
-		}
-		y++;
+		x = -1;
+		while (++x < c->win.wid)
+			mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, 0xff0055);
+			//c->win.addr[y * c->win.sz + x * (c->win.bpp / 8)] = 0xff0055; // SEGFAULT
 	}
-	mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->libx.img, 0, 0);
 
 	return (1);
 }
 
+int draw(t_cub *c)
+{
+	int x;
 
+	x = -1;
+	paint_screen(c);
+	while (++x < c->win.wid)
+	{
+		raycaster(c, x);
+	}
+	mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->win.img, 0, 0);
+	return (1);
+}

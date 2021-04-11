@@ -37,7 +37,7 @@ static void init_mov_vble(t_cub *info)
     info->cam.x = 0.0;
 }
 
-static void init_raycast_vble(t_cub *info)
+void init_raycast_vble(t_cub *info)
 {
     info->ray.dirx = 0.0;
     info->ray.diry = 0.0;
@@ -57,6 +57,10 @@ static void init_raycast_vble(t_cub *info)
     info->draw.end = 0;
     info->draw.wallx = 0;
     info->draw.wally = 0;
+
+    info->mov.mapx = 0;
+    info->mov.mapy = 0;
+    info->cam.x = 0.0;
 }
 
 void	init_struct(t_cub *info)

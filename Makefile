@@ -19,7 +19,8 @@ SRC = cub.c				\
 	  src/save_map.c	\
 	  src/handler.c		\
 	  src/move.c		\
-	  src/raycaster.c	
+	  src/raycaster.c	\
+	  src/window.c
 
 LIB = library/libft.a \
 	  library/libftprintf.a \

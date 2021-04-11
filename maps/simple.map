@@ -1,0 +1,16 @@
+R 1000 890
+NO ./images/niño_redes.xpm 
+SO ./images/ladrillo.xpm
+WE ./images/niña_globo.xpm
+EA ./images/niña_globo.xpm
+S ./images/covid_.xpm
+F 220,100,0
+C 225,30,0
+111111111111
+100000020011
+101100000111
+10010000E001
+111121111011
+100000000011
+111101111111
+111111111111

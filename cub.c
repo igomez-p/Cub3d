@@ -65,6 +65,7 @@ int		main(int argc, char *argv[])
 	}
 
 	read_cub(argv[1], &cub);
+	refill_map(&cub);
 	searchPlayer(&cub);
 
 	init_mlx_func(&cub);
@@ -78,7 +79,8 @@ int		main(int argc, char *argv[])
 
 	//mlx_put_image_to_window(cub.libx.mlx, cub.libx.window, cub.no.img, 50, 50);
 	
-	//mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
+	mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
+	//mlx_loop_hook(cub.libx.mlx, raycaster, &cub);			// RAYCASTING
 
 	mlx_loop(cub.libx.mlx);
 	return (0);

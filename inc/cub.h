@@ -31,7 +31,8 @@
 
 # include "libft.h"
 # include "libftprintf.h"
-# include "/usr/local/include/mlx.h"
+//# include "/usr/local/include/mlx.h"
+# include "../minilibx-linux/mlx.h"
 
 #define PASO 0.01
 #define GRADOS2RADIAN(angle) ((angle) / 180.0 * M_PI)
@@ -142,6 +143,7 @@ typedef struct	s_cub {
 				int	nrows;
 				t_minilix libx;
 				t_img win;
+				//t_img t[5];
 				t_img no;
 				t_img so;
 				t_img ea;
@@ -166,13 +168,16 @@ int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);
 
+void free_map(t_cub *c);
+void refill_map(t_cub *c);
+void init_raycast_vble(t_cub *info);
 void step_initialSide(t_cub *c);
 void move_keys(t_cub *c, int speed);
 void rotate_keys(t_cub *c, int speed);
-int raycaster(t_cub *c);
+int raycaster(t_cub *c, int x);
 
 void			eliminarEspacios(t_cub *cub);
-int				paint(t_cub *c);
+int				paint_screen(t_cub *c);
 int				render_map(t_cub *c);
 int				draw(t_cub *c);
 

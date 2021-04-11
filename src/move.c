@@ -25,6 +25,7 @@ void step_initialSide(t_cub *c)
       c->ray.stepy = 1;
       c->ray.sidey = (c->mov.mapy + 1.0 - c->mov.posy) * c->ray.deltay;
     }
+    printf("stepx %d y %d | sidex %f y %f\n", c->ray.stepx, c->ray.stepy, c->ray.sidex, c->ray.sidey);
 }
 
 void move_keys(t_cub *c, int speed)
