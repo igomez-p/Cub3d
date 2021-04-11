@@ -84,10 +84,6 @@ typedef struct	s_img {
 				int sz;
 				int endian;
 				int bpp;
-				//int num;
-				//int x;
-				//int y;
-				//double pos;
 } t_img;
 
 typedef struct	s_mov {
@@ -150,11 +146,6 @@ typedef struct	s_cub {
 				t_minilix libx;
 				t_img win;
 				t_img twall[MAX_TEXTURES];
-				//t_img tsp[2];
-				/*t_img no;
-				t_img so;
-				t_img ea;
-				t_img we;*/
 				t_img sp;
 				t_mov		mov;
 				t_camera	cam;

@@ -161,6 +161,5 @@ void refill_map(t_cub *c)
 		k++;
 	}
 	free_map(c);
-	printf("free map ok\n");
-	c->map = &map[0];
+	c->map = map;
 }

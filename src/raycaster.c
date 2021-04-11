@@ -25,8 +25,8 @@ static void dda(t_cub *c)
         }
         if(c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
         printf("map[%d][%d] %c | hit %d\n", c->mov.mapx, c->mov.mapy, c->map[c->mov.mapx][c->mov.mapy], c->ray.hit);
+       // sleep(1);
     }
-
 }
 
 static void ray_pos_dir(t_cub *c, int x)
@@ -38,21 +38,21 @@ static void ray_pos_dir(t_cub *c, int x)
     c->mov.mapx = (int)c->mov.posx;
     c->mov.mapy = (int)c->mov.posy;
 
-    if (c->ray.diry != 0)
+    /*if (c->ray.diry != 0)
     {
         if (c->ray.dirx == 0)
             c->ray.deltax = 1;
-        else
+        else*/
             c->ray.deltax = fabs(1 / c->ray.dirx);
-    }
+   /* }
 
     if (c->ray.dirx != 0)
     {
         if (c->ray.diry == 0)
             c->ray.deltay = 1;
-        else
+        else*/
             c->ray.deltay = fabs(1/c->ray.diry);
-    }
+  //  }
 }
 
 static void perpRay_distance(t_cub *c)
@@ -78,34 +78,15 @@ printf("lineh %d | perp %f\n\r", c->ray.lineh, c->ray.perp);
         c->draw.end = 0;
 }
 
-/*static void texturing_calculus(t_cub *c)
-{
-    c->no.num = (c->map[c->mov.mapx][c->mov.mapy] - 48) - 1;
-    c->so.num = (c->map[c->mov.mapx][c->mov.mapy] - 48) - 1;
-    c->we.num = (c->map[c->mov.mapx][c->mov.mapy] - 48) - 1;
-    c->ea.num = (c->map[c->mov.mapx][c->mov.mapy] - 48) - 1;
-//    c->sp.num = (c->map[c->mov.mapx][c->mov.mapy] - 48) - 1;
-
-   // c->twall[c->ray.side].num = (c->map[c->mov.mapx][c->mov.mapy] - 48) - 1;
-}*/
-
 static void xcoord_texture(t_cub *c)
 {
-    /*c->no.x = (int)(c->draw.wallx * (double)(c->no.wid));
-    c->so.x = (int)(c->draw.wallx * (double)(c->so.wid));
-    c->we.x = (int)(c->draw.wallx * (double)(c->we.wid));
-    c->ea.x = (int)(c->draw.wallx * (double)(c->ea.wid));*/
     c->ray.x = (int)(c->draw.wallx * (double)(c->twall[c->ray.side].wid));
    // c->sp.x = (int)(c->draw.wallx * (double)(c->sp.wid));
 
     if ((c->ray.side <= 1 && c->ray.dirx > 0) || (c->ray.side >= 2 && c->ray.diry > 0))
     {
         c->ray.x = c->twall[c->ray.side].wid - c->ray.x - 1;
-        /*c->no.x = c->no.wid - c->no.x - 1;
-        c->so.x = c->so.wid - c->so.x - 1;
-        c->we.x = c->we.wid - c->we.x - 1;
-        c->ea.x = c->ea.wid - c->ea.x - 1;
-        c->sp.x = c->sp.wid - c->sp.x - 1;*/
+        //c->sp.x = c->sp.wid - c->sp.x - 1;
     }
 }
 
@@ -152,7 +133,6 @@ int raycaster(t_cub *c, int x)
     printf("ray5\n");
     draw_calculus(c);
     printf("ray6\n");
-    //texturing_calculus(c);
     wallx_value(c);
     printf("ray7\n");
     xcoord_texture(c);
