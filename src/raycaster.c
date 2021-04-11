@@ -139,10 +139,8 @@ int raycaster(t_cub *c, int x)
     printf("ray8\n");
     draw_textures(c, x);
     printf("ray9\n");
-    move_keys(c, 1); //, frame_time(time, old_time) * SQUARES_SEC);
-    printf("ray10\n");
-    rotate_keys(c, 1); //, frame_time(time, old_time) * RADIANS_SEC);
-    printf("ray11\n");
-
+    //move_keys(c, 1); //, frame_time(time, old_time) * SQUARES_SEC);
+    //rotate_keys(c, 1); //, frame_time(time, old_time) * RADIANS_SEC);
+    
     return 1;
 }

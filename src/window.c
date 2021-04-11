@@ -40,5 +40,7 @@ int draw(t_cub *c)
 		raycaster(c, x);
 	}
 	mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->win.img, 0, 0);
+	move_keys(c, 1);
+	rotate_keys(c, 1);
 	return (1);
 }
