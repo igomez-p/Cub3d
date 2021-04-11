@@ -14,18 +14,14 @@ static void dda(t_cub *c)
             c->ray.sidex += c->ray.deltax;
             c->mov.mapx += c->ray.stepx;
             c->ray.step = 0 + (c->ray.dirx < 0);
-            printf("mapx %d ---- stepx %d\n", c->mov.mapx, c->ray.stepx);
         }
         else
         {
             c->ray.sidey += c->ray.deltay;
             c->mov.mapy += c->ray.stepy;
             c->ray.step = 2 + (c->ray.diry > 0);
-            printf("mapy %d ---- stepy %d\n", c->mov.mapy, c->ray.stepy);
         }
         if(c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
-        printf("map[%d][%d] %c | hit %d\n", c->mov.mapx, c->mov.mapy, c->map[c->mov.mapx][c->mov.mapy], c->ray.hit);
-       // sleep(1);
     }
 }
 
@@ -38,21 +34,10 @@ static void ray_pos_dir(t_cub *c, int x)
     c->mov.mapx = (int)c->mov.posx;
     c->mov.mapy = (int)c->mov.posy;
 
-    /*if (c->ray.diry != 0)
-    {
-        if (c->ray.dirx == 0)
-            c->ray.deltax = 1;
-        else*/
-            c->ray.deltax = fabs(1 / c->ray.dirx);
-   /* }
+    c->ray.deltax = fabs(1 / c->ray.dirx);
+    c->ray.deltay = fabs(1 / c->ray.diry);
 
-    if (c->ray.dirx != 0)
-    {
-        if (c->ray.diry == 0)
-            c->ray.deltay = 1;
-        else*/
-            c->ray.deltay = fabs(1/c->ray.diry);
-  //  }
+    c->ray.hit = 0;
 }
 
 static void perpRay_distance(t_cub *c)
@@ -66,12 +51,12 @@ static void perpRay_distance(t_cub *c)
 static void draw_calculus(t_cub *c)
 {
     c->ray.lineh = (int)((double)c->win.hei / c->ray.perp);
-printf("lineh %d | perp %f\n\r", c->ray.lineh, c->ray.perp);
-    c->draw.start = -c->ray.lineh / 2 + c->win.hei / 2;
+
+    c->draw.start = (-c->ray.lineh / 2) + (c->win.hei / 2);
     if (c->draw.start < 0)
         c->draw.start = 0;
 
-    c->draw.end = c->ray.lineh / 2 + c->win.hei / 2;
+    c->draw.end = (c->ray.lineh / 2) + (c->win.hei / 2);
     if (c->draw.end >= c->win.hei)
         c->draw.end = c->win.hei - 1;
     if (c->draw.end < 0)
@@ -97,7 +82,7 @@ static void wallx_value(t_cub *c)
     else
         c->draw.wallx = c->mov.posx + c->ray.perp * c->ray.dirx;
 
-    c->draw.wallx -= (floor)(c->draw.wallx);
+    c->draw.wallx -= floor(c->draw.wallx);
 }
 
 static void draw_textures(t_cub *c, int x)
@@ -105,6 +90,7 @@ static void draw_textures(t_cub *c, int x)
     c->ray.step = 1.0 * c->twall[c->ray.side].hei / c->ray.lineh;
     c->ray.pos = (c->draw.start - c->win.hei / 2 + c->ray.lineh / 2) * c->ray.step;
     c->ray.y = c->draw.start;
+    printf("start %d | end %d\n", c->draw.start, c->draw.end);
     while (c->ray.y < c->draw.end)
     {
         c->ray.y = (int)c->ray.pos & (c->twall[c->ray.side].hei - 1);
@@ -113,10 +99,12 @@ static void draw_textures(t_cub *c, int x)
         if (c->ray.side % 2)
             color = (color >> 1) & AND_ING;
 
-        //c->win.addr[c->win.wid * y + x] = color;
-        mlx_pixel_put(c->libx.mlx, c->libx.window, x, c->ray.y, 0x22aa77);
+        //c->win.addr[c->win.sz * c->ray.y + x] = color;
+        //printf("draw_textures\n");
+        mlx_pixel_put(c->libx.mlx, c->libx.window, x, c->ray.y, 0x0000ff);
         c->ray.y++;
     }
+    printf("saleee\n");
 }
 
 int raycaster(t_cub *c, int x)

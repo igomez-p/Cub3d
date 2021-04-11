@@ -1,10 +1,5 @@
 #include "../inc/cub.h"
 
-#define NO  0
-#define SO  1
-#define EA  2
-#define WE  3
-
 static void init_tex_vble(t_cub *c)
 {
     int x;
@@ -30,51 +25,6 @@ static void init_tex_vble(t_cub *c)
     c->sp.endian = 0;
 }
 
-// TODO: init_tex_sprite(t_cub *c)
-
-/*static void init_tex_vble(t_cub *c)
-{
-    c->no.img = NULL;
-    c->no.addr = NULL;
-    c->no.wid = 0;
-    c->no.hei = 0;
-    c->no.bpp = 0;
-    c->no.sz = 0;
-    c->no.endian = 0;
-    c->so.img = NULL;
-    c->so.addr = NULL;
-    c->so.wid = 0;
-    c->so.hei = 0;
-    c->so.bpp = 0;
-    c->so.sz = 0;
-    c->so.endian = 0;
-    c->sp.img = NULL;
-    c->sp.addr = NULL;
-    c->sp.wid = 0;
-    c->sp.hei = 0;
-    c->sp.bpp = 0;
-    c->sp.sz = 0;
-    c->sp.endian = 0;
-}
-
-static void init_tex_vble2(t_cub *c)
-{
-    c->ea.img = NULL;
-    c->ea.addr = NULL;
-    c->ea.wid = 0;
-    c->ea.hei = 0;
-    c->ea.bpp = 0;
-    c->ea.sz = 0;
-    c->ea.endian = 0;
-    c->we.img = NULL;
-    c->we.addr = NULL;
-    c->we.wid = 0;
-    c->we.hei = 0;
-    c->we.bpp = 0;
-    c->we.sz = 0;
-    c->we.endian = 0;
-}*/
-
 static void xpm2image(t_cub *c)
 {
     int x;
@@ -89,24 +39,16 @@ static void xpm2image(t_cub *c)
     while (x < MAX_TEXTURES)
     {
         if (!c->twall[x].img)
-            clean_exit(c, "Error al convertir textura\n", 1);
+            clean_exit(c, "Error al convertir textura de un muro\n", 1);
+        else
+            c->twall[x].addr = (int *)mlx_get_data_addr(c->twall[x].img, &c->twall[x].bpp, &c->twall[x].sz, &c->twall[x].endian);
         
         x++;
     }
-}
-
-static void get_textures_addr(t_cub *c)
-{
-    int x;
-
-    x = 0;
-    while (x < MAX_TEXTURES)
-    {
-        c->twall[x].addr = (int *)mlx_get_data_addr(c->twall[x].img, &c->twall[x].bpp, &c->twall[x].sz, &c->twall[x].endian);
-        x++;
-    }
-    
-    c->sp.addr = (int *)mlx_get_data_addr(c->sp.img, &c->sp.bpp, &c->sp.sz, &c->sp.endian);
+    if (!c->sp.img)
+        clean_exit(c, "Error al convertir textura del sprite\n", 1);
+    else
+        c->sp.addr = (int *)mlx_get_data_addr(c->sp.img, &c->sp.bpp, &c->sp.sz, &c->sp.endian);
 }
 
 static void resize_window(t_cub *c)
@@ -132,7 +74,6 @@ void    init_mlx_func(t_cub *c)
 
     init_tex_vble(c);
     xpm2image(c);
-    get_textures_addr(c);
 
     mlx_do_key_autorepeatoff(c->libx.mlx);
 }

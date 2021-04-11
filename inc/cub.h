@@ -20,6 +20,10 @@
 # define SUR	'S'
 # define OESTE	'w'
 # define ESTE	'E'
+#define NO  0
+#define SO  1
+#define EA  2
+#define WE  3
 # define MAX_TEXTURES	4
 # include <unistd.h>
 # include <stdlib.h>

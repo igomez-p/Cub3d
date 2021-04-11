@@ -73,9 +73,9 @@ int		main(int argc, char *argv[])
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
 		return 1;	//save_bmp(&cub);	
 
-	mlx_hook(cub.libx.window, 2, 1, key_handler, &cub);	// KEYPRESS
-	mlx_hook(cub.libx.window, 3, 3, key_handler, &cub);	// KEYRELESASE
-	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, 0);	// CLOSE WINDOW
+	mlx_hook(cub.libx.window, 2, 1u << 0, key_handler, &cub);	// KEYPRESS
+	mlx_hook(cub.libx.window, 3, 1u << 1, key_handler, &cub);	// KEYRELESASE
+	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, &cub);	// CLOSE WINDOW
 	
 	mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
 

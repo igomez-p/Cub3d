@@ -12,7 +12,7 @@
 
 #include "../inc/cub.h"
 
-int	paint_screen(t_cub *c)
+void	paint_screen_floor(t_cub *c)
 {
 	int		x;
 	int		y;
@@ -23,10 +23,16 @@ int	paint_screen(t_cub *c)
 		x = -1;
 		while (++x < c->win.wid)
 			mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, 0xff0055);
-			//c->win.addr[y * c->win.sz + x * (c->win.bpp / 8)] = 0xff0055; // SEGFAULT
 	}
+}
 
-	return (1);
+void paint_sky(t_cub *c, int x)
+{
+	int y;
+
+	y = -1;
+	while (++y < c->draw.start)
+		mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, 0x00aa00);
 }
 
 int draw(t_cub *c)
@@ -34,12 +40,13 @@ int draw(t_cub *c)
 	int x;
 
 	x = -1;
-	paint_screen(c);
+	paint_screen_floor(c);
 	while (++x < c->win.wid)
 	{
 		raycaster(c, x);
+		paint_sky(c, x);
 	}
-	mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->win.img, 0, 0);
+	//mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->win.img, 0, 0);
 	move_keys(c, 1);
 	rotate_keys(c, 1);
 	return (1);

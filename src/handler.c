@@ -60,14 +60,14 @@ static void	free_map_textures(t_cub *c)
 
 static void destroy_textures(t_cub *c)
 {
-	if (c->no.img)
-		mlx_destroy_image(c->libx.mlx, c->no.img);
-	if (c->so.img)
-		mlx_destroy_image(c->libx.mlx, c->so.img);
-	if (c->we.img)
-		mlx_destroy_image(c->libx.mlx, c->we.img);
-	if (c->ea.img)
-		mlx_destroy_image(c->libx.mlx, c->ea.img);
+	if (c->twall[NO].img)
+		mlx_destroy_image(c->libx.mlx, c->twall[NO].img);
+	if (c->twall[SO].img)
+		mlx_destroy_image(c->libx.mlx, c->twall[SO].img);
+	if (c->twall[WE].img)
+		mlx_destroy_image(c->libx.mlx, c->twall[WE].img);
+	if (c->twall[EA].img)
+		mlx_destroy_image(c->libx.mlx, c->twall[EA].img);
 	if (c->sp.img)
 		mlx_destroy_image(c->libx.mlx, c->sp.img);
 }

@@ -12,6 +12,8 @@
 
 #include "../inc/cub.h"
 
+#define VIEW_ANGLE	32.5
+
 static int	len_linea(char *line)
 {
 	int i;
@@ -76,17 +78,19 @@ char	*info_map(char *line, char *stc)
 static void player_dir(t_cub *c, int x, int y)
 {
 	// TODO: comprobar si esta bien la logica
+	c->mov.diry = 0.0;
+	c->mov.dirx = 0.0;
 	if (c->map[x][y] == NORTE)
-		c->mov.diry = 1.0;
-	else if (c->map[x][y] == SUR)
 		c->mov.diry = -1.0;
+	else if (c->map[x][y] == SUR)
+		c->mov.diry = 1.0;
 	else if (c->map[x][y] == ESTE)
 		c->mov.dirx = 1.0;
 	else if (c->map[x][y] == OESTE)
 		c->mov.dirx = -1.0;
 
-	c->mov.planex = c->mov.diry * -0.66;
-	c->mov.planey = c->mov.dirx * 0.66;
+	c->mov.planex = -c->mov.diry * ((VIEW_ANGLE * M_PI) / 180);
+	c->mov.planey = c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
 }
 
 void searchPlayer(t_cub *cub)
@@ -102,6 +106,7 @@ void searchPlayer(t_cub *cub)
 				cub->mov.posx = k + 0.5;
 				cub->mov.posy = i + 0.5;
 				player_dir(cub, k, i);
+				cub->map[k][i] = VACIO;
 				return ;
 			}
 			i++;
@@ -137,10 +142,12 @@ void free_map(t_cub *c)
 	{
 		while (c->map[i]) {
 			printf("a11\n");
-			free(c->map[i++]);
+			free(c->map[i]);
+			c->map[i++] = NULL;
 		}
 
 printf("a3\n");
+		free(c->map);
 		c->map = NULL;
 	}
 }
