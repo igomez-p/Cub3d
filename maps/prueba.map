@@ -1,8 +1,8 @@
-R 1000 890
-NO ./images/niño_redes.xpm 
-SO ./images/ladrillo.xpm
-WE ./images/niña_globo.xpm
-EA ./images/niña_globo.xpm
+R 1000 650
+NO ./images/greystone.xpm 
+SO ./images/redbrick.xpm
+WE ./images/wood.xpm
+EA ./images/purplestone.xpm
 S ./images/covid_.xpm
 F 220,100,0
 C 225,30,0

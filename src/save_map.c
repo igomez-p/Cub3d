@@ -56,7 +56,7 @@ static char	*fill_map(char *line)
 		}
 		p++;
 	}
-	aux[k] = '\0';
+	aux[k+1] = '\0';
 	return (aux);
 }
 
@@ -130,6 +130,7 @@ static int map_dimensions(t_cub *c)
 		i++;
 	}
 	c->nrows = i;
+printf("max columnas %d | max filas %d\n", max, c->nrows);
 	return max;
 }
 
@@ -137,18 +138,15 @@ void free_map(t_cub *c)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	if (c->map)
 	{
-		while (c->map[i]) {
-			printf("a11\n");
+		while (++i < c->nrows) {
 			free(c->map[i]);
-			c->map[i++] = NULL;
 		}
 
 printf("a3\n");
 		free(c->map);
-		c->map = NULL;
 	}
 }
 
@@ -168,5 +166,5 @@ void refill_map(t_cub *c)
 		k++;
 	}
 	free_map(c);
-	c->map = map;
+	c->map = &map[0];
 }

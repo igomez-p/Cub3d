@@ -6,6 +6,7 @@ void step_initialSide(t_cub *c)
   {
     c->ray.stepx = -1;
     c->ray.sidex = (c->mov.posx - c->mov.mapx) * c->ray.deltax;
+    
   }
   else
   {

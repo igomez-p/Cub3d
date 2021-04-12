@@ -21,6 +21,7 @@ static void dda(t_cub *c)
             c->mov.mapy += c->ray.stepy;
             c->ray.step = 2 + (c->ray.diry > 0);
         }
+        printf("x %d y %d\n", c->mov.mapx, c->mov.mapy);
         if(c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
     }
 }
