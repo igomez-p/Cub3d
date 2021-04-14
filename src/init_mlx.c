@@ -1,6 +1,6 @@
 #include "../inc/cub.h"
 
-static void init_tex_vble(t_cub *c)
+void init_tex_vble(t_cub *c)
 {
     int x;
 
@@ -72,7 +72,6 @@ void    init_mlx_func(t_cub *c)
 		clean_exit(c, "Error new image\n", 1);
 	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
 
-    init_tex_vble(c);
     xpm2image(c);
 
     mlx_do_key_autorepeatoff(c->libx.mlx);

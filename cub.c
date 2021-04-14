@@ -39,14 +39,15 @@ void	read_cub(char *filename, t_cub *info)
 				info_color(linea, info);
 			else if (ft_strchr(linea, '1'))
 			{
-				stc_line = info_map(linea, stc_line);
+				stc_line = info_map(linea, stc_line, info);
 				stc_line = ft_swap(stc_line, "\n");
 			}
 			free(linea);
 			linea = 0;
 		}
 		if (linea != NULL && ft_strchr(linea, '1'))
-			stc_line = info_map(linea, stc_line);
+			stc_line = info_map(linea, stc_line, info);
+
 		info->map = ft_split(stc_line, '\n');
 		close (fd);
 	}
@@ -68,9 +69,10 @@ static void comprobar_lecturaCub(t_cub cub)
 			printf("%c", cub.map[k][i]);
 			i++;
 		}
-		printf("\n");
+		printf("|\n");
 		k++;
 	}
+	printf("sale\n");
 }
 
 int		main(int argc, char *argv[])
@@ -88,12 +90,10 @@ int		main(int argc, char *argv[])
 
 	read_cub(argv[1], &cub);
 	comprobar_lecturaCub(cub);
-	refill_map(&cub);
+	//refill_map(&cub);			// TODO: segfault
 	searchPlayer(&cub);
 
 	comprobar_lecturaCub(cub);
-
-	printf("holaa\n");
 
 	init_mlx_func(&cub);
 

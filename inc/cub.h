@@ -160,8 +160,9 @@ typedef struct	s_cub {
 void			info_tex(char *line, t_cub *info);
 void			info_res(char *line, t_cub *info);
 void			info_color(char *line, t_cub *info);
-char			*info_map(char *line, char *stc);
+char			*info_map(char *line, char *stc, t_cub *cub);
 void			searchPlayer(t_cub *cub);
+void			init_tex_vble(t_cub *c);
 void			init_struct(t_cub *info);
 void    		init_mlx_func(t_cub *c);
 void			read_cub(char *filename, t_cub *info);

@@ -71,6 +71,7 @@ void	init_struct(t_cub *info)
 	init_file_vble(info);
     init_mov_vble(info);
     init_raycast_vble(info);
+    init_tex_vble(info);
 
     info->libx.mlx = NULL;
 	info->libx.window = NULL;

@@ -26,6 +26,8 @@ static int	len_linea(char *line)
 		if (line[i] == VACIO || line[i] == MURO || line[i] == OBJETO || line[i] == NADA ||
 			line[i] == 'N' || line[i] == 'S' || line[i] == 'O' || line[i] == 'E')
 			cont++;
+		else
+			return (-1);
 		i++;
 	}
 	return (cont);
@@ -33,16 +35,18 @@ static int	len_linea(char *line)
 
 static char	*fill_map(char *line)
 {
-	char	*aux;
+	char	*aux = NULL;
 	int		p;
 	int		k;
 
 	p = 0;
-	k = len_linea(line);
+	if ((k = len_linea(line)) == -1)
+		return NULL;
 	if ((int)ft_strlen(line) == k)
 		return (ft_strdup(line));
 	else
 		aux = malloc(k + 1);
+
 	if (!aux)
 		return (NULL);
 	k = 0;
@@ -60,18 +64,24 @@ static char	*fill_map(char *line)
 	return (aux);
 }
 
-char	*info_map(char *line, char *stc)
+char	*info_map(char *line, char *stc, t_cub *cub)
 {
 	char	*aux;
 
 	if (!stc)
-		stc = fill_map(line);
-	else
 	{
-		aux = fill_map(line);
-		stc = ft_swap(stc, aux);
-		free(aux);
+		stc = fill_map(line);
+		if (!stc)
+			clean_exit(cub, "Mapa incorrecto\n", 1);
+		return (stc);
 	}
+	aux = fill_map(line);
+	if (!aux)
+		clean_exit(cub, "Mapa incorrecto\n", 1);
+
+	stc = ft_swap(stc, aux);
+	free(aux);
+
 	return (stc);
 }
 
@@ -138,11 +148,12 @@ void free_map(t_cub *c)
 {
 	int i;
 
-	i = -1;
+	i = c->nrows;
 	if (c->map)
 	{
-		while (++i < c->nrows) {
+		while (i > 0) {
 			free(c->map[i]);
+			i--;
 		}
 
 printf("a3\n");
@@ -155,16 +166,19 @@ void refill_map(t_cub *c)
 	int w = map_dimensions(c);
 	char **map = malloc(c->nrows);
 	int k = 0;
-	while (c->map[k])
+	while (/*c->map[k]*/k < c->nrows)
 	{
 		map[k] = malloc(w);
 		int len = ft_strlen(c->map[k]);
-		memcpy(map[k], c->map[k], len);
+		ft_memcpy(map[k], c->map[k], len);
 		if (len < w)
-			memset(&map[k][len], ' ', w-len);
+			ft_memset(&map[k][len], ' ', w-len);
 		
 		k++;
+		printf("%d ", k);
 	}
+	c->map[k] = NULL;
 	free_map(c);
+	printf("adios\n");
 	c->map = &map[0];
 }

@@ -12,6 +12,14 @@
 
 #include "../inc/cub.h"
 
+/*void	char_mlx_pixel_put(t_cub *cub, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = cub->win.addr + (y * cub->win.sz + x * (cub->win.bpp / 8));
+	*(unsigned int*)dst = color;
+}*/
+
 void	paint_screen_floor(t_cub *c)
 {
 	int		x;
