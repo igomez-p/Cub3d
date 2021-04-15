@@ -13,17 +13,17 @@
 SRC =	aux_functions.c \
 		char_conversion.c \
 		flags.c \
-		ft_printf.c \
+		ft_//printf.c \
 		hex_conversion.c \
 		int_conversion.c \
-		printfstruct.c \
+		//printfstruct.c \
 		ptr_conversion.c \
 		strings_conversion.c \
 		
 
 OBJ = ${SRC:.c=.o}
 
-NAME = libftprintf.a
+NAME = libft//printf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 

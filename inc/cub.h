@@ -20,10 +20,10 @@
 # define SUR	'S'
 # define OESTE	'w'
 # define ESTE	'E'
-#define NO  0
-#define SO  1
-#define EA  2
-#define WE  3
+# define NO  0
+# define SO  1
+# define EA  2
+# define WE  3
 # define MAX_TEXTURES	4
 # include <unistd.h>
 # include <stdlib.h>
@@ -41,6 +41,10 @@
 
 #define PASO 0.01
 #define GRADOS2RADIAN(angle) ((angle) / 180.0 * M_PI)
+#define SQUARES_SEC 0.2
+#define RADIANS_SEC 0.2
+#define AND_ING     8355711
+#define FRAME_TIME  1000.0
 
 #define KEY_A_ 'a'   //97
 #define KEY_S_ 's'   //115
@@ -71,8 +75,8 @@ typedef struct	s_texturas {
 }				t_texturas;
 
 typedef struct	s_colores {
-				int rgb_suelo[3];
-				int rgb_techo[3];
+				int rgb_s[3];
+				int rgb_f[3];
 }				t_colores;
 
 typedef struct	s_minilibx {

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printfstruct.c                                     :+:      :+:    :+:   */
+/*   //printfstruct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
-void		initialize(t_printf *new)
+void		initialize(t_//printf *new)
 {
 	fill_str("cspdiuxX", (char *)new->conversions, (int)ft_strlen("cspdiuxX"));
 	fill_str("-0.*", (char *)new->flags, (int)ft_strlen("-0.*"));
@@ -27,7 +27,7 @@ void		initialize(t_printf *new)
 	new->x = 0;
 }
 
-int			search_flag(t_printf *list, char c)
+int			search_flag(t_//printf *list, char c)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ int			search_flag(t_printf *list, char c)
 	return (0);
 }
 
-void		type_conversion(t_printf *list, char c)
+void		type_conversion(t_//printf *list, char c)
 {
 	if (c == 'c')
 		ft_conversion_char(list, list->c = va_arg(list->args, int));
@@ -63,7 +63,7 @@ void		type_conversion(t_printf *list, char c)
 	}
 }
 
-int			is_activate_flag(t_printf *lst)
+int			is_activate_flag(t_//printf *lst)
 {
 	if (lst->activate_flag[0] == '1')
 		return (1);

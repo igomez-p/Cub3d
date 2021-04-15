@@ -74,6 +74,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 char				*ft_temp(char *l);
 char				*ft_swap(char *l, char *buf);
 int					get_next_line(int fd, char **line);
-// añadir printf
+// añadir //printf
 
 #endif

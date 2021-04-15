@@ -98,27 +98,27 @@ void	info_color(char *line, t_cub *info)
 {
 	if (ft_strnstr(line, "F", 1))
 	{
-		info->col.rgb_suelo[0] = save_int(&line);
-		if (!(info->col.rgb_suelo[0] >= 0 && info->col.rgb_suelo[0] <= 255))
+		info->col.rgb_f[0] = save_int(&line);
+		if (!(info->col.rgb_f[0] >= 0 && info->col.rgb_f[0] <= 255))
 			clean_exit(info, "Valor R suelo incorrecto\n", 1);
-		info->col.rgb_suelo[1] = save_int(&line);
-		if (!(info->col.rgb_suelo[1] >= 0 && info->col.rgb_suelo[1] <= 255))
+		info->col.rgb_f[1] = save_int(&line);
+		if (!(info->col.rgb_f[1] >= 0 && info->col.rgb_f[1] <= 255))
 			clean_exit(info, "Valor G suelo incorrecto\n", 1);
-		info->col.rgb_suelo[2] = save_int(&line);
-		if (!(info->col.rgb_suelo[2] >= 0 && info->col.rgb_suelo[2] <= 255))
+		info->col.rgb_f[2] = save_int(&line);
+		if (!(info->col.rgb_f[2] >= 0 && info->col.rgb_f[2] <= 255))
 			clean_exit(info, "Valor B suelo incorrecto\n", 1);
 
 	}
 	else if (ft_strnstr(line, "C", 1))
 	{
-		info->col.rgb_techo[0] = save_int(&line);
-		if (!(info->col.rgb_techo[0] >= 0 && info->col.rgb_techo[0] <= 255))
+		info->col.rgb_s[0] = save_int(&line);
+		if (!(info->col.rgb_s[0] >= 0 && info->col.rgb_s[0] <= 255))
 			clean_exit(info, "Valor R techo incorrecto\n", 1);
-		info->col.rgb_techo[1] = save_int(&line);
-		if (!(info->col.rgb_techo[1] >= 0 && info->col.rgb_techo[1] <= 255))
+		info->col.rgb_s[1] = save_int(&line);
+		if (!(info->col.rgb_s[1] >= 0 && info->col.rgb_s[1] <= 255))
 			clean_exit(info, "Valor G techo incorrecto\n", 1);
-		info->col.rgb_techo[2] = save_int(&line);
-		if (!(info->col.rgb_techo[2] >= 0 && info->col.rgb_techo[2] <= 255))
+		info->col.rgb_s[2] = save_int(&line);
+		if (!(info->col.rgb_s[2] >= 0 && info->col.rgb_s[2] <= 255))
 			clean_exit(info, "Valor B techo incorrecto\n", 1);
 	}
 }

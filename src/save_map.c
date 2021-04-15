@@ -91,16 +91,16 @@ static void player_dir(t_cub *c, int x, int y)
 	c->mov.diry = 0.0;
 	c->mov.dirx = 0.0;
 	if (c->map[x][y] == NORTE)
-		c->mov.diry = -1.0;
-	else if (c->map[x][y] == SUR)
-		c->mov.diry = 1.0;
-	else if (c->map[x][y] == ESTE)
-		c->mov.dirx = 1.0;
-	else if (c->map[x][y] == OESTE)
 		c->mov.dirx = -1.0;
+	else if (c->map[x][y] == SUR)
+		c->mov.dirx = 1.0;
+	else if (c->map[x][y] == ESTE)
+		c->mov.diry = 1.0;
+	else if (c->map[x][y] == OESTE)
+		c->mov.diry = -1.0;
 
-	c->mov.planex = -c->mov.diry * ((VIEW_ANGLE * M_PI) / 180);
-	c->mov.planey = c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
+	c->mov.planex = c->mov.diry * ((VIEW_ANGLE * M_PI) / 180);
+	c->mov.planey = -c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
 }
 
 void searchPlayer(t_cub *cub)
@@ -140,7 +140,7 @@ static int map_dimensions(t_cub *c)
 		i++;
 	}
 	c->nrows = i;
-printf("max columnas %d | max filas %d\n", max, c->nrows);
+//printf("max columnas %d | max filas %d\n", max, c->nrows);
 	return max;
 }
 
@@ -156,7 +156,7 @@ void free_map(t_cub *c)
 			i--;
 		}
 
-printf("a3\n");
+//printf("a3\n");
 		free(c->map);
 	}
 }
@@ -175,10 +175,10 @@ void refill_map(t_cub *c)
 			ft_memset(&map[k][len], ' ', w-len);
 		
 		k++;
-		printf("%d ", k);
+		//printf("%d ", k);
 	}
 	c->map[k] = NULL;
 	free_map(c);
-	printf("adios\n");
+	//printf("adios\n");
 	c->map = &map[0];
 }

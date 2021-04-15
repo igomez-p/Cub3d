@@ -14,7 +14,7 @@
 
 int key_handler(int key, t_cub *c)
 {
-	printf("key %d\n\r", key);
+	//printf("key %d\n\r", key);
 	if (key == (int)KEY_W_)
 		c->mov.up ^= 1;
 	else if (key == (int)KEY_A_)
@@ -27,8 +27,8 @@ int key_handler(int key, t_cub *c)
 		c->cam.right ^= 1;
 	else if (key == (int)KEY_LEFT_)
 		c->cam.left ^= 1;	
-	else if (key == (int)KEY_SPACE_)
-		printf("key space %d\n\r", key);
+	//else if (key == (int)KEY_SPACE_)
+		//printf("key space %d\n\r", key);
 	else if (key == (int)KEY_ESC_)
 		exit_handler(c);
 
@@ -54,7 +54,7 @@ static void	free_map_textures(t_cub *c)
 	if (c->tex.path_sp)
 		free(c->tex.path_sp);
 
-	printf("a1\n");
+	//printf("a1\n");
 	free_map(c);
 }
 
@@ -83,15 +83,15 @@ void	clean_exit(t_cub *c, char *str, int error)
 		perror("");
 	else
 		write(1, str, len);
-printf("a\n");
+//printf("a\n");
 	free_map_textures(c);
-printf("b\n");
+//printf("b\n");
 	if (c->libx.window)
 		mlx_destroy_window(c->libx.mlx, c->libx.window);
 	if (c->win.img)
 		mlx_destroy_image(c->libx.mlx, c->win.img);
-printf("c\n");
+//printf("c\n");
 	destroy_textures(c);
-		printf("d\n");
+		//printf("d\n");
 	exit(1);
 }

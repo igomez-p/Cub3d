@@ -12,19 +12,20 @@
 
 #include "../inc/cub.h"
 
-/*void	char_mlx_pixel_put(t_cub *cub, int x, int y, int color)
+static int rgb2int(int r, int g, int b)
 {
-	char	*dst;
-
-	dst = cub->win.addr + (y * cub->win.sz + x * (cub->win.bpp / 8));
-	*(unsigned int*)dst = color;
-}*/
+	return ((r << 16) | (g << 8) | b);
+}
 
 void	paint_sky_floor(t_cub *c)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
+	int	sky_color;
+	int	floor_color;
 
+	sky_color = rgb2int(c->col.rgb_s[0], c->col.rgb_s[1], c->col.rgb_s[2]);
+	floor_color = rgb2int(c->col.rgb_f[0], c->col.rgb_f[1], c->col.rgb_f[2]);
 	y = -1;
 	while (++y < c->win.hei)
 	{
@@ -32,35 +33,24 @@ void	paint_sky_floor(t_cub *c)
 		while (++x < c->win.wid)
 		{
 			if (y < c->win.hei/2)
-				mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, 0xff0055);	// sky
+				mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, sky_color);
 			else
-				mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, 0xaa6611);	// floor
+				mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, floor_color);
 		}
 	}
 }
-
-/*void paint_sky(t_cub *c, int x)
-{
-	int y;
-
-	y = -1;
-	while (++y < c->draw.start)
-		mlx_pixel_put(c->libx.mlx, c->libx.window, x, y, 0x00aa00);
-}*/
 
 int draw(t_cub *c)
 {
 	int x;
 
 	x = -1;
-	paint_screen_floor(c);
+	paint_sky_floor(c);
 	while (++x < c->win.wid)
 	{
 		raycaster(c, x);
-		//paint_sky(c, x);
 	}
-	//mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->win.img, 0, 0);
-	move_keys(c, 1);
-	rotate_keys(c, 1);
+	move_keys(c, SQUARES_SEC);
+	rotate_keys(c, RADIANS_SEC);
 	return (1);
 }

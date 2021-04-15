@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
-static int	ft_else(t_printf *ls, char *s, int i)
+static int	ft_else(t_//printf *ls, char *s, int i)
 {
 	if (s[i] == ls->flags[2])
 	{
@@ -40,7 +40,7 @@ static int	ft_else(t_printf *ls, char *s, int i)
 	return (i);
 }
 
-int			ft_activate_flag(t_printf *ls, char *s)
+int			ft_activate_flag(t_//printf *ls, char *s)
 {
 	int		i;
 
@@ -68,7 +68,7 @@ int			ft_activate_flag(t_printf *ls, char *s)
 	return (i);
 }
 
-int			flag_conversion_int(t_printf *lst, char *n)
+int			flag_conversion_int(t_//printf *lst, char *n)
 {
 	int	len;
 	int	x;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
 int		int_leng(long int n, int base)
 {

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
-static int	flag_conversion(t_printf *lst, char *str)
+static int	flag_conversion(t_//printf *lst, char *str)
 {
 	int	len;
 
@@ -30,7 +30,7 @@ static int	flag_conversion(t_printf *lst, char *str)
 	return (1);
 }
 
-static void	putchar_width(t_printf *lst, char c, char *str)
+static void	putchar_width(t_//printf *lst, char c, char *str)
 {
 	int w;
 
@@ -46,7 +46,7 @@ static void	putchar_width(t_printf *lst, char c, char *str)
 	}
 }
 
-static void	flag_width(t_printf *lst, char *str)
+static void	flag_width(t_//printf *lst, char *str)
 {
 	if (lst->activate_flag[1] == '1' && lst->activate_flag[0] == '0')
 		putchar_width(lst, '0', str);
@@ -59,7 +59,7 @@ static void	flag_width(t_printf *lst, char *str)
 	lst->width = 0;
 }
 
-static void	flag_precision(t_printf *lst, char *str)
+static void	flag_precision(t_//printf *lst, char *str)
 {
 	char new_str[lst->precision];
 
@@ -87,7 +87,7 @@ static void	flag_precision(t_printf *lst, char *str)
 	lst->precision = 0;
 }
 
-void		ft_conversion_string(t_printf *lst, char *str)
+void		ft_conversion_string(t_//printf *lst, char *str)
 {
 	if (!str)
 		str = ft_strdup("(null)");

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_//printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
 char	*ft_minisplit(char *s)
 {
@@ -33,7 +33,7 @@ char	*ft_minisplit(char *s)
 	return (temp);
 }
 
-void	ft_write(t_printf *lst, char *str)
+void	ft_write(t_//printf *lst, char *str)
 {
 	char	*aux;
 	char	*temp;
@@ -59,9 +59,9 @@ void	ft_write(t_printf *lst, char *str)
 	lst->nbytes += ft_strlen(str);
 }
 
-int		ft_printf(const char *str, ...)
+int		ft_//printf(const char *str, ...)
 {
-	t_printf	lista;
+	t_//printf	lista;
 	va_list		va_aux;
 	char		*aux_str;
 

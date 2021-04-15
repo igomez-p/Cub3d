@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
 char		*ft_itohex(unsigned long num, char c)
 {
@@ -39,7 +39,7 @@ char		*ft_itohex(unsigned long num, char c)
 	return (nhex);
 }
 
-static void	flag_precision0(t_printf *lst, char *hex, char *new_hex)
+static void	flag_precision0(t_//printf *lst, char *hex, char *new_hex)
 {
 	while ((lst->precision - (int)ft_strlen(hex)) >= 1)
 	{
@@ -56,7 +56,7 @@ static void	flag_precision0(t_printf *lst, char *hex, char *new_hex)
 	}
 }
 
-static void	flag_precision(t_printf *lst, char *hex)
+static void	flag_precision(t_//printf *lst, char *hex)
 {
 	char	*new_hex;
 
@@ -78,7 +78,7 @@ static void	flag_precision(t_printf *lst, char *hex)
 	}
 }
 
-static void	ft_else(t_printf *lst, unsigned int num, char *hex)
+static void	ft_else(t_//printf *lst, unsigned int num, char *hex)
 {
 	if (lst->activate_flag[2] == '1')
 	{
@@ -94,7 +94,7 @@ static void	ft_else(t_printf *lst, unsigned int num, char *hex)
 		flag_width_int(lst, hex);
 }
 
-void		ft_conversion_hex(t_printf *lst, unsigned int num, char c)
+void		ft_conversion_hex(t_//printf *lst, unsigned int num, char c)
 {
 	char	*hex;
 

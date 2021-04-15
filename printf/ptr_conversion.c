@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
-static void	flag_width_ptr(t_printf *lst, char *str)
+static void	flag_width_ptr(t_//printf *lst, char *str)
 {
 	char	*new_str;
 
@@ -39,7 +39,7 @@ static void	flag_width_ptr(t_printf *lst, char *str)
 	free(new_str);
 }
 
-static void	flag_precision0(t_printf *lst, char *hex, char *new_hex)
+static void	flag_precision0(t_//printf *lst, char *hex, char *new_hex)
 {
 	while ((lst->precision - (int)ft_strlen(hex)) >= 1)
 	{
@@ -56,7 +56,7 @@ static void	flag_precision0(t_printf *lst, char *hex, char *new_hex)
 	}
 }
 
-static void	flag_precision(t_printf *lst, char *hex)
+static void	flag_precision(t_//printf *lst, char *hex)
 {
 	char	*new_hex;
 
@@ -79,7 +79,7 @@ static void	flag_precision(t_printf *lst, char *hex)
 	}
 }
 
-void		ft_conversion_ptr(t_printf *lst, unsigned long ptr)
+void		ft_conversion_ptr(t_//printf *lst, unsigned long ptr)
 {
 	char	*memo;
 

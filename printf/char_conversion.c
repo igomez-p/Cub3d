@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
-static void	putchar_width(t_printf *lst, char c)
+static void	putchar_width(t_//printf *lst, char c)
 {
 	while (lst->width > 1)
 	{
@@ -22,7 +22,7 @@ static void	putchar_width(t_printf *lst, char c)
 	}
 }
 
-static void	flag_minus_width(t_printf *lst, char c)
+static void	flag_minus_width(t_//printf *lst, char c)
 {
 	ft_putchar_fd(c, 1);
 	lst->nbytes++;
@@ -30,7 +30,7 @@ static void	flag_minus_width(t_printf *lst, char c)
 	lst->width = 0;
 }
 
-static void	flag_width(t_printf *lst, char c)
+static void	flag_width(t_//printf *lst, char c)
 {
 	if (lst->activate_flag[1] == '1')
 		putchar_width(lst, '0');
@@ -41,7 +41,7 @@ static void	flag_width(t_printf *lst, char c)
 	lst->width = 0;
 }
 
-static int	flag_conversion(t_printf *lst)
+static int	flag_conversion(t_//printf *lst)
 {
 	if (!ft_strncmp(lst->activate_flag, "0100", 4))
 		return (0);
@@ -56,7 +56,7 @@ static int	flag_conversion(t_printf *lst)
 	return (1);
 }
 
-void		ft_conversion_char(t_printf *lst, char c)
+void		ft_conversion_char(t_//printf *lst, char c)
 {
 	if (!is_activate_flag(lst) || !flag_conversion(lst))
 	{

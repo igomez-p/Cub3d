@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
-#include "../inc/libftprintf.h"
+#include "../inc/libft//printf.h"
 
 /*static void comprobar_lecturaCub(t_cub cub)
 {
-	printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
-	printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n", 
+	//printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
+	//printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n", 
 	cub.tex.path_norte, cub.tex.path_sur, cub.tex.path_oeste, cub.tex.path_este, cub.tex.path_sprite);
-	printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_suelo[0], cub.col.rgb_suelo[1], cub.col.rgb_suelo[2],
+	//printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_suelo[0], cub.col.rgb_suelo[1], cub.col.rgb_suelo[2],
 	cub.col.rgb_techo[0], cub.col.rgb_techo[1], cub.col.rgb_techo[2]);
 	int k = 0;
 	while (cub.map[k])
@@ -26,10 +26,10 @@
 		int i = 0;
 		while (cub.map[k][i])
 		{
-			printf("%c", cub.map[k][i]);
+			//printf("%c", cub.map[k][i]);
 			i++;
 		}
-		printf("\n");
+		//printf("\n");
 		k++;
 	}
 }*/

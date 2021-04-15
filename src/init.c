@@ -11,8 +11,8 @@ static void init_file_vble(t_cub *info)
 	info->tex.path_ea = NULL;
 	info->tex.path_sp = NULL;
 
-    ft_bzero(info->col.rgb_suelo, 3);
-    ft_bzero(info->col.rgb_techo, 3);
+    ft_bzero(info->col.rgb_s, 3);
+    ft_bzero(info->col.rgb_f, 3);
 
 	info->map = NULL;
 }

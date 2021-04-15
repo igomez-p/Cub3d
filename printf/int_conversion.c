@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft//printf.h"
 
-void		putchar_width0(t_printf *lst, char c, char p, int len)
+void		putchar_width0(t_//printf *lst, char c, char p, int len)
 {
 	int w;
 
@@ -30,7 +30,7 @@ void		putchar_width0(t_printf *lst, char c, char p, int len)
 	}
 }
 
-void		flag_width_int(t_printf *lst, char *str)
+void		flag_width_int(t_//printf *lst, char *str)
 {
 	if (lst->activate_flag[1] == '1' && lst->activate_flag[0] == '0')
 	{
@@ -52,7 +52,7 @@ void		flag_width_int(t_printf *lst, char *str)
 	lst->width = 0;
 }
 
-static void	flag_precision0(t_printf *lst, char *num, long int n, int b)
+static void	flag_precision0(t_//printf *lst, char *num, long int n, int b)
 {
 	if (n < 0)
 	{
@@ -74,7 +74,7 @@ static void	flag_precision0(t_printf *lst, char *num, long int n, int b)
 	}
 }
 
-static void	flag_precision(t_printf *lst, long int n, int b)
+static void	flag_precision(t_//printf *lst, long int n, int b)
 {
 	char	*nu;
 	int		leng;
@@ -103,7 +103,7 @@ static void	flag_precision(t_printf *lst, long int n, int b)
 	}
 }
 
-void		ft_conversion_int(t_printf *lst, long int num, char c)
+void		ft_conversion_int(t_//printf *lst, long int num, char c)
 {
 	char *num_str;
 
