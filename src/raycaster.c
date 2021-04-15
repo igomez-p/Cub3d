@@ -8,13 +8,13 @@ static void dda(t_cub *c)
         {
             c->ray.sidex += c->ray.deltax;
             c->mov.mapx += c->ray.stepx;
-            c->ray.side = 0; /*+ (c->ray.dirx < 0);*/    //c->ray.step = 0 + (c->ray.dirx < 0);
+            c->ray.side = 0 + (c->ray.dirx < 0);
         }
         else
         {
             c->ray.sidey += c->ray.deltay;
             c->mov.mapy += c->ray.stepy;
-            c->ray.side = 1; /*2 + (c->ray.diry > 0);*/    //c->ray.step = 2 + (c->ray.diry > 0);
+            c->ray.side = 2 + (c->ray.diry > 0);
         }
         if(c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
     }
@@ -35,7 +35,7 @@ static void ray_pos_dir(t_cub *c, int x)
 
 static void perpRay_distance(t_cub *c)
 {
-    if (c->ray.side == 0/*<= 1*/)
+    if (c->ray.side /*== 0*/<= 1)
         c->ray.perp = (c->mov.mapx - c->mov.posx + (1 - c->ray.stepx) / 2) / c->ray.dirx;
     else
         c->ray.perp = (c->mov.mapy - c->mov.posy + (1 - c->ray.stepy) / 2) / c->ray.diry;
@@ -70,7 +70,7 @@ static void xcoord_texture(t_cub *c)
 
 static void wallx_value(t_cub *c)
 {
-    if (c->ray.side == 0/*<= 1*/)
+    if (c->ray.side /*== 0*/<= 1)
         c->draw.wallx = c->mov.posy + c->ray.perp * c->ray.diry;
     else
         c->draw.wallx = c->mov.posx + c->ray.perp * c->ray.dirx;

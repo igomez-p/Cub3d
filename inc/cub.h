@@ -20,10 +20,10 @@
 # define SUR	'S'
 # define OESTE	'w'
 # define ESTE	'E'
-# define NO  0
-# define SO  1
-# define EA  2
-# define WE  3
+# define NO  1
+# define SO  0
+# define EA  3
+# define WE  2
 # define MAX_TEXTURES	4
 # include <unistd.h>
 # include <stdlib.h>
@@ -182,6 +182,7 @@ void step_initialSide(t_cub *c);
 void move_keys(t_cub *c, double speed);
 void rotate_keys(t_cub *c, double speed);
 int raycaster(t_cub *c, int x);
+int				save_bmp(t_cub *c);
 
 void			eliminarEspacios(t_cub *cub);
 int				paint_screen(t_cub *c);

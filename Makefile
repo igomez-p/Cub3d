@@ -20,7 +20,8 @@ SRC = cub.c				\
 	  src/handler.c		\
 	  src/move.c		\
 	  src/raycaster.c	\
-	  src/window.c
+	  src/window.c		\
+	  src/save_bmp.c
 
 LIB = library/libft.a \
 	  library/libftprintf.a \

@@ -98,7 +98,7 @@ int		main(int argc, char *argv[])
 	init_mlx_func(&cub);
 
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
-		return 1;	//save_bmp(&cub);	
+		save_bmp(&cub);	
 
 	mlx_hook(cub.libx.window, 2, 1u << 0, key_handler, &cub);	// KEYPRESS
 	mlx_hook(cub.libx.window, 3, 1u << 1, key_handler, &cub);	// KEYRELESASE

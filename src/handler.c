@@ -26,9 +26,7 @@ int key_handler(int key, t_cub *c)
 	else if (key == (int)KEY_RIGHT_)
 		c->cam.right ^= 1;
 	else if (key == (int)KEY_LEFT_)
-		c->cam.left ^= 1;	
-	//else if (key == (int)KEY_SPACE_)
-		//printf("key space %d\n\r", key);
+		c->cam.left ^= 1;
 	else if (key == (int)KEY_ESC_)
 		exit_handler(c);
 
