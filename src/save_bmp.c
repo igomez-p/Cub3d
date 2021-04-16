@@ -11,7 +11,7 @@ static int		write_bmp_header(t_cub *c, int fd, int filesize)
 {
 	int				i;
 	unsigned char	bmpfileheader[BMP_HEADER_BYTES];
-
+	(void)filesize;
 	i = 0;
 	while (i < BMP_HEADER_BYTES)
 		bmpfileheader[i++] = (unsigned char)(0);
@@ -49,8 +49,8 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 		x = 0;
 		while (x < c->res.rend_x)
 		{
-			color = c->win.addr[(4 * c->res.rend_x * (c->res.rend_y - 1 - y)) + (4 * x)];
-			if (write(file, &color, 3) < 0)
+			color = c->win.addr[c->res.rend_x * y + x];
+			if (write(file, &color, 1) < 0)
 				return (0);
 			if (pad > 0 && write(file, &zero, pad) < 0)
 				return (0);
@@ -64,17 +64,18 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 int				save_bmp(t_cub *c)
 {
 	int			filesize;
-	int			file;
+	int			file = 0;
 	int			pad;
 
 	draw(c);
 	pad = (4 - (c->res.rend_x * 3) % 4) % 4;
 	filesize = BMP_HEADER_BYTES + (3 * (c->res.rend_x + pad) * c->res.rend_y);
-	if ((file = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 744)) < 0){
-        printf("fail open file\n");
+	if ((file = open("prueba.bmp", O_CREAT | O_WRONLY, 0644)) < 0)
+	{
+		printf("fail open\n");
 		return (0);
-    }
-	if (!write_bmp_header(c, filesize, file))
+	}
+	if (!write_bmp_header(c, file, filesize))
     {
         printf("fail bmp header\n");
 		return (0);

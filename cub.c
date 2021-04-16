@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:52:45 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/16 20:05:10 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/16 20:16:59 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void comprobar_lecturaCub(t_cub cub)
 
 int		main(int argc, char *argv[])
 {
-	// argumento 1: archivo rt con info sobre el elemento
-	// argumento 2: --save
 	t_cub	cub;
 	init_struct(&cub);
 
@@ -90,7 +88,7 @@ int		main(int argc, char *argv[])
 
 	read_cub(argv[1], &cub);
 	comprobar_lecturaCub(cub);
-	refill_map(&cub);			// TODO: segfault
+	refill_map(&cub);
 	searchPlayer(&cub);
 
 	comprobar_lecturaCub(cub);
@@ -100,11 +98,10 @@ int		main(int argc, char *argv[])
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
 		save_bmp(&cub);
 
-	mlx_hook(cub.libx.window, 2, 0, key_press_handler, &cub);	// KEYPRESS
-	mlx_hook(cub.libx.window, 3, 0, key_release_handler, &cub);	// KEYRELESASE
-	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, &cub);	// CLOSE WINDOW
-
-	mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
+	mlx_hook(cub.libx.window, 2, 0, key_press_handler, &cub);
+	mlx_hook(cub.libx.window, 3, 0, key_release_handler, &cub);
+	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, &cub);
+	mlx_loop_hook(cub.libx.mlx, draw, &cub);
 
 	mlx_loop(cub.libx.mlx);
 	return (0);
