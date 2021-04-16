@@ -56,7 +56,7 @@ void rotate_keys(t_cub *c, double speed)
     {
       double oldDirX = c->mov.dirx;
       c->mov.dirx = c->mov.dirx * cos(-speed) - c->mov.diry * sin(-speed);
-      c->mov.dirx = oldDirX * sin(-speed) + c->mov.diry * cos(-speed);
+      c->mov.diry = oldDirX * sin(-speed) + c->mov.diry * cos(-speed);
       double oldPlaneX = c->mov.planex;
       c->mov.planex = c->mov.planex * cos(-speed) - c->mov.planey * sin(-speed);
       c->mov.planey = oldPlaneX * sin(-speed) + c->mov.planey * cos(-speed);

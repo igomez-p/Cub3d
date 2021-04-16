@@ -6,28 +6,47 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/03/27 18:20:06 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/16 20:05:55 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-int key_handler(int key, t_cub *c)
+int key_press_handler(int key, t_cub *c)
 {
-	//printf("key %d\n\r", key);
-	if (key == (int)KEY_W_)
-		c->mov.up ^= 1;
-	else if (key == (int)KEY_A_)
-		c->mov.left ^= 1;
-	else if (key == (int)KEY_S_)
-		c->mov.down ^= 1;
-	else if (key == (int)KEY_D_)
-		c->mov.right ^= 1;
-	else if (key == (int)KEY_RIGHT_)
-		c->cam.right ^= 1;
-	else if (key == (int)KEY_LEFT_)
-		c->cam.left ^= 1;
-	else if (key == (int)KEY_ESC_)
+	if (key == (int)KEY_W)
+		c->mov.up = 1;
+	else if (key == (int)KEY_A)
+		c->mov.left = 1;
+	else if (key == (int)KEY_S)
+		c->mov.down = 1;
+	else if (key == (int)KEY_D)
+		c->mov.right = 1;
+	else if (key == (int)KEY_RIGHT)
+		c->cam.right = 1;
+	else if (key == (int)KEY_LEFT)
+		c->cam.left = 1;
+	else if (key == (int)KEY_ESCAPE)
+		exit_handler(c);
+
+    return 1;
+}
+
+int key_release_handler(int key, t_cub *c)
+{
+	if (key == (int)KEY_W)
+		c->mov.up = 0;
+	else if (key == (int)KEY_A)
+		c->mov.left = 0;
+	else if (key == (int)KEY_S)
+		c->mov.down = 0;
+	else if (key == (int)KEY_D)
+		c->mov.right = 0;
+	else if (key == (int)KEY_RIGHT)
+		c->cam.right = 0;
+	else if (key == (int)KEY_LEFT)
+		c->cam.left = 0;
+	else if (key == (int)KEY_ESCAPE)
 		exit_handler(c);
 
     return 1;
@@ -40,7 +59,7 @@ int	exit_handler(t_cub *c)
 }
 
 static void	free_map_textures(t_cub *c)
-{	
+{
 	if (c->tex.path_no)
 		free(c->tex.path_no);
 	if (c->tex.path_so)
@@ -52,7 +71,6 @@ static void	free_map_textures(t_cub *c)
 	if (c->tex.path_sp)
 		free(c->tex.path_sp);
 
-	//printf("a1\n");
 	free_map(c);
 }
 
@@ -73,7 +91,7 @@ static void destroy_textures(t_cub *c)
 void	clean_exit(t_cub *c, char *str, int error)
 {
 	int		len;
-
+printf("clean exit\n");
 	len = ft_strlen(str);
 	if (error)
 		write(1, "Error\n", 6);

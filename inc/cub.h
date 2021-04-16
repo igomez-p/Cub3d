@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/09 20:19:19 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/04/16 20:07:13 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
+
+# ifndef CUB_H
 # define CUB_H
+
 # define NADA ' '
 # define VACIO '0'
 # define MURO '1'
@@ -37,7 +39,14 @@
 # include "libft.h"
 # include "libftprintf.h"
 //# include "/usr/local/include/mlx.h"
-# include "../minilibx-linux/mlx.h"
+
+#define MAC_SYSTEM 1
+
+#ifdef	MAC_SYSTEM
+	#include "../minilibx-Darwin/mlx.h"
+#elif	LINUX_SYSTEM
+	# include "../minilibx-linux/mlx.h"
+#endif
 
 #define PASO 0.01
 #define GRADOS2RADIAN(angle) ((angle) / 180.0 * M_PI)
@@ -170,7 +179,9 @@ void			init_tex_vble(t_cub *c);
 void			init_struct(t_cub *info);
 void    		init_mlx_func(t_cub *c);
 void			read_cub(char *filename, t_cub *info);
-int				key_handler(int key, t_cub *c);
+//int				key_handler(int key, t_cub *c);
+int				key_press_handler(int key, t_cub *c);
+int				key_release_handler(int key, t_cub *c);
 int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);

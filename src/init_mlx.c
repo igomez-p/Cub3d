@@ -42,7 +42,7 @@ static void xpm2image(t_cub *c)
             clean_exit(c, "Error al convertir textura de un muro\n", 1);
         else
             c->twall[x].addr = (int *)mlx_get_data_addr(c->twall[x].img, &c->twall[x].bpp, &c->twall[x].sz, &c->twall[x].endian);
-        
+
         x++;
     }
     if (!c->sp.img)

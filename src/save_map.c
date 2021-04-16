@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/01/24 16:59:05 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/16 20:02:41 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	*info_map(char *line, char *stc, t_cub *cub)
 
 static void player_dir(t_cub *c, int x, int y)
 {
-	// TODO: comprobar si esta bien la logica
 	c->mov.diry = 0.0;
 	c->mov.dirx = 0.0;
 	if (c->map[x][y] == NORTE)
@@ -140,7 +139,6 @@ static int map_dimensions(t_cub *c)
 		i++;
 	}
 	c->nrows = i;
-//printf("max columnas %d | max filas %d\n", max, c->nrows);
 	return max;
 }
 
@@ -156,7 +154,6 @@ void free_map(t_cub *c)
 			i--;
 		}
 
-//printf("a3\n");
 		free(c->map);
 	}
 }
@@ -164,21 +161,20 @@ void free_map(t_cub *c)
 void refill_map(t_cub *c)
 {
 	int w = map_dimensions(c);
-	char **map = malloc(c->nrows);
+	char **map = malloc((c->nrows+1)*sizeof(char *));
 	int k = 0;
-	while (/*c->map[k]*/k < c->nrows)
+	while (c->map[k])
 	{
-		map[k] = malloc(w);
+		map[k] = malloc((w+1)*sizeof(char));
 		int len = ft_strlen(c->map[k]);
 		ft_memcpy(map[k], c->map[k], len);
 		if (len < w)
-			ft_memset(&map[k][len], ' ', w-len);
-		
+			ft_memset(&map[k][len], '1', w-len);
+
+		map[k][w] = '\0';
 		k++;
-		//printf("%d ", k);
 	}
-	c->map[k] = NULL;
+	map[k] = NULL;
 	free_map(c);
-	//printf("adios\n");
-	c->map = &map[0];
+	c->map = map;
 }

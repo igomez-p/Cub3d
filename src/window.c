@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   windows.c                                          :+:      :+:    :+:   */
+/*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:31:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/01/31 18:20:06 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/16 18:30:41 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int draw(t_cub *c)
 	while (++x < c->win.wid)
 	{
 		raycaster(c, x);
+		//move_keys(c, SQUARES_SEC);
+		//rotate_keys(c, RADIANS_SEC);
 	}
 	move_keys(c, SQUARES_SEC);
 	rotate_keys(c, RADIANS_SEC);

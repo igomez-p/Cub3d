@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:52:45 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/01/31 19:48:01 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/16 20:05:10 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	read_cub(char *filename, t_cub *info)
 
 static void comprobar_lecturaCub(t_cub cub)
 {
-	//printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
-	//printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n", 
-	//cub.tex.path_no, cub.tex.path_so, cub.tex.path_we, cub.tex.path_ea, cub.tex.path_sp);
-	//printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_suelo[0], cub.col.rgb_suelo[1], cub.col.rgb_suelo[2],
-	//cub.col.rgb_techo[0], cub.col.rgb_techo[1], cub.col.rgb_techo[2]);
+	/*printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
+	printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n",
+	cub.tex.path_no, cub.tex.path_so, cub.tex.path_we, cub.tex.path_ea, cub.tex.path_sp);
+	printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_f[0], cub.col.rgb_f[1], cub.col.rgb_f[2],
+	cub.col.rgb_s[0], cub.col.rgb_s[1], cub.col.rgb_s[2]);*/
 	int k = 0;
 	while (cub.map[k])
 	{
@@ -90,7 +90,7 @@ int		main(int argc, char *argv[])
 
 	read_cub(argv[1], &cub);
 	comprobar_lecturaCub(cub);
-	//refill_map(&cub);			// TODO: segfault
+	refill_map(&cub);			// TODO: segfault
 	searchPlayer(&cub);
 
 	comprobar_lecturaCub(cub);
@@ -98,12 +98,12 @@ int		main(int argc, char *argv[])
 	init_mlx_func(&cub);
 
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
-		save_bmp(&cub);	
+		save_bmp(&cub);
 
-	mlx_hook(cub.libx.window, 2, 1u << 0, key_handler, &cub);	// KEYPRESS
-	mlx_hook(cub.libx.window, 3, 1u << 1, key_handler, &cub);	// KEYRELESASE
+	mlx_hook(cub.libx.window, 2, 0, key_press_handler, &cub);	// KEYPRESS
+	mlx_hook(cub.libx.window, 3, 0, key_release_handler, &cub);	// KEYRELESASE
 	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, &cub);	// CLOSE WINDOW
-	
+
 	mlx_loop_hook(cub.libx.mlx, draw, &cub);			// RAYCASTING
 
 	mlx_loop(cub.libx.mlx);
