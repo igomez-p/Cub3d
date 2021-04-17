@@ -44,13 +44,13 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 	int					color;
 
 	y = 0;
-	while (y < c->res.rend_y)
+	while (y < c->win.hei)
 	{
 		x = 0;
-		while (x < c->res.rend_x)
+		while (x < c->win.wid)
 		{
-			color = c->win.addr[c->res.rend_x * y + x];
-			if (write(file, &color, 1) < 0)
+			color = c->win.addr[c->win.wid * y + x];
+			if (write(file, &color, 3) < 0)
 				return (0);
 			if (pad > 0 && write(file, &zero, pad) < 0)
 				return (0);
@@ -61,30 +61,40 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 	return (1);
 }
 
+static int		write_bmp(t_cub *c, int fd, int filesize, int pad)
+{
+	if (!write_bmp_header(c, fd, filesize))
+    {
+		close(fd);
+        clean_exit(c, "Fallo al crear cabecera bmp\n", 1);
+		return (0);
+    }
+	if (!write_bmp_data(c, fd, pad))
+    {
+		close(fd);
+        clean_exit(c, "Fallo al escribit datos bmp\n", 1);
+		return (0);
+    }
+	return (1);
+}
+
 int				save_bmp(t_cub *c)
 {
 	int			filesize;
-	int			file = 0;
+	int			file;
 	int			pad;
 
+	c->bmp = 1;
+	init_mlx_func(c);
 	draw(c);
-	pad = (4 - (c->res.rend_x * 3) % 4) % 4;
-	filesize = BMP_HEADER_BYTES + (3 * (c->res.rend_x + pad) * c->res.rend_y);
-	if ((file = open("prueba.bmp", O_CREAT | O_WRONLY, 0644)) < 0)
+	pad = (4 - (c->win.wid * 3) % 4) % 4;
+	filesize = BMP_HEADER_BYTES + (3 * (c->win.wid + pad) * c->win.hei);
+	if ((file = open("screenshot2.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0644)) < 0)
 	{
-		printf("fail open\n");
+		clean_exit(c, "Fallo al crear fichero\n", 1);
 		return (0);
 	}
-	if (!write_bmp_header(c, file, filesize))
-    {
-        printf("fail bmp header\n");
-		return (0);
-    }
-	if (!write_bmp_data(c, file, pad))
-    {
-        printf("fail bmp data\n");
-		return (0);
-    }
+	write_bmp(c, file, filesize, pad);
 	close(file);
 	exit_handler(c);
 	return (1);

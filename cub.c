@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:52:45 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/16 20:16:59 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/17 18:55:30 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,10 @@ int		main(int argc, char *argv[])
 
 	comprobar_lecturaCub(cub);
 
-	init_mlx_func(&cub);
-
 	if (argc == 3 && (!ft_strncmp(argv[2], "--save", 7)))
 		save_bmp(&cub);
 
+	init_mlx_func(&cub);
 	mlx_hook(cub.libx.window, 2, 0, key_press_handler, &cub);
 	mlx_hook(cub.libx.window, 3, 0, key_release_handler, &cub);
 	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, &cub);

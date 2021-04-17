@@ -6,7 +6,7 @@
 #    By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 15:29:03 by igomez-p          #+#    #+#              #
-#    Updated: 2021/04/16 17:57:15 by igomez-p         ###   ########.fr        #
+#    Updated: 2021/04/17 19:20:51 by igomez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,11 @@ SRC = cub.c				\
 	  src/move.c		\
 	  src/raycaster.c	\
 	  src/window.c		\
-	  src/save_bmp.c
+	  src/save_bmp.c	\
+	  src/sprites.c
 
 LIB = library/libft_$(OS).a \
 	  minilibx-$(OS)/libmlx.a \
-	  #library/libftprintf.a \
 
 OS  = $(shell uname -s)
 

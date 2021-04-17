@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/16 20:02:41 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/17 15:07:49 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void refill_map(t_cub *c)
 		int len = ft_strlen(c->map[k]);
 		ft_memcpy(map[k], c->map[k], len);
 		if (len < w)
-			ft_memset(&map[k][len], '1', w-len);
+			ft_memset(&map[k][len], ' ', w-len);
 
 		map[k][w] = '\0';
 		k++;

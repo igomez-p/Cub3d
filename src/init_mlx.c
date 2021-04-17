@@ -1,4 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/17 15:18:11 by igomez-p          #+#    #+#             */
+/*   Updated: 2021/04/17 18:54:27 by igomez-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
+
+void init_sp_vble(t_cub *c)
+{
+    c->sp.img = NULL;
+    c->sp.addr = NULL;
+    c->sp.wid = 0;
+    c->sp.hei = 0;
+    c->sp.bpp = 0;
+    c->sp.sz = 0;
+    c->sp.endian = 0;
+    c->sp.x = 0.0;
+    c->sp.y = 0.0;
+    c->sp.posx = 0.0;
+    c->sp.posy = 0.0;
+    c->sp.draw_startx = 0;
+    c->sp.draw_starty = 0;
+    c->sp.draw_endx = 0;
+    c->sp.draw_endy = 0;
+}
 
 void init_tex_vble(t_cub *c)
 {
@@ -16,13 +47,7 @@ void init_tex_vble(t_cub *c)
         c->twall[x].endian = 0;
         x++;
     }
-    c->sp.img = NULL;
-    c->sp.addr = NULL;
-    c->sp.wid = 0;
-    c->sp.hei = 0;
-    c->sp.bpp = 0;
-    c->sp.sz = 0;
-    c->sp.endian = 0;
+    init_sp_vble(c);
 }
 
 static void xpm2image(t_cub *c)
@@ -51,12 +76,16 @@ static void xpm2image(t_cub *c)
         c->sp.addr = (int *)mlx_get_data_addr(c->sp.img, &c->sp.bpp, &c->sp.sz, &c->sp.endian);
 }
 
-static void resize_window(t_cub *c)
+static void resize_window(t_cub *c, int bmp)
 {
-    if (c->res.rend_x <= c->win.wid)
+    if (c->res.rend_x > c->win.wid && bmp)
+        c->win.wid = c->res.rend_x;
+    else if (c->res.rend_x <= c->win.wid)
         c->win.wid = c->res.rend_x;
 
-    if (c->res.rend_y <= c->win.hei)
+    if (c->res.rend_y > c->win.hei && bmp)
+        c->win.hei = c->res.rend_y;
+    else if (c->res.rend_y <= c->win.hei)
         c->win.hei = c->res.rend_y;
 }
 
@@ -65,7 +94,7 @@ void    init_mlx_func(t_cub *c)
     if (!(c->libx.mlx = mlx_init()))
 		clean_exit(c, "Error al inicializar MLX\n", 1);
     mlx_get_screen_size(c->libx.mlx, &c->win.wid, &c->win.hei);
-    resize_window(c);
+    resize_window(c, c->bmp);
 	if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, c->win.hei, "Cub3D")))
 		clean_exit(c, "Error new window\n", 1);
 	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))

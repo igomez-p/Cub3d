@@ -15,6 +15,7 @@ static void init_file_vble(t_cub *info)
     ft_bzero(info->col.rgb_f, 3);
 
 	info->map = NULL;
+    info->bmp = 0;
 }
 
 static void init_mov_vble(t_cub *info)
@@ -76,6 +77,6 @@ void	init_struct(t_cub *info)
     info->libx.mlx = NULL;
 	info->libx.window = NULL;
 	info->win.img = NULL;
-    
+
     info->nrows = 0;
 }

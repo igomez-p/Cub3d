@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/17 15:22:27 by igomez-p          #+#    #+#             */
+/*   Updated: 2021/04/17 19:33:03 by igomez-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 static void dda(t_cub *c)
 {
     while (c->ray.hit == 0)
     {
-        if(c->ray.sidex < c->ray.sidey)
+        if (c->ray.sidex < c->ray.sidey)
         {
             c->ray.sidex += c->ray.deltax;
             c->mov.mapx += c->ray.stepx;
@@ -16,7 +28,12 @@ static void dda(t_cub *c)
             c->mov.mapy += c->ray.stepy;
             c->ray.side = 2 + (c->ray.diry > 0);
         }
-        if(c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
+        if (c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
+        if (c->map[c->mov.mapx][c->mov.mapy] == OBJETO)
+        {
+            c->sp.x = c->mov.mapx;
+            c->sp.y = c->mov.mapy;
+        }
     }
 }
 
@@ -35,7 +52,7 @@ static void ray_pos_dir(t_cub *c, int x)
 
 static void perpRay_distance(t_cub *c)
 {
-    if (c->ray.side /*== 0*/<= 1)
+    if (c->ray.side <= 1)
         c->ray.perp = (c->mov.mapx - c->mov.posx + (1 - c->ray.stepx) / 2) / c->ray.dirx;
     else
         c->ray.perp = (c->mov.mapy - c->mov.posy + (1 - c->ray.stepy) / 2) / c->ray.diry;
@@ -70,7 +87,7 @@ static void xcoord_texture(t_cub *c)
 
 static void wallx_value(t_cub *c)
 {
-    if (c->ray.side /*== 0*/<= 1)
+    if (c->ray.side <= 1)
         c->draw.wallx = c->mov.posy + c->ray.perp * c->ray.diry;
     else
         c->draw.wallx = c->mov.posx + c->ray.perp * c->ray.dirx;
@@ -78,7 +95,7 @@ static void wallx_value(t_cub *c)
     c->draw.wallx -= floor(c->draw.wallx);
 }
 
-static void draw_textures(t_cub *c, int x)
+static void draw_textures(t_cub *c, int x, double *zbuf)
 {
     int i = 0;
 
@@ -94,13 +111,14 @@ static void draw_textures(t_cub *c, int x)
         if (c->ray.side % 2)
             color = (color >> 1) & AND_ING;
 
-        mlx_pixel_put(c->libx.mlx, c->libx.window, x, i, color);
+        my_mlx_pixel_put(c, x, i, color);
         i++;
     }
+    zbuf[x] = c->ray.perp;
 }
 
-int raycaster(t_cub *c, int x)
-{    
+int raycaster(t_cub *c, int x, double *zbuffer)
+{
     init_raycast_vble(c);
     ray_pos_dir(c, x);
     step_initialSide(c);
@@ -109,9 +127,7 @@ int raycaster(t_cub *c, int x)
     draw_calculus(c);
     wallx_value(c);
     xcoord_texture(c);
-    draw_textures(c, x);
-    //move_keys(c, SQUARES_SEC); //, frame_time(time, old_time) * SQUARES_SEC);
-    //rotate_keys(c, RADIANS_SEC); //, frame_time(time, old_time) * RADIANS_SEC);
-    
+    draw_textures(c, x, zbuffer);
+
     return 1;
 }

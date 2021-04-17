@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/16 20:07:13 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/17 19:26:45 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +15,18 @@
 # ifndef CUB_H
 # define CUB_H
 
-# define NADA ' '
-# define VACIO '0'
-# define MURO '1'
-# define OBJETO '2'
+# define NADA	' '
+# define VACIO	'0'
+# define MURO 	'1'
+# define OBJETO	'2'
 # define NORTE	'N'
 # define SUR	'S'
 # define OESTE	'w'
 # define ESTE	'E'
-# define NO  1
-# define SO  0
-# define EA  3
-# define WE  2
+# define NO		1
+# define SO		0
+# define EA		3
+# define WE		2
 # define MAX_TEXTURES	4
 # include <unistd.h>
 # include <stdlib.h>
@@ -50,8 +51,8 @@
 
 #define PASO 0.01
 #define GRADOS2RADIAN(angle) ((angle) / 180.0 * M_PI)
-#define SQUARES_SEC 0.2
-#define RADIANS_SEC 0.2
+#define SQUARES_SEC 0.06
+#define RADIANS_SEC 0.02
 #define AND_ING     8355711
 #define FRAME_TIME  1000.0
 
@@ -102,6 +103,24 @@ typedef struct	s_img {
 				int endian;
 				int bpp;
 } t_img;
+
+typedef struct	s_sprite {
+				void *img;
+				int *addr;
+				int hei;
+				int wid;
+				int sz;
+				int endian;
+				int bpp;
+				double x;
+				double y;
+				double posx;
+				double posy;
+				int draw_starty;
+				int draw_startx;
+				int draw_endy;
+				int draw_endx;
+} t_sprite;
 
 typedef struct	s_mov {
 				int left;
@@ -163,11 +182,12 @@ typedef struct	s_cub {
 				t_minilix libx;
 				t_img win;
 				t_img twall[MAX_TEXTURES];
-				t_img sp;
+				t_sprite sp;
 				t_mov		mov;
 				t_camera	cam;
 				t_raycasting ray;
 				t_draw draw;
+				int	bmp;
 }				t_cub;
 
 void			info_tex(char *line, t_cub *info);
@@ -179,25 +199,25 @@ void			init_tex_vble(t_cub *c);
 void			init_struct(t_cub *info);
 void    		init_mlx_func(t_cub *c);
 void			read_cub(char *filename, t_cub *info);
-//int				key_handler(int key, t_cub *c);
 int				key_press_handler(int key, t_cub *c);
 int				key_release_handler(int key, t_cub *c);
 int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);
+void			step_initialSide(t_cub *c);
+void			move_keys(t_cub *c, double speed);
+void			rotate_keys(t_cub *c, double speed);
+int				raycaster(t_cub *c, int x, double *zbuffer);
+void			init_sp_vble(t_cub *c);
+void			init_raycast_vble(t_cub *info);
+void			free_map(t_cub *c);
+void			refill_map(t_cub *c);
+int				draw(t_cub *c);
+void			sprite2screen(t_cub *c, double *zbuf);
 
-void free_map(t_cub *c);
-void refill_map(t_cub *c);
-void init_raycast_vble(t_cub *info);
-void step_initialSide(t_cub *c);
-void move_keys(t_cub *c, double speed);
-void rotate_keys(t_cub *c, double speed);
-int raycaster(t_cub *c, int x);
+void			my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 int				save_bmp(t_cub *c);
 
 void			eliminarEspacios(t_cub *cub);
-int				paint_screen(t_cub *c);
-int				render_map(t_cub *c);
-int				draw(t_cub *c);
 
 #endif
