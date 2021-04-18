@@ -18,6 +18,82 @@
 #define V_MOVE	0.0
 #define BYTE	256
 
+static int	count_sprites(t_cub *c)
+{
+	int x;
+	int y;
+	int count;
+
+	count = 0;
+	x = 0;
+	while (c->map[x])
+	{
+		y = 0;
+		while (c->map[x][y])
+		{
+			if (c->map[x][y] == OBJETO)
+				count++;
+			y++;
+		}
+		x++;
+	}
+	return (count);
+}
+
+static void	sort_sprite(t_cub *c)
+{
+	int s;
+	int z;
+	int total;
+	t_sprites tmp;
+
+	total = count_sprites(c);
+	s = -1;
+	while (++s < total)
+	{
+		z = -1;
+		while (++z < total)
+		{
+			if (c->sprites[s].dist < c->sprites[z].dist)
+			{
+				tmp = c->sprites[s];
+				c->sprites[s] = c->sprites[z];
+				c->sprites[z] = tmp;
+			}
+		}
+	}
+}
+
+void	search_sprites(t_cub *c)
+{
+	int x;
+	int y;
+	int s;
+printf("search sprites | total: %d\n", count_sprites(c));
+	c->sprites = malloc(sizeof(t_sprite) * (count_sprites(c)));
+	s = 0;
+	x = 0;
+	while (c->map[x])
+	{
+		y = 0;
+		while (c->map[x][y])
+		{
+			if (c->map[x][y] == OBJETO)
+			{
+				c->sprites[s].x = x + 0.5;
+				c->sprites[s].y = y + 0.5;
+				c->sprites[s].dist = ((c->mov.posx - c->sprites[s].x) * (c->mov.posx - c->sprites[s].x)
+						+ (c->mov.posy - c->sprites[s].y) * (c->mov.posy - c->sprites[s].y));
+				printf("sprite %d: (x,y):(%f,%f) dist %d\n", s, c->sprites[s].x, c->sprites[s].y, c->sprites[s].dist);
+				s++;
+			}
+			y++;
+		}
+		x++;
+	}
+
+}
+
 static void sp_draw(t_cub *c, int height, int width, int screenx)
 {
 	c->sp.draw_starty = -height / 2 + c->win.hei / 2;
@@ -35,7 +111,7 @@ static void sp_draw(t_cub *c, int height, int width, int screenx)
 		c->sp.draw_endx = c->win.wid - 1;
 }
 
-static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int height,double *zbuf)
+static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int height, double *zbuf)
 {
 	int x;
 	int y;
@@ -48,7 +124,7 @@ static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int heigh
 	while (++x < c->sp.draw_endx)
 	{
 		texx = (int)(BYTE * (x - (-width / 2 + screenx)) * c->sp.wid / width) / BYTE;
-		if (transfy > 0 && x > 0 && x < c->win.wid && transfy < zbuf[x])
+		if (transfy > 0 && x >= 0 && x <= c->win.wid && transfy < zbuf[x])
 		{
 			y = c->sp.draw_starty - 1;
 			while (++y < c->sp.draw_endy)
@@ -63,31 +139,34 @@ static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int heigh
 	}
 }
 
-static void scaling_sprite(t_cub *c, double transformy, double transformx, double *zbuf)
-{
-	int sprite_screenx;
-	int sp_height;
-	int sp_width;
-
-	sprite_screenx = (int)((c->win.wid / 2) * (1 + transformx / transformy));
-	sp_height = abs((int)(c->win.hei / transformy)) / V_DIV;
-	sp_width = abs((int)(c->win.hei / transformy)) / U_DIV;
-	sp_draw(c, sp_height, sp_width, sprite_screenx);
-	sprite_loop(c, sp_width, sprite_screenx, transformy, sp_height, zbuf);
-}
-
 void sprite2screen(t_cub *c, double *zbuf)
 {
 	double inv_det;
 	double transformx;
 	double transformy;
+	int sprite_screenx;
+	int sp_height;
+	int sp_width;
+	int s;
+	int total;
 
+	total = count_sprites(c);
+	s = -1;
+	sort_sprite(c);
+	while (++s < total)
+	{
+		c->sp.posx = (double)c->sprites[s].x - c->mov.posx;
+		c->sp.posy = (double)c->sprites[s].y - c->mov.posy;
 
-	c->sp.posx = c->sp.x - c->mov.posx;
-	c->sp.posy = c->sp.y - c->mov.posy;
+		inv_det = 1.0 / (c->mov.planex * c->mov.diry - c->mov.dirx * c->mov.planey);
+		transformx = inv_det * (c->mov.diry * c->sp.posx - c->mov.dirx * c->sp.posy);
+		transformy = inv_det * (-c->mov.planey * c->sp.posx + c->mov.planex * c->sp.posy);
 
-	inv_det = 1.0 / (c->mov.planex * c->ray.diry - c->ray.dirx * c->mov.planey);
-	transformx = inv_det * (c->ray.diry * c->sp.posx - c->ray.dirx * c->sp.posy);
-	transformy = inv_det * (-c->mov.planey * c->sp.posx + c->mov.planex * c->sp.posy);
-	scaling_sprite(c, transformy, transformx, zbuf);
+		sprite_screenx = (int)((c->win.wid / 2) * (1 + transformx / transformy));
+		sp_height = abs((int)(c->win.hei / transformy));
+		sp_width = abs((int)(c->win.hei / transformy));
+		printf("hei %d | wid %d\n", sp_height, sp_width);
+		sp_draw(c, sp_height, sp_width, sprite_screenx);
+		sprite_loop(c, sp_width, sprite_screenx, transformy, sp_height, zbuf);
+	}
 }

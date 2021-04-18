@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 15:18:11 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/17 18:54:27 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/17 21:20:43 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void init_sp_vble(t_cub *c)
     c->sp.bpp = 0;
     c->sp.sz = 0;
     c->sp.endian = 0;
-    c->sp.x = 0.0;
-    c->sp.y = 0.0;
     c->sp.posx = 0.0;
     c->sp.posy = 0.0;
     c->sp.draw_startx = 0;

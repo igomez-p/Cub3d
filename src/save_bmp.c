@@ -43,8 +43,8 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 	int					x;
 	int					color;
 
-	y = 0;
-	while (y < c->win.hei)
+	y = c->win.hei - 1;
+	while (y >= 0)
 	{
 		x = 0;
 		while (x < c->win.wid)
@@ -56,7 +56,7 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 				return (0);
 			x++;
 		}
-		y++;
+		y--;
 	}
 	return (1);
 }
@@ -89,7 +89,7 @@ int				save_bmp(t_cub *c)
 	draw(c);
 	pad = (4 - (c->win.wid * 3) % 4) % 4;
 	filesize = BMP_HEADER_BYTES + (3 * (c->win.wid + pad) * c->win.hei);
-	if ((file = open("screenshot2.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0644)) < 0)
+	if ((file = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0644)) < 0)
 	{
 		clean_exit(c, "Fallo al crear fichero\n", 1);
 		return (0);

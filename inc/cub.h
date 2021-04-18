@@ -21,7 +21,7 @@
 # define OBJETO	'2'
 # define NORTE	'N'
 # define SUR	'S'
-# define OESTE	'w'
+# define OESTE	'W'
 # define ESTE	'E'
 # define NO		1
 # define SO		0
@@ -112,8 +112,6 @@ typedef struct	s_sprite {
 				int sz;
 				int endian;
 				int bpp;
-				double x;
-				double y;
 				double posx;
 				double posy;
 				int draw_starty;
@@ -121,6 +119,12 @@ typedef struct	s_sprite {
 				int draw_endy;
 				int draw_endx;
 } t_sprite;
+
+typedef struct s_sprites {
+				double x;
+				double y;
+				int dist;
+} t_sprites;
 
 typedef struct	s_mov {
 				int left;
@@ -183,6 +187,7 @@ typedef struct	s_cub {
 				t_img win;
 				t_img twall[MAX_TEXTURES];
 				t_sprite sp;
+				t_sprites *sprites;
 				t_mov		mov;
 				t_camera	cam;
 				t_raycasting ray;
@@ -215,6 +220,7 @@ void			refill_map(t_cub *c);
 int				draw(t_cub *c);
 void			sprite2screen(t_cub *c, double *zbuf);
 
+void			search_sprites(t_cub *c);
 void			my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 int				save_bmp(t_cub *c);
 

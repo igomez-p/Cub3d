@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:52:45 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/17 18:55:30 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 13:55:42 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		main(int argc, char *argv[])
 	comprobar_lecturaCub(cub);
 	refill_map(&cub);
 	searchPlayer(&cub);
+	search_sprites(&cub);
 
 	comprobar_lecturaCub(cub);
 

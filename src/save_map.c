@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/17 15:07:49 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 14:25:54 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	len_linea(char *line)
 	while (line[i])
 	{
 		if (line[i] == VACIO || line[i] == MURO || line[i] == OBJETO || line[i] == NADA ||
-			line[i] == 'N' || line[i] == 'S' || line[i] == 'O' || line[i] == 'E')
+			line[i] == NORTE || line[i] == SUR || line[i] == OESTE || line[i] == ESTE)
 			cont++;
 		else
 			return (-1);
@@ -53,7 +53,7 @@ static char	*fill_map(char *line)
 	while (line[p])
 	{
 		if (line[p] == VACIO || line[p] == MURO || line[p] == OBJETO || line[p] == NADA ||
-			line[p] == 'N' || line[p] == 'S' || line[p] == 'O' || line[p] == 'E')
+			line[p] == NORTE || line[p] == SUR || line[p] == OESTE || line[p] == ESTE)
 		{
 			aux[k] = line[p];
 			k++;
