@@ -109,6 +109,8 @@ static void sp_draw(t_cub *c, int height, int width, int screenx)
 	c->sp.draw_endx = width / 2 + screenx;
 	if (c->sp.draw_endx >= c->win.wid)
 		c->sp.draw_endx = c->win.wid - 1;
+
+	printf("startY %d | endY %d | startX %d | endX %d\n", c->sp.draw_starty, c->sp.draw_endy, c->sp.draw_startx, c->sp.draw_endx);
 }
 
 static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int height, double *zbuf)
@@ -124,8 +126,10 @@ static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int heigh
 	while (++x < c->sp.draw_endx)
 	{
 		texx = (int)(BYTE * (x - (-width / 2 + screenx)) * c->sp.wid / width) / BYTE;
-		if (transfy > 0 && x >= 0 && x <= c->win.wid && transfy < zbuf[x])
+		printf("transfy %d | zbuf %f\n", transfy, zbuf[x]);
+		if (transfy >= 0 && x >= 0 && x <= c->win.wid && (double)transfy < (zbuf[x]-0.3))
 		{
+			printf("hola\n");
 			y = c->sp.draw_starty - 1;
 			while (++y < c->sp.draw_endy)
 			{
