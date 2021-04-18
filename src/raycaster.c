@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 15:22:27 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/17 21:09:35 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 19:10:36 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ static void dda(t_cub *c)
             c->ray.side = 2 + (c->ray.diry > 0);
         }
         if (c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
-        /*if (c->map[c->mov.mapx][c->mov.mapy] == OBJETO)
-        {
-            c->sp.x = c->mov.mapx;
-            c->sp.y = c->mov.mapy;
-        }*/
     }
 }
 
@@ -76,12 +71,10 @@ static void draw_calculus(t_cub *c)
 static void xcoord_texture(t_cub *c)
 {
     c->ray.x = (int)(c->draw.wallx * (double)(c->twall[c->ray.side].wid));
-   // c->sp.x = (int)(c->draw.wallx * (double)(c->sp.wid));
 
     if ((c->ray.side <= 1 && c->ray.dirx > 0) || (c->ray.side >= 2 && c->ray.diry > 0))
     {
         c->ray.x = c->twall[c->ray.side].wid - c->ray.x - 1;
-        //c->sp.x = c->sp.wid - c->sp.x - 1;
     }
 }
 

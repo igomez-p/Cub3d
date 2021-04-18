@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 14:25:54 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 17:32:17 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,12 @@ void free_map(t_cub *c)
 	{
 		while (i > 0) {
 			free(c->map[i]);
+			c->map[i] = NULL;
 			i--;
 		}
 
 		free(c->map);
+		c->map = NULL;
 	}
 }
 

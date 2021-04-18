@@ -28,6 +28,7 @@
 # define EA		3
 # define WE		2
 # define MAX_TEXTURES	4
+# define MAX_LEN	10
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -175,7 +176,21 @@ typedef struct	s_draw {
 				int end;
 				double wallx;
 				double wally;
+				int repaint;
 }				t_draw;
+
+typedef struct s_check {
+				int resx;
+				int resy;
+				int texno;
+				int texso;
+				int texwe;
+				int texea;
+				int texsp;
+				int sky;
+				int floor;
+} t_check;
+
 
 typedef struct	s_cub {
 				t_resolucion res;
@@ -193,6 +208,7 @@ typedef struct	s_cub {
 				t_raycasting ray;
 				t_draw draw;
 				int	bmp;
+				t_check check;
 }				t_cub;
 
 void			info_tex(char *line, t_cub *info);
@@ -210,8 +226,8 @@ int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);
 void			step_initialSide(t_cub *c);
-void			move_keys(t_cub *c, double speed);
-void			rotate_keys(t_cub *c, double speed);
+int				move_keys(t_cub *c, double speed);
+int				rotate_keys(t_cub *c, double speed);
 int				raycaster(t_cub *c, int x, double *zbuffer);
 void			init_sp_vble(t_cub *c);
 void			init_raycast_vble(t_cub *info);
@@ -219,10 +235,11 @@ void			free_map(t_cub *c);
 void			refill_map(t_cub *c);
 int				draw(t_cub *c);
 void			sprite2screen(t_cub *c, double *zbuf);
-
 void			search_sprites(t_cub *c);
 void			my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 int				save_bmp(t_cub *c);
+void			check_extension(char *filename);
+int				check_resolution(char *num);
 
 void			eliminarEspacios(t_cub *cub);
 

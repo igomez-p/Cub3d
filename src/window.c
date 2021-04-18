@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:31:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 16:11:01 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 19:07:06 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ int draw(t_cub *c)
 	z = -1;
 	while (++z < c->win.wid)
 		zbuffer[z] = 0.0;
-
-	x = -1;
-	paint_sky_floor(c);
-	while (++x < c->win.wid)
+	if (c->draw.repaint)
 	{
-		raycaster(c, x, zbuffer);
+		x = -1;
+		paint_sky_floor(c);
+		while (++x < c->win.wid)
+			raycaster(c, x, zbuffer);
+		sprite2screen(c, zbuffer);
 	}
-	sprite2screen(c, zbuffer);
 	if (!c->bmp)
 	{
 		mlx_put_image_to_window(c->libx.mlx, c->libx.window, c->win.img, 0, 0);
-		move_keys(c, SQUARES_SEC);
-		rotate_keys(c, RADIANS_SEC);
+		c->draw.repaint = move_keys(c, SQUARES_SEC);
+		c->draw.repaint |= rotate_keys(c, RADIANS_SEC);
 	}
 	return (1);
 }

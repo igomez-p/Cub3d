@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/16 20:05:55 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 18:18:03 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void destroy_textures(t_cub *c)
 void	clean_exit(t_cub *c, char *str, int error)
 {
 	int		len;
-printf("clean exit\n");
+
 	len = ft_strlen(str);
 	if (error)
 		write(1, "Error\n", 6);
@@ -99,15 +99,18 @@ printf("clean exit\n");
 		perror("");
 	else
 		write(1, str, len);
-//printf("a\n");
-	free_map_textures(c);
-//printf("b\n");
-	if (c->libx.window)
-		mlx_destroy_window(c->libx.mlx, c->libx.window);
-	if (c->win.img)
-		mlx_destroy_image(c->libx.mlx, c->win.img);
-//printf("c\n");
-	destroy_textures(c);
-		//printf("d\n");
+
+	if (c != NULL)
+	{
+		free_map_textures(c);
+
+		if (c->libx.window)
+			mlx_destroy_window(c->libx.mlx, c->libx.window);
+		if (c->win.img)
+			mlx_destroy_image(c->libx.mlx, c->win.img);
+
+		destroy_textures(c);
+	}
+	//system("leaks cub3d");
 	exit(1);
 }

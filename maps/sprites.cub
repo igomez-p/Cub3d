@@ -1,11 +1,12 @@
-R 2000 1250
+R 1080 214748364
 NO ./images/greystone.xpm
 SO ./images/redbrick.xpm
 WE ./images/wood.xpm
 EA ./images/purplestone.xpm
 S ./images/barrel.xpm
-F 220,100,0
+F 220,100,21
 C 40,30,150
+
         1111111111111111111111111
         1000000000110000012100001
         1011000001110000000000001

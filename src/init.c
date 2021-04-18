@@ -74,6 +74,8 @@ void	init_struct(t_cub *info)
     init_raycast_vble(info);
     init_tex_vble(info);
 
+    info->draw.repaint = 1;
+
     info->libx.mlx = NULL;
 	info->libx.window = NULL;
 	info->win.img = NULL;

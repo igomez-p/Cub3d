@@ -6,13 +6,14 @@
 #    By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 15:29:03 by igomez-p          #+#    #+#              #
-#    Updated: 2021/04/18 14:15:16 by igomez-p         ###   ########.fr        #
+#    Updated: 2021/04/18 19:09:33 by igomez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 SRC = cub.c				\
+	  src/read_cub.c	\
 	  src/init.c		\
 	  src/init_mlx.c	\
 	  src/save_info.c	\
@@ -22,7 +23,8 @@ SRC = cub.c				\
 	  src/raycaster.c	\
 	  src/window.c		\
 	  src/save_bmp.c	\
-	  src/sprites.c
+	  src/sprites.c		\
+	  src/check_info.c	\
 
 LIB = library/libft_$(OS).a \
 	  minilibx-$(OS)/libmlx.a \
