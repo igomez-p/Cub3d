@@ -29,7 +29,6 @@ void	read_cub(char *filename, t_cub *info)
 		linea = 0;
 		while (get_next_line(fd, &linea) > 0)
 		{
-			//Puede haber espacios antes de un identificador?? en ese caso, mover puntero hasta el 1er char alpha
 			if (ft_strchr(linea, 'R'))
 				info_res(linea, info);
 			else if (!ft_strncmp(linea, "NO", 2) || !ft_strncmp(linea, "SO", 2) ||

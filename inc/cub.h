@@ -180,8 +180,7 @@ typedef struct	s_draw {
 }				t_draw;
 
 typedef struct s_check {
-				int resx;
-				int resy;
+				int res;
 				int texno;
 				int texso;
 				int texwe;
@@ -240,6 +239,7 @@ void			my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 int				save_bmp(t_cub *c);
 void			check_extension(char *filename);
 int				check_resolution(char *num);
+int				check_repeated_text(t_cub *c, char *new);
 
 void			eliminarEspacios(t_cub *cub);
 

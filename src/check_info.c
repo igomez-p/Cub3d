@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:58:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 19:57:09 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/18 20:43:35 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,19 @@ int check_resolution(char *num)
 	return (1);
 }
 
+int check_repeated_text(t_cub *c, char *new)
+{
+	int len;
+
+	len = ft_strlen(new);
+	if (c->tex.path_no && !ft_strncmp(c->tex.path_no, new, len))
+		return (0);
+	if (c->tex.path_so && !ft_strncmp(c->tex.path_no, new, len))
+		return (0);
+	if (c->tex.path_we && !ft_strncmp(c->tex.path_no, new, len))
+		return (0);
+	if (c->tex.path_ea && !ft_strncmp(c->tex.path_no, new, len))
+		return (0);
+	// TODO: comprobar extensión xpm
+	return (1);
+}
