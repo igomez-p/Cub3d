@@ -81,4 +81,14 @@ void	init_struct(t_cub *info)
 	info->win.img = NULL;
 
     info->nrows = 0;
+
+    info->check.texno = 0;
+    info->check.texso = 0;
+    info->check.texwe = 0;
+    info->check.texea = 0;
+    info->check.texsp = 0;
+    info->check.res = 0;
+    info->check.floor = 0;
+    info->check.sky = 0;
+    info->check.map = 0;
 }

@@ -91,6 +91,7 @@ void    init_mlx_func(t_cub *c)
 {
     if (!(c->libx.mlx = mlx_init()))
 		clean_exit(c, "Error al inicializar MLX\n", 1);
+    xpm2image(c);
     mlx_get_screen_size(c->libx.mlx, &c->win.wid, &c->win.hei);
     resize_window(c, c->bmp);
 	if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, c->win.hei, "Cub3D")))
@@ -98,8 +99,6 @@ void    init_mlx_func(t_cub *c)
 	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))
 		clean_exit(c, "Error new image\n", 1);
 	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
-
-    xpm2image(c);
 
     mlx_do_key_autorepeatoff(c->libx.mlx);
 }

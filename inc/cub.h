@@ -29,6 +29,8 @@
 # define WE		2
 # define MAX_TEXTURES	4
 # define MAX_LEN	10
+# define TOTAL_IDS	8
+# define TOTAL_INFO	9
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -42,12 +44,13 @@
 # include "libftprintf.h"
 //# include "/usr/local/include/mlx.h"
 
-#define MAC_SYSTEM 1
+#define MAC_SYSTEM		0
+#define LINUX_SYSTEM	1
 
 #ifdef	MAC_SYSTEM
 	#include "../minilibx-Darwin/mlx.h"
 #elif	LINUX_SYSTEM
-	# include "../minilibx-linux/mlx.h"
+	# include "../minilibx-Linux/mlx.h"
 #endif
 
 #define PASO 0.01
@@ -188,6 +191,7 @@ typedef struct s_check {
 				int texsp;
 				int sky;
 				int floor;
+				int map;
 } t_check;
 
 
@@ -239,8 +243,10 @@ void			my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 int				save_bmp(t_cub *c);
 void			check_extension(char *filename);
 int				check_resolution(char *num);
-int				check_repeated_text(t_cub *c, char *new);
-
-void			eliminarEspacios(t_cub *cub);
+int				check_text(t_cub *c, char *text);
+void			remove_spaces(char **line);
+int				check_identifiers(t_cub *c);
+int     		is_texture(char *line);
+int				empty_line(char *line);
 
 #endif

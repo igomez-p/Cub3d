@@ -18,15 +18,6 @@
 
 }*/
 
-void check_extension(char *filename)
-{
-	int len;
-
-	len = ft_strlen(filename);
-	if (ft_strncmp(&filename[len - 4], ".cub", 4) != 0)
-		clean_exit(NULL, "Extensión de archivo incorrecta\n", 1);
-}
-
 int check_resolution(char *num)
 {
 	int len;
@@ -48,19 +39,42 @@ int check_resolution(char *num)
 	return (1);
 }
 
-int check_repeated_text(t_cub *c, char *new)
+int check_text(t_cub *c, char *text)
 {
 	int len;
 
-	len = ft_strlen(new);
-	if (c->tex.path_no && !ft_strncmp(c->tex.path_no, new, len))
+	len = ft_strlen(text);
+	if (c->tex.path_no && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-	if (c->tex.path_so && !ft_strncmp(c->tex.path_no, new, len))
+	if (c->tex.path_so && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-	if (c->tex.path_we && !ft_strncmp(c->tex.path_no, new, len))
+	if (c->tex.path_we && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-	if (c->tex.path_ea && !ft_strncmp(c->tex.path_no, new, len))
+	if (c->tex.path_ea && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-	// TODO: comprobar extensión xpm
+	
+	if (ft_strncmp(&text[len - 4], ".xpm", 4))
+		return (-1);
+
+	return (1);
+}
+
+int check_identifiers(t_cub *c)
+{
+	return (c->check.texno + c->check.texso + c->check.texwe + 
+			c->check.texea + c->check.texsp + c->check.res +
+			c->check.floor + c->check.sky);
+}
+
+int empty_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] == NADA)
+		i++;
+
+	if (line[i])
+		return (0);
 	return (1);
 }

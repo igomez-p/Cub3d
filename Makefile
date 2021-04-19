@@ -17,6 +17,7 @@ SRC = cub.c				\
 	  src/init.c		\
 	  src/init_mlx.c	\
 	  src/save_info.c	\
+	  src/read_textures.c	\
 	  src/save_map.c	\
 	  src/handler.c		\
 	  src/move.c		\
@@ -25,9 +26,17 @@ SRC = cub.c				\
 	  src/save_bmp.c	\
 	  src/sprites.c		\
 	  src/check_info.c	\
+	  library/ft_split.c \
+	  library/get_next_line.c \
+	  library/mem_functions.c	\
+	  library/str_functions.c	\
+	  library/number_functions.c\
 
-LIB = library/libft_$(OS).a \
-	  minilibx-$(OS)/libmlx.a \
+
+LIB = minilibx-$(OS)/libmlx.a \
+	minilibx-Linux/libmlx_Linux.a
+#library/libft_$(OS).a \
+	  
 
 OS  = $(shell uname -s)
 
@@ -44,7 +53,7 @@ OBJ = $(SRC:.c=.o)
 ifeq ($(OS), Darwin)
     MINILIB = -framework OpenGL -framework AppKit
 else
-    MINILIB = -lXext -lX11 -lz -lm
+    MINILIB = -lm -lz -lXext -lX11 -L ./minilibx-Linux -pthread
 endif
 
 %.o: %.c
@@ -53,11 +62,12 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		gcc -Wall -Werror -Wextra -g $(OBJ) -I /usr/local/include $(MINILIB) $(LIB) -o $(NAME)
+		gcc -Wall -Werror -Wextra -g $(OBJ) -I /usr/local/include $(LIB) $(MINILIB) -o $(NAME)
 
 clean:
 		make -C minilibx-$(OS) clean
-		rm -rf $(OBJ) libft.a libmlx.a
+		rm -rf $(OBJ) 
+		#libmlx.a libft.a 
 
 fclean: clean
 		make -C minilibx-$(OS) clean
