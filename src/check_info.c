@@ -63,7 +63,7 @@ int check_identifiers(t_cub *c)
 {
 	return (c->check.texno + c->check.texso + c->check.texwe + 
 			c->check.texea + c->check.texsp + c->check.res +
-			c->check.floor + c->check.sky);
+			c->check.floor + c->check.sky + c->check.map);
 }
 
 int empty_line(char *line)

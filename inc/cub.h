@@ -41,11 +41,10 @@
 # include <math.h>
 
 # include "libft.h"
-# include "libftprintf.h"
 //# include "/usr/local/include/mlx.h"
 
-#define MAC_SYSTEM		0
-#define LINUX_SYSTEM	1
+//#define MAC_SYSTEM		0
+//#define LINUX_SYSTEM	1
 
 #ifdef	MAC_SYSTEM
 	#include "../minilibx-Darwin/mlx.h"
@@ -248,5 +247,8 @@ void			remove_spaces(char **line);
 int				check_identifiers(t_cub *c);
 int     		is_texture(char *line);
 int				empty_line(char *line);
+int				error_tex_elements(char *line);
+int				error_res_elements(char *line);
+void			error_rgb_elements(t_cub *info, char *line);
 
 #endif

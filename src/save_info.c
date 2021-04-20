@@ -45,8 +45,12 @@ void	info_res(char *line, t_cub *info)
 	{
 		if (line[1] != NADA)
 			clean_exit(info, "Resolución de pantalla incorrecta\n", 1);
+		if (error_res_elements(line))
+			clean_exit(info, "La resolución no permite caracteres\n", 1);
 		info->res.rend_x = save_int(&line);
 		info->res.rend_y = save_int(&line);
+		if (save_int(&line) != 0)
+			clean_exit(info, "Demasiados elementos en resolución\n", 1);
 		if (info->res.rend_x <= 0 || info->res.rend_y <= 0)
 			clean_exit(info, "Resolución de pantalla incorrecta\n", 1);
 		if (info->res.rend_x < 30 || info->res.rend_y < 30)
@@ -71,6 +75,8 @@ static void info_color_sky(char *line, t_cub *info)
 		info->col.rgb_s[2] = save_int(&line);
 		if (!(info->col.rgb_s[2] >= 0 && info->col.rgb_s[2] <= 255))
 			clean_exit(info, "Valor B techo incorrecto\n", 1);
+		if (save_int(&line) > 0)
+			clean_exit(info, "Demasiados elementos en color de techo\n", 1);
 		info->check.sky = 1;
 	}
 	else if (!ft_strncmp(line, "C", 1) && info->check.sky)
@@ -79,6 +85,7 @@ static void info_color_sky(char *line, t_cub *info)
 
 void	info_color(char *line, t_cub *info)
 {
+	error_rgb_elements(info, line);
 	remove_spaces(&line);
 	if (!ft_strncmp(line, "F", 1) && !info->check.floor)
 	{
@@ -93,6 +100,8 @@ void	info_color(char *line, t_cub *info)
 		info->col.rgb_f[2] = save_int(&line);
 		if (!(info->col.rgb_f[2] >= 0 && info->col.rgb_f[2] <= 255))
 			clean_exit(info, "Valor B suelo incorrecto\n", 1);
+		if (save_int(&line) > 0)
+			clean_exit(info, "Demasiados elementos en color de suelo\n", 1);
 		info->check.floor = 1;
 	}
 	else if (!ft_strncmp(line, "F", 1) && info->check.floor)

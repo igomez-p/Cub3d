@@ -1,13 +1,13 @@
 
 
 
-  R 300 300 512
-  
+  R 300 300
  NO    images/greystone.xpm
    SO ./images/redbrick.xpm
 EA   ./images/purplestone.xpm
 WE ./images/wood.xpm
- S  ./images/barrel.xpm
+ S  ./images/barrel.xpm  
+ 
 F   220,100,21
 
 
@@ -28,3 +28,4 @@ F   220,100,21
 11110111 1110101 101111010001
 11111111 1111111 111111111111
     
+

@@ -14,6 +14,9 @@ static char	*path_tex(char *line, t_cub *c, int nchar)
 		line[i] = '\0';
 		i--;
 	}
+	if (error_tex_elements(line))
+		clean_exit(c, "Demasiados elementos en textura\n", 1);
+
 	if (check_text(c, line) == 1)
 		return (ft_strdup(line));
 	
@@ -35,7 +38,7 @@ static int vertical_text(char *line, t_cub *info)
         return (1);
 	}
     else if (!ft_strncmp(line, "NO", 2) && info->check.texno)
-        clean_exit(info, "Textura norte duplicada\n", 1);
+        clean_exit(info, "Identificador de textura norte duplicado\n", 1);
 	else if (!ft_strncmp(line, "SO", 2) && !info->check.texso)
 	{
 		if (line[2] != NADA || !(info->tex.path_so = path_tex(line, info, 2)))
@@ -44,7 +47,7 @@ static int vertical_text(char *line, t_cub *info)
         return (1);
 	}
     else if (!ft_strncmp(line, "SO", 2) && info->check.texso)
-        clean_exit(info, "Textura sur duplicada\n", 1);
+        clean_exit(info, "Identificador de textura sur duplicado\n", 1);
     
     return (0);
 }
@@ -59,7 +62,7 @@ static int horizontal_text(char *line, t_cub *info)
         return (1);
 	}
     else if (!ft_strncmp(line, "WE", 2) && info->check.texwe)
-        clean_exit(info, "Textura oeste duplicada\n", 1);
+        clean_exit(info, "Identificador de textura oeste duplicado\n", 1);
 	else if (!ft_strncmp(line, "EA", 2) && !info->check.texea)
 	{
 		if (line[2] != NADA || !(info->tex.path_ea = path_tex(line, info, 2)))
@@ -68,7 +71,7 @@ static int horizontal_text(char *line, t_cub *info)
         return (1);
 	}
     else if (!ft_strncmp(line, "EA", 2) && info->check.texea)
-        clean_exit(info, "Textura este duplicada\n", 1);
+        clean_exit(info, "Identificador de textura este duplicado\n", 1);
     return (0);
 }
 
@@ -85,7 +88,7 @@ void		info_tex(char *line, t_cub *info)
 		info->check.texsp = 1;
 	}
     else if (!done && !ft_strncmp(line, "S", 1) && info->check.texsp)
-        clean_exit(info, "Textura sprite duplicada\n", 1);
+        clean_exit(info, "Identificador de textura sprite duplicado\n", 1);
 }
 
 int     is_texture(char *line)

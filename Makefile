@@ -26,6 +26,7 @@ SRC = cub.c				\
 	  src/save_bmp.c	\
 	  src/sprites.c		\
 	  src/check_info.c	\
+	  src/check_elements.c \
 	  library/ft_split.c \
 	  library/get_next_line.c \
 	  library/mem_functions.c	\
@@ -40,14 +41,6 @@ LIB = minilibx-$(OS)/libmlx.a \
 
 OS  = $(shell uname -s)
 
-#ifeq MAC_SYSTEM
-#MAC_SYSTEM=1
-#endif
-
-#ifeq LINUX_SYSTEM
-#LINUX_SYSTEM=0
-#endif
-
 OBJ = $(SRC:.c=.o)
 
 ifeq ($(OS), Darwin)
@@ -56,12 +49,19 @@ else
     MINILIB = -lm -lz -lXext -lX11 -L ./minilibx-Linux -pthread
 endif
 
+ifeq ($(OS), Darwin)
+    SYSTEM = -D MAC_SYSTEM=1
+else
+    SYSTEM = -D LINUX_SYSTEM=1
+endif
+
 %.o: %.c
-	gcc -Wall -Werror -Wextra -g -I /usr/local/include -c $< -o $@
+	gcc $(SYSTEM) -Wall -Werror -Wextra -g -I /usr/local/include -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
+		$(MAKE) -C minilibx-$(OS)/
 		gcc -Wall -Werror -Wextra -g $(OBJ) -I /usr/local/include $(LIB) $(MINILIB) -o $(NAME)
 
 clean:

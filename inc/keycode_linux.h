@@ -73,7 +73,7 @@
  */
 
 #define KEY_RESERVED		0
-#define KEY_ESC			1
+#define KEY_ESCAPE		1
 #define KEY_1			2
 #define KEY_2			3
 #define KEY_3			4

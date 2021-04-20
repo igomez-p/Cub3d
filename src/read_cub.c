@@ -45,7 +45,9 @@ void	read_cub(char *filename, t_cub *info)
 		linea = 0;
 		while (get_next_line(fd, &linea) > 0)
 		{
-			if (ft_strchr(linea, 'R'))
+			if (!empty_line(linea) && check_identifiers(info) == TOTAL_INFO)
+				clean_exit(info, "No se permite informacion despues del mapa\n", 1);
+			else if (ft_strchr(linea, 'R'))
 				info_res(linea, info);
 			else if (is_texture(linea))
 				info_tex(linea, info);
@@ -58,6 +60,11 @@ void	read_cub(char *filename, t_cub *info)
 			}
 			else if (ft_strchr(linea, '1') && check_identifiers(info) < TOTAL_IDS)
 				clean_exit(info, "Faltan identificadores\n", 1);
+			else if (empty_line(linea) && stc_line != NULL)
+			{
+				info->map = ft_split(stc_line, '\n');
+				info->check.map = 1;
+			}
 			else if (!empty_line(linea))
 				clean_exit(info, "Identificador no reconocido\n", 1);
 
@@ -67,8 +74,8 @@ void	read_cub(char *filename, t_cub *info)
 		if (linea != NULL && ft_strchr(linea, '1'))
 			stc_line = info_map(linea, stc_line, info);
 
-		if (linea != NULL && check_identifiers(info) == TOTAL_INFO)
-			clean_exit(info, "El mapa debe ir al final del fichero\n", 1);
+		if (!empty_line(linea) && check_identifiers(info) == TOTAL_INFO)
+			clean_exit(info, "No se permite informacion despues del mapa\n", 1);
 
 		info->map = ft_split(stc_line, '\n');
 		info->check.map = 1;
