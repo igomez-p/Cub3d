@@ -109,3 +109,27 @@ void	info_color(char *line, t_cub *info)
 	
 	info_color_sky(line, info);
 }
+
+void refill_map(t_cub *c)
+{
+	int w;
+	char **map;
+	int k;
+
+	w = map_dimensions(c);
+	map = malloc((c->nrows+1)*sizeof(char *));
+	k = -1;
+	while (c->map[++k])
+	{
+		map[k] = malloc((w+1)*sizeof(char));
+		int len = ft_strlen(c->map[k]);
+		ft_memcpy(map[k], c->map[k], len);
+		if (len < w)
+			ft_memset(&map[k][len], ' ', w-len);
+
+		map[k][w] = '\0';
+	}
+	map[k] = NULL;
+	free_map(c);
+	c->map = map;
+}

@@ -47,7 +47,7 @@ int check_text(t_cub *c, char *text)
 		return (0);
 	if (c->tex.path_ea && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-	
+
 	if (ft_strncmp(&text[len - 4], ".xpm", 4))
 		return (-1);
 
@@ -61,15 +61,43 @@ int check_identifiers(t_cub *c)
 			c->check.floor + c->check.sky + c->check.map);
 }
 
-int empty_line(char *line)
+static void player_dir(t_cub *c, int x, int y)
 {
-	int i;
+	c->mov.diry = 0.0;
+	c->mov.dirx = 0.0;
+	if (c->map[x][y] == NORTH)
+		c->mov.dirx = -1.0;
+	else if (c->map[x][y] == SOUTH)
+		c->mov.dirx = 1.0;
+	else if (c->map[x][y] == EAST)
+		c->mov.diry = 1.0;
+	else if (c->map[x][y] == WEST)
+		c->mov.diry = -1.0;
 
-	i = 0;
-	while (line[i] && line[i] == SPACE)
-		i++;
+	c->mov.planex = c->mov.diry * ((VIEW_ANGLE * M_PI) / 180);
+	c->mov.planey = -c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
+}
 
-	if (line[i])
-		return (0);
-	return (1);
+void search_player(t_cub *cub)
+{
+	int k = 0;
+	while (cub->map[k])
+	{
+		int i = 0;
+		while (cub->map[k][i])
+		{
+			if (cub->map[k][i] == NORTH || cub->map[k][i] == SOUTH ||
+				cub->map[k][i] == WEST || cub->map[k][i] == EAST)
+			{
+				cub->mov.posx = k + 0.5;
+				cub->mov.posy = i + 0.5;
+				player_dir(cub, k, i);
+				cub->map[k][i] = EMPTY;
+				return ;
+			}
+			i++;
+		}
+		k++;
+	}
+	clean_exit(cub, "Player not found\n", 1);
 }

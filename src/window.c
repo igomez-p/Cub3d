@@ -23,6 +23,24 @@ void	my_mlx_pixel_put(t_cub *c, int x, int y, int color)
 	c->win.addr[c->win.wid * y + x] = color;
 }
 
+void free_map(t_cub *c)
+{
+	int i;
+
+	i = c->nrows;
+	if (c->map)
+	{
+		while (i > 0) {
+			free(c->map[i]);
+			c->map[i] = NULL;
+			i--;
+		}
+
+		free(c->map);
+		c->map = NULL;
+	}
+}
+
 void	paint_sky_floor(t_cub *c)
 {
 	int	x;

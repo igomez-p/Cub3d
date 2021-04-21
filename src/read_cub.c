@@ -18,7 +18,19 @@ void remove_spaces(char **line)
 {
 	while (**line && **line == SPACE)
 		*line = *line + 1;
+}
 
+int empty_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] == SPACE)
+		i++;
+
+	if (line[i])
+		return (0);
+	return (1);
 }
 
 void check_extension(char *filename)
@@ -30,7 +42,6 @@ void check_extension(char *filename)
 		clean_exit(NULL, "The file extension must be .cub\n", 1);
 }
 
-// Función para leer archivo .cub
 void	read_cub(char *filename, t_cub *info)
 {
 	int	fd;

@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/21 19:33:03 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/21 23:56:30 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,7 @@ int key_release_handler(int key, t_cub *c)
 int	exit_handler(t_cub *c)
 {
 	clean_exit(c, "Closing program...\n", 0);
-    return (0);
-}
-
-static void	free_map_textures(t_cub *c)
-{
-	if (c->tex.path_no)
-		free(c->tex.path_no);
-	if (c->tex.path_so)
-		free(c->tex.path_so);
-	if (c->tex.path_ea)
-		free(c->tex.path_ea);
-	if (c->tex.path_we)
-		free(c->tex.path_we);
-	if (c->tex.path_sp)
-		free(c->tex.path_sp);
-
-	free_map(c);
+	return (0);
 }
 
 static void destroy_textures(t_cub *c)
@@ -86,11 +70,24 @@ static void destroy_textures(t_cub *c)
 		mlx_destroy_image(c->libx.mlx, c->twall[EA].img);
 	if (c->sp.img)
 		mlx_destroy_image(c->libx.mlx, c->sp.img);
+
+	if (c->tex.path_no)
+		free(c->tex.path_no);
+	if (c->tex.path_so)
+		free(c->tex.path_so);
+	if (c->tex.path_ea)
+		free(c->tex.path_ea);
+	if (c->tex.path_we)
+		free(c->tex.path_we);
+	if (c->tex.path_sp)
+		free(c->tex.path_sp);
+
+	free_map(c);
 }
 
 void	clean_exit(t_cub *c, char *str, int error)
 {
-	int		len;
+	int	len;
 
 	len = ft_strlen(str);
 	if (error)
@@ -102,8 +99,6 @@ void	clean_exit(t_cub *c, char *str, int error)
 
 	if (c != NULL)
 	{
-		free_map_textures(c);
-
 		if (c->libx.window)
 			mlx_destroy_window(c->libx.mlx, c->libx.window);
 		if (c->win.img)

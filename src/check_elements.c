@@ -22,13 +22,13 @@ int	error_tex_elements(char *line)
 	i = 0;
 	while (line[i] && line[i] != SPACE)
 		i++;
-	
-	if (line[i-4] == '.' && line[i-3] == 'x' && line[i-2] == 'p' && line[i-1] == 'm')
+
+	if (!ft_strncmp(&line[i-4], ".xpm", 4))
 		extension = 1;
-	
+
 	while (line[i] && line[i] == SPACE)
 		i++;
-	
+
 	if ((line[i-1] == SPACE && line[i] && extension) || !extension)
 		return (1);
 	return (0);
@@ -36,71 +36,71 @@ int	error_tex_elements(char *line)
 
 int error_res_elements(char *line)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (line[i] == 'R')
-        i++;
-    while (line[i] && (ft_isdigit(line[i]) || line[i] == SPACE))
-        i++;
+	i = 0;
+	if (line[i] == 'R')
+		i++;
+	while (line[i] && (ft_isdigit(line[i]) || line[i] == SPACE))
+		i++;
 
-    if (line[i])
-        return (1);
-    return (0);
+	if (line[i])
+		return (1);
+	return (0);
 }
 
-void error_rgb_elements(t_cub *info, char *line)
+void error_rgb_elements(t_cub *info, char *s)
 {
-    int i;
+	int i;
 
-    i = 0;
-    if (line[i] == 'F' || line[i] == 'C')
-        i++;
-    while (line[i] && (ft_isdigit(line[i]) || line[i] == SPACE || line[i] == ','))
-    {
-        if (line[i] == ',' && !ft_isdigit(line[i+1]))
-            clean_exit(info, "Invalid RGB format\n", 1);
-        i++;
-    }
+	i = 0;
+	if (s[i] == 'F' || s[i] == 'C')
+		i++;
+	while (s[i] && (ft_isdigit(s[i]) || s[i] == SPACE || s[i] == ','))
+	{
+		if (s[i] == ',' && !ft_isdigit(s[i+1]))
+			clean_exit(info, "Invalid RGB format\n", 1);
+		i++;
+	}
 
-    if (line[i])
-    {
-        if (line[0] == 'F')
-        {
-            //free(line);
-            clean_exit(info, "Invalid characters in floor color\n", 1);
-        }
-        else if (line[0] == 'C')
-            clean_exit(info, "Invalid characters in ceiling color\n", 1);
-    }
+	if (s[i])
+	{
+		if (s[0] == 'F')
+		{
+			//free(s);
+			clean_exit(info, "Invalid characters in floor color\n", 1);
+		}
+		else if (s[0] == 'C')
+			clean_exit(info, "Invalid characters in ceiling color\n", 1);
+	}
 }
 
-static int ft_isspace(char c)
+static int is_empty(char c)
 {
-    return (((int)c >= 9 && (int)c <= 13) || c == SPACE);
+	return (((int)c >= 9 && (int)c <= 13) || c == SPACE);
 }
 
 void check_map_wall(t_cub *c)
 {
-    int x;
-    int y;
+	int x;
+	int y;
 
-    x = -1;
-    while (c->map[++x])
-    {
-        y = -1;
-        while (c->map[x][++y])
-        {
-            if (c->map[x][y] == EMPTY || c->map[x][y] == OBJECT)
-            {
-                if (ft_isspace(c->map[x-1][y-1]) || ft_isspace(c->map[x-1][y]) ||
-                    ft_isspace(c->map[x-1][y+1]) || ft_isspace(c->map[x][y-1]) ||
-                    ft_isspace(c->map[x][y+1]) || ft_isspace(c->map[x+1][y-1]) ||
-                    ft_isspace(c->map[x+1][y]) || ft_isspace(c->map[x+1][y+1]))
-                {
-                    clean_exit(c, "The map must be surrounded by walls\n", 1);
-                }
-            }
-        }
-    }
+	x = -1;
+	while (c->map[++x])
+	{
+		y = -1;
+		while (c->map[x][++y])
+		{
+			if (c->map[x][y] == EMPTY || c->map[x][y] == OBJECT)
+			{
+				if (is_empty(c->map[x-1][y-1]) || is_empty(c->map[x-1][y]) ||
+					is_empty(c->map[x-1][y+1]) || is_empty(c->map[x][y-1]) ||
+					is_empty(c->map[x][y+1]) || is_empty(c->map[x+1][y-1]) ||
+					is_empty(c->map[x+1][y]) || is_empty(c->map[x+1][y+1]))
+				{
+					clean_exit(c, "The map must be surrounded by walls\n", 1);
+				}
+			}
+		}
+	}
 }

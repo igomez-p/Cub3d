@@ -55,6 +55,12 @@
 #define FRAME_TIME  1000.0
 #define BYTE	256
 
+#define BMP_HEADER_BYTES    54
+#define DATA_INIT           54
+#define BMP_HEADER_SIZE     40
+#define NUM_PLANES          1
+#define HORIZ_RESOLUTION    24
+
 #ifdef	MAC_SYSTEM
 	# include "keycode_mac.h"
 #elif	LINUX_SYSTEM
@@ -205,7 +211,6 @@ void			info_res(char *line, t_cub *info);
 void			info_color(char *line, t_cub *info);
 char			*info_map(char *line, char *stc, t_cub *cub);
 void			search_player(t_cub *cub);
-void			init_tex_vble(t_cub *c);
 void			init_struct(t_cub *info);
 void    		init_mlx_func(t_cub *c);
 void			read_cub(char *filename, t_cub *info);
@@ -236,7 +241,8 @@ int     		is_texture(char *line);
 int				empty_line(char *line);
 int				error_tex_elements(char *line);
 int				error_res_elements(char *line);
-void			error_rgb_elements(t_cub *info, char *line);
+void			error_rgb_elements(t_cub *info, char *s);
 void			check_map_wall(t_cub *c);
+int				map_dimensions(t_cub *c);
 
 #endif

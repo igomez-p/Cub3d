@@ -43,56 +43,56 @@ static char	*path_tex(char *line, t_cub *c, int nchar)
 
 static int vertical_text(char *line, t_cub *info)
 {
-    if (!ft_strncmp(line, "NO", 2) && !info->check.texno)
+	if (!ft_strncmp(line, "NO", 2) && !info->check.texno)
 	{
 		if (line[2] != SPACE || !(info->tex.path_no = path_tex(line, info, 2)))
 			clean_exit(info, "Wrong north texture\n", 1);
 		info->check.texno = 1;
-        return (1);
+		return (1);
 	}
-    else if (!ft_strncmp(line, "NO", 2) && info->check.texno)
-        clean_exit(info, "Duplicate north texture identifier\n", 1);
+	else if (!ft_strncmp(line, "NO", 2) && info->check.texno)
+		clean_exit(info, "Duplicate north texture identifier\n", 1);
 	else if (!ft_strncmp(line, "SO", 2) && !info->check.texso)
 	{
 		if (line[2] != SPACE || !(info->tex.path_so = path_tex(line, info, 2)))
 			clean_exit(info, "Wrong south texture\n", 1);
 		info->check.texso = 1;
-        return (1);
+		return (1);
 	}
-    else if (!ft_strncmp(line, "SO", 2) && info->check.texso)
-        clean_exit(info, "Duplicate south texture identifier\n", 1);
-    
-    return (0);
+	else if (!ft_strncmp(line, "SO", 2) && info->check.texso)
+		clean_exit(info, "Duplicate south texture identifier\n", 1);
+
+	return (0);
 }
 
 static int horizontal_text(char *line, t_cub *info)
 {
-    if (!ft_strncmp(line, "WE", 2) && !info->check.texwe)
+	if (!ft_strncmp(line, "WE", 2) && !info->check.texwe)
 	{
 		if (line[2] != SPACE || !(info->tex.path_we = path_tex(line, info, 2)))
 			clean_exit(info, "Wrong west texture\n", 1);
 		info->check.texwe = 1;
-        return (1);
+		return (1);
 	}
-    else if (!ft_strncmp(line, "WE", 2) && info->check.texwe)
-        clean_exit(info, "Duplicate west texture identifier\n", 1);
+	else if (!ft_strncmp(line, "WE", 2) && info->check.texwe)
+		clean_exit(info, "Duplicate west texture identifier\n", 1);
 	else if (!ft_strncmp(line, "EA", 2) && !info->check.texea)
 	{
 		if (line[2] != SPACE || !(info->tex.path_ea = path_tex(line, info, 2)))
 			clean_exit(info, "Wrong east texture\n", 1);
 		info->check.texea = 1;
-        return (1);
+		return (1);
 	}
-    else if (!ft_strncmp(line, "EA", 2) && info->check.texea)
-        clean_exit(info, "Duplicate east texture identifier\n", 1);
-    return (0);
+	else if (!ft_strncmp(line, "EA", 2) && info->check.texea)
+		clean_exit(info, "Duplicate east texture identifier\n", 1);
+	return (0);
 }
 
 void		info_tex(char *line, t_cub *info)
 {
 	int done;
-    
-    remove_spaces(&line);
+
+	remove_spaces(&line);
 	done = vertical_text(line, info) || horizontal_text(line, info);
 	if (!done && !ft_strncmp(line, "S", 1) && !info->check.texsp)
 	{
@@ -100,24 +100,24 @@ void		info_tex(char *line, t_cub *info)
 			clean_exit(info, "Wrong sprite texture\n", 1);
 		info->check.texsp = 1;
 	}
-    else if (!done && !ft_strncmp(line, "S", 1) && info->check.texsp)
-        clean_exit(info, "Duplicate sprite texture identifier\n", 1);
+	else if (!done && !ft_strncmp(line, "S", 1) && info->check.texsp)
+		clean_exit(info, "Duplicate sprite texture identifier\n", 1);
 }
 
 int     is_texture(char *line)
 {
-    char *aux;
+	char *aux;
 
-    if ((aux = ft_strchr(line, 'N')) && aux[1] == 'O')
-        return (1);
-    else if ((aux = ft_strchr(line, 'S')) && aux[1] == 'O')
-        return (1);
-    else if ((aux = ft_strchr(line, 'W')) && aux[1] == 'E')
-        return (1);
-    else if ((aux = ft_strchr(line, 'E')) && aux[1] == 'A')
-        return (1);
-    else if ((aux = ft_strchr(line, 'S')))
-        return (1);
+	if ((aux = ft_strchr(line, 'N')) && aux[1] == 'O')
+		return (1);
+	else if ((aux = ft_strchr(line, 'S')) && aux[1] == 'O')
+		return (1);
+	else if ((aux = ft_strchr(line, 'W')) && aux[1] == 'E')
+		return (1);
+	else if ((aux = ft_strchr(line, 'E')) && aux[1] == 'A')
+		return (1);
+	else if ((aux = ft_strchr(line, 'S')))
+		return (1);
 
-    return (0);
+	return (0);
 }
