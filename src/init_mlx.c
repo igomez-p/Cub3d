@@ -94,9 +94,12 @@ void    init_mlx_func(t_cub *c)
     xpm2image(c);
     mlx_get_screen_size(c->libx.mlx, &c->win.wid, &c->win.hei);
     resize_window(c, c->bmp);
-	if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, c->win.hei, "Cub3D")))
-		clean_exit(c, "Error new window\n", 1);
-	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))
+	if (!c->bmp)
+    {
+        if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, c->win.hei, "Cub3D")))
+            clean_exit(c, "Error new window\n", 1);
+    }
+    if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))
 		clean_exit(c, "Error new image\n", 1);
 	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
 
