@@ -50,9 +50,9 @@ static void move_player(t_cub *c, double speed, int sg, int plane)
     dx = c->mov.planex;
     dy = c->mov.planey;
   }
-  if(c->map[(int)(c->mov.posx + sg * dx * speed)][(int)c->mov.posy] == VACIO)
+  if(c->map[(int)(c->mov.posx + sg * dx * speed)][(int)c->mov.posy] == EMPTY)
     c->mov.posx += sg * dx * speed;
-  if(c->map[(int)c->mov.posx][(int)(c->mov.posy + sg * dy * speed)] == VACIO)
+  if(c->map[(int)c->mov.posx][(int)(c->mov.posy + sg * dy * speed)] == EMPTY)
     c->mov.posy += sg * dy * speed;
 }
 

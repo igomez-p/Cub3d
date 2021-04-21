@@ -13,9 +13,9 @@
 
 #include "../inc/cub.h"
 
-#define VIEW_ANGLE	32.5
 
-static int	len_linea(char *line)
+
+static int	len_line(char *line)
 {
 	int i;
 	int cont;
@@ -24,8 +24,8 @@ static int	len_linea(char *line)
 	cont = 0;
 	while (line[i])
 	{
-		if (line[i] == VACIO || line[i] == MURO || line[i] == OBJETO || line[i] == NADA ||
-			line[i] == NORTE || line[i] == SUR || line[i] == OESTE || line[i] == ESTE)
+		if (line[i] == EMPTY || line[i] == WALL || line[i] == OBJECT || line[i] == SPACE ||
+			line[i] == NORTH || line[i] == SOUTH || line[i] == WEST || line[i] == EAST)
 			cont++;
 		else
 			return (-1);
@@ -41,7 +41,7 @@ static char	*fill_map(char *line)
 	int		k;
 
 	p = 0;
-	if ((k = len_linea(line)) == -1)
+	if ((k = len_line(line)) == -1)
 		return NULL;
 	if ((int)ft_strlen(line) == k)
 		return (ft_strdup(line));
@@ -53,8 +53,8 @@ static char	*fill_map(char *line)
 	k = 0;
 	while (line[p])
 	{
-		if (line[p] == VACIO || line[p] == MURO || line[p] == OBJETO || line[p] == NADA ||
-			line[p] == NORTE || line[p] == SUR || line[p] == OESTE || line[p] == ESTE)
+		if (line[p] == EMPTY || line[p] == WALL || line[p] == OBJECT || line[p] == SPACE ||
+			line[p] == NORTH || line[p] == SOUTH || line[p] == WEST || line[p] == EAST)
 		{
 			aux[k] = line[p];
 			k++;
@@ -90,13 +90,13 @@ static void player_dir(t_cub *c, int x, int y)
 {
 	c->mov.diry = 0.0;
 	c->mov.dirx = 0.0;
-	if (c->map[x][y] == NORTE)
+	if (c->map[x][y] == NORTH)
 		c->mov.dirx = -1.0;
-	else if (c->map[x][y] == SUR)
+	else if (c->map[x][y] == SOUTH)
 		c->mov.dirx = 1.0;
-	else if (c->map[x][y] == ESTE)
+	else if (c->map[x][y] == EAST)
 		c->mov.diry = 1.0;
-	else if (c->map[x][y] == OESTE)
+	else if (c->map[x][y] == WEST)
 		c->mov.diry = -1.0;
 
 	c->mov.planex = c->mov.diry * ((VIEW_ANGLE * M_PI) / 180);
@@ -111,19 +111,19 @@ void search_player(t_cub *cub)
 		int i = 0;
 		while (cub->map[k][i])
 		{
-			if (cub->map[k][i] == NORTE || cub->map[k][i] == SUR || cub->map[k][i] == OESTE || cub->map[k][i] == ESTE)
+			if (cub->map[k][i] == NORTH || cub->map[k][i] == SOUTH || cub->map[k][i] == WEST || cub->map[k][i] == EAST)
 			{
 				cub->mov.posx = k + 0.5;
 				cub->mov.posy = i + 0.5;
 				player_dir(cub, k, i);
-				cub->map[k][i] = VACIO;
+				cub->map[k][i] = EMPTY;
 				return ;
 			}
 			i++;
 		}
 		k++;
 	}
-	clean_exit(cub, "No se encuentra jugador\n", 1);
+	clean_exit(cub, "Player not found\n", 1);
 }
 
 static int map_dimensions(t_cub *c)

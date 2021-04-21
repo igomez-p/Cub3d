@@ -15,8 +15,8 @@
 
 static void init_file_vble(t_cub *info)
 {
-    info->res.rend_x = 0;
-	info->res.rend_y = 0;
+    info->res.x = 0;
+	info->res.y = 0;
 
 	info->tex.path_no = NULL;
 	info->tex.path_so = NULL;

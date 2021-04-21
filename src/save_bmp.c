@@ -36,14 +36,14 @@ static int		write_bmp_header(t_cub *c, int fd, int filesize)
     bmpfileheader[5] = (filesize >> 24) % BYTE;
 	bmpfileheader[10] = (unsigned char)(DATA_INIT);
 	bmpfileheader[14] = (unsigned char)(BMP_HEADER_SIZE);
-    bmpfileheader[18] = c->res.rend_x % BYTE;
-    bmpfileheader[19] = (c->res.rend_x >> 8) % BYTE;
-    bmpfileheader[20] = (c->res.rend_x >> 16) % BYTE;
-    bmpfileheader[21] = (c->res.rend_x >> 24) % BYTE;
-	bmpfileheader[22] = c->res.rend_y % BYTE;
-    bmpfileheader[23] = (c->res.rend_y >> 8) % BYTE;
-    bmpfileheader[24] = (c->res.rend_y >> 16) % BYTE;
-    bmpfileheader[25] = (c->res.rend_y >> 24) % BYTE;
+    bmpfileheader[18] = c->res.x % BYTE;
+    bmpfileheader[19] = (c->res.x >> 8) % BYTE;
+    bmpfileheader[20] = (c->res.x >> 16) % BYTE;
+    bmpfileheader[21] = (c->res.x >> 24) % BYTE;
+	bmpfileheader[22] = c->res.y % BYTE;
+    bmpfileheader[23] = (c->res.y >> 8) % BYTE;
+    bmpfileheader[24] = (c->res.y >> 16) % BYTE;
+    bmpfileheader[25] = (c->res.y >> 24) % BYTE;
 	bmpfileheader[26] = (unsigned char)(NUM_PLANES);
 	bmpfileheader[28] = (unsigned char)(HORIZ_RESOLUTION);
 	return (!(write(fd, bmpfileheader, BMP_HEADER_BYTES) < 0));
@@ -79,13 +79,13 @@ static int		write_bmp(t_cub *c, int fd, int filesize, int pad)
 	if (!write_bmp_header(c, fd, filesize))
     {
 		close(fd);
-        clean_exit(c, "Fallo al crear cabecera bmp\n", 1);
+        clean_exit(c, "The BMP header could not be create\n", 1);
 		return (0);
     }
 	if (!write_bmp_data(c, fd, pad))
     {
 		close(fd);
-        clean_exit(c, "Fallo al escribit datos bmp\n", 1);
+        clean_exit(c, "The BMP data could not be written\n", 1);
 		return (0);
     }
 	return (1);
@@ -104,7 +104,7 @@ int				save_bmp(t_cub *c)
 	filesize = BMP_HEADER_BYTES + (3 * (c->win.wid + pad) * c->win.hei);
 	if ((file = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0644)) < 0)
 	{
-		clean_exit(c, "Fallo al crear fichero\n", 1);
+		clean_exit(c, "Screenshot could not be opened\n", 1);
 		return (0);
 	}
 	write_bmp(c, file, filesize, pad);

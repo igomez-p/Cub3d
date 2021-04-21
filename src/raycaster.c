@@ -29,7 +29,7 @@ static void dda(t_cub *c)
             c->mov.mapy += c->ray.stepy;
             c->ray.side = 2 + (c->ray.diry > 0);
         }
-        if (c->map[c->mov.mapx][c->mov.mapy] == MURO) c->ray.hit = 1;
+        if (c->map[c->mov.mapx][c->mov.mapy] == WALL) c->ray.hit = 1;
     }
 }
 

@@ -16,7 +16,7 @@
 
 void remove_spaces(char **line)
 {
-	while (**line && **line == NADA)
+	while (**line && **line == SPACE)
 		*line = *line + 1;
 
 }
@@ -27,55 +27,55 @@ void check_extension(char *filename)
 
 	len = ft_strlen(filename);
 	if (ft_strncmp(&filename[len - 4], ".cub", 4) != 0)
-		clean_exit(NULL, "Extensión de archivo debe ser .cub\n", 1);
+		clean_exit(NULL, "The file extension must be .cub\n", 1);
 }
 
 // Función para leer archivo .cub
 void	read_cub(char *filename, t_cub *info)
 {
 	int	fd;
-	char	*linea;
+	char	*line;
 	char	*stc_line;
 
 	stc_line = NULL;
 	if ((fd = open(filename, O_RDONLY)) == -1)
-		clean_exit(info, "Fallo al abrir el archivo\n", 1);
+		clean_exit(info, "File could not be opened\n", 1);
 	else
 	{
-		linea = 0;
-		while (get_next_line(fd, &linea) > 0)
+		line = 0;
+		while (get_next_line(fd, &line) > 0)
 		{
-			if (!empty_line(linea) && check_identifiers(info) == TOTAL_INFO)
-				clean_exit(info, "No se permite informacion despues del mapa\n", 1);
-			else if (ft_strchr(linea, 'R'))
-				info_res(linea, info);
-			else if (is_texture(linea))
-				info_tex(linea, info);
-			else if (ft_strchr(linea, 'F') || ft_strchr(linea, 'C'))
-				info_color(linea, info);
-			else if (ft_strchr(linea, '1') && check_identifiers(info) == TOTAL_IDS)
+			if (!empty_line(line) && check_identifiers(info) == TOTAL_INFO)
+				clean_exit(info, "No information allowed after the map\n", 1);
+			else if (ft_strchr(line, 'R'))
+				info_res(line, info);
+			else if (is_texture(line))
+				info_tex(line, info);
+			else if (ft_strchr(line, 'F') || ft_strchr(line, 'C'))
+				info_color(line, info);
+			else if (ft_strchr(line, '1') && check_identifiers(info) == TOTAL_IDS)
 			{
-				stc_line = info_map(linea, stc_line, info);
+				stc_line = info_map(line, stc_line, info);
 				stc_line = ft_swap(stc_line, "\n");
 			}
-			else if (ft_strchr(linea, '1') && check_identifiers(info) < TOTAL_IDS)
-				clean_exit(info, "Faltan identificadores\n", 1);
-			else if (empty_line(linea) && stc_line != NULL)
+			else if (ft_strchr(line, '1') && check_identifiers(info) < TOTAL_IDS)
+				clean_exit(info, "Identifiers missing\n", 1);
+			else if (empty_line(line) && stc_line != NULL)
 			{
 				info->map = ft_split(stc_line, '\n');
 				info->check.map = 1;
 			}
-			else if (!empty_line(linea))
-				clean_exit(info, "Identificador no reconocido\n", 1);
+			else if (!empty_line(line))
+				clean_exit(info, "Unrecognized identifier\n", 1);
 
-			free(linea);
-			linea = 0;
+			free(line);
+			line = 0;
 		}
-		if (linea != NULL && ft_strchr(linea, '1'))
-			stc_line = info_map(linea, stc_line, info);
+		if (line != NULL && ft_strchr(line, '1'))
+			stc_line = info_map(line, stc_line, info);
 
-		if (!empty_line(linea) && check_identifiers(info) == TOTAL_INFO)
-			clean_exit(info, "No se permite informacion despues del mapa\n", 1);
+		if (!empty_line(line) && check_identifiers(info) == TOTAL_INFO)
+			clean_exit(info, "No information allowed after the map\n", 1);
 
 		info->map = ft_split(stc_line, '\n');
 		info->check.map = 1;

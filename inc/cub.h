@@ -15,14 +15,14 @@
 # ifndef CUB_H
 # define CUB_H
 
-# define NADA	' '
-# define VACIO	'0'
-# define MURO 	'1'
-# define OBJETO	'2'
-# define NORTE	'N'
-# define SUR	'S'
-# define OESTE	'W'
-# define ESTE	'E'
+# define SPACE	' '
+# define EMPTY	'0'
+# define WALL 	'1'
+# define OBJECT	'2'
+# define NORTH	'N'
+# define SOUTH	'S'
+# define WEST	'W'
+# define EAST	'E'
 # define NO		1
 # define SO		0
 # define EA		3
@@ -41,10 +41,6 @@
 # include <math.h>
 
 # include "libft.h"
-//# include "/usr/local/include/mlx.h"
-
-//#define MAC_SYSTEM		0
-//#define LINUX_SYSTEM	1
 
 #ifdef	MAC_SYSTEM
 	#include "../minilibx-Darwin/mlx.h"
@@ -52,21 +48,12 @@
 	# include "../minilibx-Linux/mlx.h"
 #endif
 
-#define PASO 0.01
-#define GRADOS2RADIAN(angle) ((angle) / 180.0 * M_PI)
+#define VIEW_ANGLE	32.5
 #define SQUARES_SEC 0.06
 #define RADIANS_SEC 0.02
 #define AND_ING     8355711
 #define FRAME_TIME  1000.0
-
-#define KEY_A_ 'a'   //97
-#define KEY_S_ 's'   //115
-#define KEY_D_ 'd'   //100
-#define KEY_W_ 'w'   //119
-#define KEY_LEFT_  65361
-#define KEY_RIGHT_ 65363
-#define KEY_SPACE_ 32
-#define KEY_ESC_   65307
+#define BYTE	256
 
 #ifdef	MAC_SYSTEM
 	# include "keycode_mac.h"
@@ -74,23 +61,23 @@
 	# include "keycode.h" //# include "keycode_linux.h"
 #endif
 
-typedef struct	s_resolucion {
-				int rend_x;
-				int rend_y;
-}				t_resolucion;
+typedef struct	s_resolution {
+				int x;
+				int y;
+}				t_resolution;
 
-typedef struct	s_texturas {
+typedef struct	s_textures {
 				char *path_no;
 				char *path_so;
 				char *path_we;
 				char *path_ea;
 				char *path_sp;
-}				t_texturas;
+}				t_textures;
 
-typedef struct	s_colores {
+typedef struct	s_colors {
 				int rgb_s[3];
 				int rgb_f[3];
-}				t_colores;
+}				t_colors;
 
 typedef struct	s_minilibx {
 				void	*mlx;
@@ -195,9 +182,9 @@ typedef struct s_check {
 
 
 typedef struct	s_cub {
-				t_resolucion res;
-				t_texturas tex;
-				t_colores col;
+				t_resolution res;
+				t_textures tex;
+				t_colors col;
 				char **map;
 				int	nrows;
 				t_minilix libx;

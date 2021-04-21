@@ -43,44 +43,44 @@ void	info_res(char *line, t_cub *info)
 	remove_spaces(&line);
 	if (!ft_strncmp(line, "R", 1) && !info->check.res)
 	{
-		if (line[1] != NADA)
-			clean_exit(info, "Resolución de pantalla incorrecta\n", 1);
+		if (line[1] != SPACE)
+			clean_exit(info, "Wrong screen resolution\n", 1);
 		if (error_res_elements(line))
-			clean_exit(info, "La resolución no permite caracteres\n", 1);
-		info->res.rend_x = save_int(&line);
-		info->res.rend_y = save_int(&line);
+			clean_exit(info, "Characters not allowed in resolution\n", 1);
+		info->res.x = save_int(&line);
+		info->res.y = save_int(&line);
 		if (save_int(&line) != 0)
-			clean_exit(info, "Demasiados elementos en resolución\n", 1);
-		if (info->res.rend_x <= 0 || info->res.rend_y <= 0)
-			clean_exit(info, "Resolución de pantalla incorrecta\n", 1);
-		if (info->res.rend_x < 30 || info->res.rend_y < 30)
-			clean_exit(info, "Resolución de pantalla demasiado pequeña\n", 1);
+			clean_exit(info, "Too many elements in resolution\n", 1);
+		if (info->res.x <= 0 || info->res.y <= 0)
+			clean_exit(info, "Wrong screen resolution\n", 1);
+		if (info->res.x < 30 || info->res.y < 30)
+			clean_exit(info, "Screen resolution too small\n", 1);
 		info->check.res = 1;
 	} else if (!ft_strncmp(line, "R", 1) && info->check.res)
-		clean_exit(info, "Identificador de resolución repetido\n", 1);
+		clean_exit(info, "Repeated resolution identifier\n", 1);
 }
 
 static void info_color_sky(char *line, t_cub *info)
 {
 	if (!ft_strncmp(line, "C", 1) && !info->check.sky)
 	{
-		if (line[1] != NADA)
-			clean_exit(info, "Color de techo incorrecto\n", 1);
+		if (line[1] != SPACE)
+			clean_exit(info, "Wrong ceiling color\n", 1);
 		info->col.rgb_s[0] = save_int(&line);
 		if (!(info->col.rgb_s[0] >= 0 && info->col.rgb_s[0] <= 255))
-			clean_exit(info, "Valor R techo incorrecto\n", 1);
+			clean_exit(info, "Wrong R ceiling value\n", 1);
 		info->col.rgb_s[1] = save_int(&line);
 		if (!(info->col.rgb_s[1] >= 0 && info->col.rgb_s[1] <= 255))
-			clean_exit(info, "Valor G techo incorrecto\n", 1);
+			clean_exit(info, "Wrong G ceiling value\n", 1);
 		info->col.rgb_s[2] = save_int(&line);
 		if (!(info->col.rgb_s[2] >= 0 && info->col.rgb_s[2] <= 255))
-			clean_exit(info, "Valor B techo incorrecto\n", 1);
+			clean_exit(info, "Wrong B ceiling value\n", 1);
 		if (save_int(&line) > 0)
-			clean_exit(info, "Demasiados elementos en color de techo\n", 1);
+			clean_exit(info, "Too many elements in ceiling color\n", 1);
 		info->check.sky = 1;
 	}
 	else if (!ft_strncmp(line, "C", 1) && info->check.sky)
-		clean_exit(info, "Identificador de color de techo repetido\n", 1);
+		clean_exit(info, "Repeated ceiling color identifier\n", 1);
 }
 
 void	info_color(char *line, t_cub *info)
@@ -89,23 +89,23 @@ void	info_color(char *line, t_cub *info)
 	remove_spaces(&line);
 	if (!ft_strncmp(line, "F", 1) && !info->check.floor)
 	{
-		if (line[1] != NADA)
-			clean_exit(info, "Color de suelo incorrecto\n", 1);
+		if (line[1] != SPACE)
+			clean_exit(info, "Wrong floor color\n", 1);
 		info->col.rgb_f[0] = save_int(&line);
 		if (!(info->col.rgb_f[0] >= 0 && info->col.rgb_f[0] <= 255))
-			clean_exit(info, "Valor R suelo incorrecto\n", 1);
+			clean_exit(info, "Wrong R floor value\n", 1);
 		info->col.rgb_f[1] = save_int(&line);
 		if (!(info->col.rgb_f[1] >= 0 && info->col.rgb_f[1] <= 255))
-			clean_exit(info, "Valor G suelo incorrecto\n", 1);
+			clean_exit(info, "Wrong G floor value\n", 1);
 		info->col.rgb_f[2] = save_int(&line);
 		if (!(info->col.rgb_f[2] >= 0 && info->col.rgb_f[2] <= 255))
-			clean_exit(info, "Valor B suelo incorrecto\n", 1);
+			clean_exit(info, "Wrong B floor value\n", 1);
 		if (save_int(&line) > 0)
-			clean_exit(info, "Demasiados elementos en color de suelo\n", 1);
+			clean_exit(info, "Too many elements in floor color\n", 1);
 		info->check.floor = 1;
 	}
 	else if (!ft_strncmp(line, "F", 1) && info->check.floor)
-		clean_exit(info, "Identificador de color de suelo repetido\n", 1);
+		clean_exit(info, "Repeated floor color identifier\n", 1);
 	
 	info_color_sky(line, info);
 }

@@ -844,7 +844,7 @@
 #define ABS_HAT2Y		0x15
 #define ABS_HAT3X		0x16
 #define ABS_HAT3Y		0x17
-#define ABS_PRESSURE		0x18
+#define ABS_PRESSOUTHE		0x18
 #define ABS_DISTANCE		0x19
 #define ABS_TILT_X		0x1a
 #define ABS_TILT_Y		0x1b
@@ -874,7 +874,7 @@
 #define ABS_MT_TOOL_TYPE	0x37	/* Type of touching device */
 #define ABS_MT_BLOB_ID		0x38	/* Group a set of packets as a blob */
 #define ABS_MT_TRACKING_ID	0x39	/* Unique ID of initiated contact */
-#define ABS_MT_PRESSURE		0x3a	/* Pressure on contact area */
+#define ABS_MT_PRESSOUTHE		0x3a	/* PresSOUTHe on contact area */
 #define ABS_MT_DISTANCE		0x3b	/* Contact hover distance */
 #define ABS_MT_TOOL_X		0x3c	/* Center X tool position */
 #define ABS_MT_TOOL_Y		0x3d	/* Center Y tool position */

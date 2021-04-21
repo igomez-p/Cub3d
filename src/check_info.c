@@ -13,12 +13,6 @@
 
 #include "../inc/cub.h"
 
-// TODO: Comprobar que el mapa esté rodeado por muros
-/*void check_walls(t_cub *c)
-{
-
-}*/
-
 int check_resolution(char *num)
 {
 	int len;
@@ -72,7 +66,7 @@ int empty_line(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] && line[i] == NADA)
+	while (line[i] && line[i] == SPACE)
 		i++;
 
 	if (line[i])

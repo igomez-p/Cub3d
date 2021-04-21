@@ -10,7 +10,7 @@
 
 
 /*
-** We do not use White/BlackPixel macro, TrueColor Visual make sure
+** We do not use White/BlackPixel macro, TrueColor Visual make SOUTHe
 ** 0 is black & -1 is white
 **
 ** With mlx_int_wait_first_expose, no flush is needed.

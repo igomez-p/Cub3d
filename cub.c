@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:52:45 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/21 20:49:38 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/21 22:54:19 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 static void comprobar_lecturaCub(t_cub cub)
 {
-	/*printf("RESOLUCION x %d | y %d\n\r", cub.res.rend_x, cub.res.rend_y);
-	printf("TEXTURAS\nnorte: %s\nsur %s\noeste %s\neste %s\nsprite %s\n",
+	/*printf("RESOLUCION x %d | y %d\n\r", cub.res.x, cub.res.y);
+	printf("textures\nNORTH: %s\nSOUTH %s\nWEST %s\nEAST %s\nsprite %s\n",
 	cub.tex.path_no, cub.tex.path_so, cub.tex.path_we, cub.tex.path_ea, cub.tex.path_sp);
-	printf("COLORES (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_f[0], cub.col.rgb_f[1], cub.col.rgb_f[2],
+	printf("colors (RGB)\nsuelo %d %d %d\ntecho %d %d %d\n", cub.col.rgb_f[0], cub.col.rgb_f[1], cub.col.rgb_f[2],
 	cub.col.rgb_s[0], cub.col.rgb_s[1], cub.col.rgb_s[2]);*/
 	int k = 0;
 	while (cub.map[k])

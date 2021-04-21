@@ -13,11 +13,6 @@
 
 #include "../inc/cub.h"
 
-#define U_DIV	1
-#define V_DIV	1
-#define V_MOVE	0.0
-#define BYTE	256
-
 static int	count_sprites(t_cub *c)
 {
 	int x;
@@ -31,7 +26,7 @@ static int	count_sprites(t_cub *c)
 		y = 0;
 		while (c->map[x][y])
 		{
-			if (c->map[x][y] == OBJETO)
+			if (c->map[x][y] == OBJECT)
 				count++;
 			y++;
 		}
@@ -69,7 +64,7 @@ void	search_sprites(t_cub *c)
 	int x;
 	int y;
 	int s;
-//printf("search sprites | total: %d\n", count_sprites(c));
+
 	c->sprites = malloc(sizeof(t_sprite) * (count_sprites(c)));
 	s = 0;
 	x = 0;
@@ -78,13 +73,12 @@ void	search_sprites(t_cub *c)
 		y = 0;
 		while (c->map[x][y])
 		{
-			if (c->map[x][y] == OBJETO)
+			if (c->map[x][y] == OBJECT)
 			{
 				c->sprites[s].x = x + 0.5;
 				c->sprites[s].y = y + 0.5;
 				c->sprites[s].dist = ((c->mov.posx - c->sprites[s].x) * (c->mov.posx - c->sprites[s].x)
 						+ (c->mov.posy - c->sprites[s].y) * (c->mov.posy - c->sprites[s].y));
-				//printf("sprite %d: (x,y):(%f,%f) dist %d\n", s, c->sprites[s].x, c->sprites[s].y, c->sprites[s].dist);
 				s++;
 			}
 			y++;
@@ -109,8 +103,6 @@ static void sp_draw(t_cub *c, int height, int width, int screenx)
 	c->sp.draw_endx = width / 2 + screenx;
 	if (c->sp.draw_endx >= c->win.wid)
 		c->sp.draw_endx = c->win.wid - 1;
-
-	//printf("startY %d | endY %d | startX %d | endX %d\n", c->sp.draw_starty, c->sp.draw_endy, c->sp.draw_startx, c->sp.draw_endx);
 }
 
 static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int height, double *zbuf)
@@ -126,10 +118,8 @@ static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int heigh
 	while (++x < c->sp.draw_endx)
 	{
 		texx = (int)(BYTE * (x - (-width / 2 + screenx)) * c->sp.wid / width) / BYTE;
-		//printf("transfy %d | zbuf %f\n", transfy, zbuf[x]);
 		if (transfy >= 0 && x >= 0 && x <= c->win.wid && (double)transfy < (zbuf[x]-0.3))
 		{
-			//printf("hola\n");
 			y = c->sp.draw_starty - 1;
 			while (++y < c->sp.draw_endy)
 			{
@@ -169,7 +159,6 @@ void sprite2screen(t_cub *c, double *zbuf)
 		sprite_screenx = (int)((c->win.wid / 2) * (1 + transformx / transformy));
 		sp_height = abs((int)(c->win.hei / transformy));
 		sp_width = abs((int)(c->win.hei / transformy));
-		//printf("hei %d | wid %d\n", sp_height, sp_width);
 		sp_draw(c, sp_height, sp_width, sprite_screenx);
 		sprite_loop(c, sp_width, sprite_screenx, transformy, sp_height, zbuf);
 	}
