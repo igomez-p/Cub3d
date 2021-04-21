@@ -1,3 +1,16 @@
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_elements.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/21 19:27:07 by igomez-p          #+#    #+#             */
+/*   Updated: 2021/04/21 19:27:07 by igomez-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub.h"
 
 int	error_tex_elements(char *line)
@@ -59,5 +72,35 @@ void error_rgb_elements(t_cub *info, char *line)
         }
         else if (line[0] == 'C')
             clean_exit(info, "Caracteres invalidos en color de techo\n", 1);
+    }
+}
+
+static int ft_isspace(char c)
+{
+    return (((int)c >= 9 && (int)c <= 13) || c == NADA);
+}
+
+void check_map_wall(t_cub *c)
+{
+    int x;
+    int y;
+
+    x = -1;
+    while (c->map[++x])
+    {
+        y = -1;
+        while (c->map[x][++y])
+        {
+            if (c->map[x][y] == VACIO || c->map[x][y] == OBJETO)
+            {
+                if (ft_isspace(c->map[x-1][y-1]) || ft_isspace(c->map[x-1][y]) ||
+                    ft_isspace(c->map[x-1][y+1]) || ft_isspace(c->map[x][y-1]) ||
+                    ft_isspace(c->map[x][y+1]) || ft_isspace(c->map[x+1][y-1]) ||
+                    ft_isspace(c->map[x+1][y]) || ft_isspace(c->map[x+1][y+1]))
+                {
+                    clean_exit(c, "El mapa debe estar rodeado por muros\n", 1);
+                }
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -12,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-void step_initialSide(t_cub *c)
+void step_initial_side(t_cub *c)
 {
   if(c->ray.dirx < 0)
   {

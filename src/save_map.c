@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -102,7 +103,7 @@ static void player_dir(t_cub *c, int x, int y)
 	c->mov.planey = -c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
 }
 
-void searchPlayer(t_cub *cub)
+void search_player(t_cub *cub)
 {
 	int k = 0;
 	while (cub->map[k])

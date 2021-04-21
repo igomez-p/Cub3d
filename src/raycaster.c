@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -45,7 +46,7 @@ static void ray_pos_dir(t_cub *c, int x)
     c->ray.deltay = fabs(1 / c->ray.diry);
 }
 
-static void perpRay_distance(t_cub *c)
+static void perp_ray_distance(t_cub *c)
 {
     if (c->ray.side <= 1)
         c->ray.perp = (c->mov.mapx - c->mov.posx + (1 - c->ray.stepx) / 2) / c->ray.dirx;
@@ -114,9 +115,9 @@ int raycaster(t_cub *c, int x, double *zbuffer)
 {
     init_raycast_vble(c);
     ray_pos_dir(c, x);
-    step_initialSide(c);
+    step_initial_side(c);
     dda(c);
-    perpRay_distance(c);
+    perp_ray_distance(c);
     draw_calculus(c);
     wallx_value(c);
     xcoord_texture(c);

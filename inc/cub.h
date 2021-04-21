@@ -217,7 +217,7 @@ void			info_tex(char *line, t_cub *info);
 void			info_res(char *line, t_cub *info);
 void			info_color(char *line, t_cub *info);
 char			*info_map(char *line, char *stc, t_cub *cub);
-void			searchPlayer(t_cub *cub);
+void			search_player(t_cub *cub);
 void			init_tex_vble(t_cub *c);
 void			init_struct(t_cub *info);
 void    		init_mlx_func(t_cub *c);
@@ -227,7 +227,7 @@ int				key_release_handler(int key, t_cub *c);
 int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
 int 			paint_game(t_cub *c);
-void			step_initialSide(t_cub *c);
+void			step_initial_side(t_cub *c);
 int				move_keys(t_cub *c, double speed);
 int				rotate_keys(t_cub *c, double speed);
 int				raycaster(t_cub *c, int x, double *zbuffer);
@@ -250,5 +250,6 @@ int				empty_line(char *line);
 int				error_tex_elements(char *line);
 int				error_res_elements(char *line);
 void			error_rgb_elements(t_cub *info, char *line);
+void			check_map_wall(t_cub *c);
 
 #endif
