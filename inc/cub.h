@@ -71,7 +71,7 @@
 #ifdef	MAC_SYSTEM
 	# include "keycode_mac.h"
 #elif	LINUX_SYSTEM
-	# include "keycode_linux.h"
+	# include "keycode.h" //# include "keycode_linux.h"
 #endif
 
 typedef struct	s_resolucion {

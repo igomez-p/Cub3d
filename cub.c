@@ -58,8 +58,8 @@ int		main(int argc, char *argv[])
 		save_bmp(&cub);
 
 	init_mlx_func(&cub);
-	mlx_hook(cub.libx.window, 2, 1U << 1, key_press_handler, &cub);
-	mlx_hook(cub.libx.window, 3, 1U << 2, key_release_handler, &cub);
+	mlx_hook(cub.libx.window, 2, /*1U << */1, key_press_handler, &cub);
+	mlx_hook(cub.libx.window, 3, /*1U << */2, key_release_handler, &cub);
 	mlx_hook(cub.libx.window, 17, (1U << 17), exit_handler, &cub);
 	mlx_loop_hook(cub.libx.mlx, draw, &cub);
 
