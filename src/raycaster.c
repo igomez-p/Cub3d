@@ -46,9 +46,11 @@ static void dda(t_cub *c)
 	}
 
 	if (c->ray.side <= 1)
-		c->ray.perp = (c->mov.mapx - c->mov.posx + (1 - c->ray.stepx) / 2) / c->ray.dirx;
+		c->ray.perp = (c->mov.mapx - c->mov.posx + (1 - c->ray.stepx) / 2) / 
+						c->ray.dirx;
 	else
-		c->ray.perp = (c->mov.mapy - c->mov.posy + (1 - c->ray.stepy) / 2) / c->ray.diry;
+		c->ray.perp = (c->mov.mapy - c->mov.posy + (1 - c->ray.stepy) / 2) / 
+						c->ray.diry;
 }
 
 static void draw_calculus(t_cub *c)
@@ -69,47 +71,49 @@ static void draw_calculus(t_cub *c)
 		c->draw.wallx = c->mov.posy + c->ray.perp * c->ray.diry;
 	else
 		c->draw.wallx = c->mov.posx + c->ray.perp * c->ray.dirx;
-
 	c->draw.wallx -= floor(c->draw.wallx);
 
 	c->ray.x = (int)(c->draw.wallx * (double)(c->twall[c->ray.side].wid));
 
-	if ((c->ray.side <= 1 && c->ray.dirx > 0) || (c->ray.side >= 2 && c->ray.diry > 0))
+	if ((c->ray.side <= 1 && c->ray.dirx > 0) || (c->ray.side >= 2 && 
+		c->ray.diry > 0))
 	{
 		c->ray.x = c->twall[c->ray.side].wid - c->ray.x - 1;
 	}
 }
 
-static void draw_textures(t_cub *c, int x, double *zbuf)
+static void draw_textures(t_cub *c, int x)
 {
-	int i = 0;
+	int i;
 
 	i = c->draw.start;
 	c->ray.step = 1.0 * c->twall[c->ray.side].hei / c->ray.lineh;
-	c->ray.pos = (c->draw.start - c->win.hei / 2 + c->ray.lineh / 2) * c->ray.step;
+	c->ray.pos = (c->draw.start - c->win.hei / 2 + c->ray.lineh / 2) * 
+				c->ray.step;
 
 	while (i < c->draw.end)
 	{
 		c->ray.y = (int)c->ray.pos & (c->twall[c->ray.side].hei - 1);
 		c->ray.pos += c->ray.step;
-		int color = c->twall[c->ray.side].addr[c->twall[c->ray.side].wid * c->ray.y + c->ray.x];
+		int color = c->twall[c->ray.side].addr[c->twall[c->ray.side].wid * 
+					c->ray.y + c->ray.x];
 		if (c->ray.side % 2)
 			color = (color >> 1) & AND_ING;
 
 		my_mlx_pixel_put(c, x, i, color);
 		i++;
 	}
-	zbuf[x] = c->ray.perp;
+	c->sp.zbuf[x] = c->ray.perp;
 }
 
-int raycaster(t_cub *c, int x, double *zbuffer)
+int raycaster(t_cub *c, int x)
 {
 	init_raycast_vble(c);
 	ray_pos_dir(c, x);
 	step_initial_side(c);
 	dda(c);
 	draw_calculus(c);
-	draw_textures(c, x, zbuffer);
+	draw_textures(c, x);
 
     return 1;
 }

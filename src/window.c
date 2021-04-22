@@ -30,7 +30,8 @@ void free_map(t_cub *c)
 	i = c->nrows;
 	if (c->map)
 	{
-		while (i > 0) {
+		while (i > 0) 
+		{
 			free(c->map[i]);
 			c->map[i] = NULL;
 			i--;
@@ -67,19 +68,15 @@ void	paint_sky_floor(t_cub *c)
 int draw(t_cub *c)
 {
 	int x;
-	int z;
-	double zbuffer[c->win.wid];
 
-	z = -1;
-	while (++z < c->win.wid)
-		zbuffer[z] = 0.0;
+	c->sp.zbuf = malloc(sizeof(double) * c->win.wid);
 	if (c->draw.repaint)
 	{
 		x = -1;
 		paint_sky_floor(c);
 		while (++x < c->win.wid)
-			raycaster(c, x, zbuffer);
-		sprite2screen(c, zbuffer);
+			raycaster(c, x);
+		sprite2screen(c);
 	}
 	if (!c->bmp)
 	{

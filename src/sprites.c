@@ -13,28 +13,6 @@
 
 #include "../inc/cub.h"
 
-static int	count_sprites(t_cub *c)
-{
-	int x;
-	int y;
-	int count;
-
-	count = 0;
-	x = 0;
-	while (c->map[x])
-	{
-		y = 0;
-		while (c->map[x][y])
-		{
-			if (c->map[x][y] == OBJECT)
-				count++;
-			y++;
-		}
-		x++;
-	}
-	return (count);
-}
-
 static void	sort_sprite(t_cub *c)
 {
 	int s;
@@ -77,70 +55,67 @@ void	search_sprites(t_cub *c)
 			{
 				c->sprites[s].x = x + 0.5;
 				c->sprites[s].y = y + 0.5;
-				c->sprites[s].dist = ((c->mov.posx - c->sprites[s].x) * (c->mov.posx - c->sprites[s].x)
-						+ (c->mov.posy - c->sprites[s].y) * (c->mov.posy - c->sprites[s].y));
+				c->sprites[s].dist = ((c->mov.posx - c->sprites[s].x) * 
+					(c->mov.posx - c->sprites[s].x) + (c->mov.posy - 
+					c->sprites[s].y) * (c->mov.posy - c->sprites[s].y));
 				s++;
 			}
 			y++;
 		}
 		x++;
 	}
-
 }
 
-static void sp_draw(t_cub *c, int height, int width, int screenx)
+static void sp_draw(t_cub *c)
 {
-	c->sp.draw_starty = -height / 2 + c->win.hei / 2;
+	c->sp.draw_starty = -c->sp.h / 2 + c->win.hei / 2;
 	if (c->sp.draw_starty < 0)
 		c->sp.draw_starty = 0;
-	c->sp.draw_endy = height / 2 + c->win.hei / 2;
+	c->sp.draw_endy = c->sp.h / 2 + c->win.hei / 2;
 	if (c->sp.draw_endy >= c->win.hei)
 		c->sp.draw_endy = c->win.hei - 1;
 
-	c->sp.draw_startx = -width / 2 + screenx;
+	c->sp.draw_startx = -c->sp.w / 2 + c->sp.screenx;
 	if (c->sp.draw_startx < 0)
 		c->sp.draw_startx = 0;
-	c->sp.draw_endx = width / 2 + screenx;
+	c->sp.draw_endx = c->sp.w / 2 + c->sp.screenx;
 	if (c->sp.draw_endx >= c->win.wid)
 		c->sp.draw_endx = c->win.wid - 1;
 }
 
-static void sprite_loop(t_cub *c, int width, int screenx, int transfy, int height, double *zbuf)
+static void sprite_loop(t_cub *c, double ty)
 {
 	int x;
 	int y;
 	int texx;
 	int texy;
 	int d;
-	int color;
 
 	x = c->sp.draw_startx - 1;
 	while (++x < c->sp.draw_endx)
 	{
-		texx = (int)(BYTE * (x - (-width / 2 + screenx)) * c->sp.wid / width) / BYTE;
-		if (transfy >= 0 && x >= 0 && x <= c->win.wid && (double)transfy < (zbuf[x]-0.3))
+		texx = (int)(BYTE * (x - (-c->sp.w / 2 + c->sp.screenx)) * 
+				c->sp.wid / c->sp.w) / BYTE;
+		if (ty >= 0 && x >= 0 && x <= c->win.wid && ty < c->sp.zbuf[x])
 		{
 			y = c->sp.draw_starty - 1;
 			while (++y < c->sp.draw_endy)
 			{
-				d = y * BYTE - c->win.hei * (BYTE/2) + height * (BYTE/2);
-				texy = abs(((d * c->sp.hei) / height) / BYTE);
-				color = c->sp.addr[c->sp.wid * texy + texx];
-				if ((color & 0x00FFFFFF) != 0)
-					my_mlx_pixel_put(c, x, y, color);
+				d = y * BYTE - c->win.hei * (BYTE/2) + c->sp.h * (BYTE/2);
+				texy = abs(((d * c->sp.hei) / c->sp.h) / BYTE);
+				c->sp.color = c->sp.addr[c->sp.wid * texy + texx];
+				if ((c->sp.color & 0x00FFFFFF) != 0)
+					my_mlx_pixel_put(c, x, y, c->sp.color);
 			}
 		}
 	}
 }
 
-void sprite2screen(t_cub *c, double *zbuf)
+void sprite2screen(t_cub *c)
 {
-	double inv_det;
-	double transformx;
-	double transformy;
-	int sprite_screenx;
-	int sp_height;
-	int sp_width;
+	double idet;
+	double tx;
+	double ty;
 	int s;
 	int total;
 
@@ -151,15 +126,13 @@ void sprite2screen(t_cub *c, double *zbuf)
 	{
 		c->sp.posx = (double)c->sprites[s].x - c->mov.posx;
 		c->sp.posy = (double)c->sprites[s].y - c->mov.posy;
-
-		inv_det = 1.0 / (c->mov.planex * c->mov.diry - c->mov.dirx * c->mov.planey);
-		transformx = inv_det * (c->mov.diry * c->sp.posx - c->mov.dirx * c->sp.posy);
-		transformy = inv_det * (-c->mov.planey * c->sp.posx + c->mov.planex * c->sp.posy);
-
-		sprite_screenx = (int)((c->win.wid / 2) * (1 + transformx / transformy));
-		sp_height = abs((int)(c->win.hei / transformy));
-		sp_width = abs((int)(c->win.hei / transformy));
-		sp_draw(c, sp_height, sp_width, sprite_screenx);
-		sprite_loop(c, sp_width, sprite_screenx, transformy, sp_height, zbuf);
+		idet = 1.0 / (c->mov.planex * c->mov.diry - c->mov.dirx * c->mov.planey);
+		tx = idet * (c->mov.diry * c->sp.posx - c->mov.dirx * c->sp.posy);
+		ty = idet * (-c->mov.planey * c->sp.posx + c->mov.planex * c->sp.posy);
+		c->sp.screenx = (int)((c->win.wid / 2) * (1 + tx / ty));
+		c->sp.h = abs((int)(c->win.hei / ty));
+		c->sp.w = abs((int)(c->win.hei / ty));
+		sp_draw(c);
+		sprite_loop(c, ty);
 	}
 }

@@ -28,6 +28,11 @@ void init_sp_vble(t_cub *c)
 	c->sp.draw_starty = 0;
 	c->sp.draw_endx = 0;
 	c->sp.draw_endy = 0;
+	c->sp.h = 0;
+	c->sp.w = 0;
+	c->sp.screenx = 0;
+	c->sp.color = 0;
+	c->sp.zbuf = NULL;
 }
 
 static void check_xpm(t_cub *c)
@@ -90,12 +95,14 @@ void    init_mlx_func(t_cub *c)
 	resize_window(c, c->bmp);
 	if (!c->bmp)
 	{
-		if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, c->win.hei, "Cub3D")))
+		if(!(c->libx.window = mlx_new_window(c->libx.mlx, c->win.wid, 
+			c->win.hei, "Cub3D")))
 			clean_exit(c, "When opening a new window\n", 1);
 	}
 	if (!(c->win.img = mlx_new_image(c->libx.mlx, c->win.wid, c->win.hei)))
 		clean_exit(c, "When creating a new image\n", 1);
-	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz, &c->win.endian);
+	c->win.addr = (int *)mlx_get_data_addr(c->win.img, &c->win.bpp, &c->win.sz,
+											&c->win.endian);
 
 	mlx_do_key_autorepeatoff(c->libx.mlx);
 }

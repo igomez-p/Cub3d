@@ -42,13 +42,38 @@ void check_extension(char *filename)
 		clean_exit(NULL, "The file extension must be .cub\n", 1);
 }
 
+void	find_id(t_cub *info, char *line, char **stc)
+{
+	if (!empty_line(line) && check_identifiers(info) == TOTAL_INFO)
+		clean_exit(info, "No information allowed after the map\n", 1);
+	else if (ft_strchr(line, 'R'))
+		info_res(line, info);
+	else if (is_texture(line))
+		info_tex(line, info);
+	else if (ft_strchr(line, 'F') || ft_strchr(line, 'C'))
+		info_color(line, info);
+	else if (ft_strchr(line, '1') && check_identifiers(info) == TOTAL_IDS)
+	{
+		*stc = info_map(line, *stc, info);
+		*stc = ft_swap(*stc, "\n");
+	}
+	else if (ft_strchr(line, '1') && check_identifiers(info) < TOTAL_IDS)
+		clean_exit(info, "Identifiers missing\n", 1);
+	else if (empty_line(line) && *stc != NULL)
+	{
+		info->map = ft_split(*stc, '\n');
+		info->check.map = 1;
+	}
+	else if (!empty_line(line))
+		clean_exit(info, "Unrecognized identifier\n", 1);
+}
+
 void	read_cub(char *filename, t_cub *info)
 {
 	int	fd;
 	char	*line;
-	char	*stc_line;
+	static char	*stc_line = NULL;
 
-	stc_line = NULL;
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		clean_exit(info, "File could not be opened\n", 1);
 	else
@@ -56,35 +81,12 @@ void	read_cub(char *filename, t_cub *info)
 		line = 0;
 		while (get_next_line(fd, &line) > 0)
 		{
-			if (!empty_line(line) && check_identifiers(info) == TOTAL_INFO)
-				clean_exit(info, "No information allowed after the map\n", 1);
-			else if (ft_strchr(line, 'R'))
-				info_res(line, info);
-			else if (is_texture(line))
-				info_tex(line, info);
-			else if (ft_strchr(line, 'F') || ft_strchr(line, 'C'))
-				info_color(line, info);
-			else if (ft_strchr(line, '1') && check_identifiers(info) == TOTAL_IDS)
-			{
-				stc_line = info_map(line, stc_line, info);
-				stc_line = ft_swap(stc_line, "\n");
-			}
-			else if (ft_strchr(line, '1') && check_identifiers(info) < TOTAL_IDS)
-				clean_exit(info, "Identifiers missing\n", 1);
-			else if (empty_line(line) && stc_line != NULL)
-			{
-				info->map = ft_split(stc_line, '\n');
-				info->check.map = 1;
-			}
-			else if (!empty_line(line))
-				clean_exit(info, "Unrecognized identifier\n", 1);
-
+			find_id(info, line, &stc_line);
 			free(line);
 			line = 0;
 		}
 		if (line != NULL && ft_strchr(line, '1'))
 			stc_line = info_map(line, stc_line, info);
-
 		if (!empty_line(line) && check_identifiers(info) == TOTAL_INFO)
 			clean_exit(info, "No information allowed after the map\n", 1);
 

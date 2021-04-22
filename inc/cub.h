@@ -114,6 +114,12 @@ typedef struct	s_sprite {
 				int draw_startx;
 				int draw_endy;
 				int draw_endx;
+
+				int h;
+				int w;
+				int		screenx;
+				double *zbuf;
+				int color;
 } t_sprite;
 
 typedef struct s_sprites {
@@ -222,13 +228,13 @@ int 			paint_game(t_cub *c);
 void			step_initial_side(t_cub *c);
 int				move_keys(t_cub *c, double speed);
 int				rotate_keys(t_cub *c, double speed);
-int				raycaster(t_cub *c, int x, double *zbuffer);
+int				raycaster(t_cub *c, int x);
 void			init_sp_vble(t_cub *c);
 void			init_raycast_vble(t_cub *info);
 void			free_map(t_cub *c);
 void			refill_map(t_cub *c);
 int				draw(t_cub *c);
-void			sprite2screen(t_cub *c, double *zbuf);
+void			sprite2screen(t_cub *c);
 void			search_sprites(t_cub *c);
 void			my_mlx_pixel_put(t_cub *c, int x, int y, int color);
 int				save_bmp(t_cub *c);
@@ -244,5 +250,6 @@ int				error_res_elements(char *line);
 void			error_rgb_elements(t_cub *info, char *s);
 void			check_map_wall(t_cub *c);
 int				map_dimensions(t_cub *c);
+int				count_sprites(t_cub *c);
 
 #endif
