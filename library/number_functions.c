@@ -15,12 +15,16 @@
 
 int	ft_isprint(int c)
 {
-	return ((c >= 32 && c <= 126) ? 1 : 0);
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }
 
 int         ft_isdigit(int c)
 {
-	return ((c >= 48 && c <= 57) ? 1 : 0);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
 
 int			ft_atoi(const char *str)
@@ -36,7 +40,9 @@ int			ft_atoi(const char *str)
 		i++;
 	if ((str[i] == '-' || str[i] == '+') && ft_isdigit(str[i + 1]))
 	{
-		sig = (str[i] == '-') ? -1 : 1;
+		sig = 1;
+		if (str[i] == '-')
+			sig = -1;
 		i++;
 	}
 	while (str[i] && ft_isdigit(str[i]))

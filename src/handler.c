@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/22 22:17:31 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/22 23:15:17 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void		clean_exit(t_cub *c, char *str, int error)
 		destroy_textures(c);
 		if (c->line != NULL)
 			free(c->line);
+		if (c->sp.zbuf != NULL)
+			free(c->sp.zbuf);
 	}
 	//system("leaks cub3d");
 	exit(1);

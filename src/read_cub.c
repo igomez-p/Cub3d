@@ -71,7 +71,6 @@ void		find_id(t_cub *c, /*char *line,*/ char **stc)
 void		read_cub(char *filename, t_cub *info)
 {
 	int	fd;
-	//char	*line;
 	static char	*stc_line = NULL;
 
 	if ((fd = open(filename, O_RDONLY)) == -1)
@@ -81,7 +80,7 @@ void		read_cub(char *filename, t_cub *info)
 		info->line = 0;
 		while (get_next_line(fd, &info->line) > 0)
 		{
-			find_id(info, /*line, */&stc_line);
+			find_id(info, &stc_line);
 			free(info->line);
 			info->line = 0;
 		}
@@ -92,7 +91,7 @@ void		read_cub(char *filename, t_cub *info)
 
 		info->map = ft_split(stc_line, '\n');
 		info->check.map = 1;
-		free(stc_line); // SOLUCIONADO LOS MEMORY LEAKS ??
+		free(stc_line);
 		close (fd);
 	}
 }

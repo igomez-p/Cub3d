@@ -102,16 +102,16 @@ int		get_next_line(int fd, char **line)
 		b[nbytes] = '\0';
 		l = ft_swap(l, b);
 		if ((aux = ft_strchr(l, '\n')) != NULL)
-		{
-			free(b);
-			return (((l = ft_newstatic(aux, l, line)) != NULL) ? 1 : 1);
-		}
+			break;
 	}
 	free(b);
 	if ((aux = ft_strchr(l, '\n')) != NULL)
-		return (((l = ft_newstatic(aux, l, line)) != NULL) ? 1 : 1);
+	{
+		l = ft_newstatic(aux, l, line);
+		if (l != NULL)
+			return (1);
+	}
 	*line = ft_strdup(l);
 	free(l);
-	l = NULL;
 	return (0);
 }

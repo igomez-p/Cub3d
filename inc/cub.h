@@ -12,8 +12,31 @@
 /* ************************************************************************** */
 
 
-# ifndef CUB_H
+#ifndef CUB_H
 # define CUB_H
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <stdio.h>
+# include <string.h>
+# include <math.h>
+# include "libft.h"
+
+# ifdef	MAC_SYSTEM
+	# include "../minilibx-Darwin/mlx.h"
+# elif	LINUX_SYSTEM
+	# include "../minilibx-Linux/mlx.h"
+# endif
+
+
+# ifdef	MAC_SYSTEM
+	# include "keycode_mac.h"
+# elif	LINUX_SYSTEM
+	# include "keycode_linux.h"
+# endif
 
 # define SPACE				' '
 # define EMPTY				'0'
@@ -43,172 +66,147 @@
 # define NUM_PLANES			1
 # define HORIZ_RESOLUTION	24
 
-#ifdef	MAC_SYSTEM
-	#include "../minilibx-Darwin/mlx.h"
-#elif	LINUX_SYSTEM
-	# include "../minilibx-Linux/mlx.h"
-#endif
-
-
-#ifdef	MAC_SYSTEM
-	# include "keycode_mac.h"
-#elif	LINUX_SYSTEM
-	# include "keycode_linux.h"
-#endif
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <stdio.h>
-# include <string.h>
-# include <math.h>
-# include "libft.h"
-
-typedef struct	s_resolution {
-				int x;
-				int y;
-}				t_resolution;
+typedef struct	s_render {
+	int			x;
+	int			y;
+}				t_render;
 
 typedef struct	s_textures {
-				char *path_no;
-				char *path_so;
-				char *path_we;
-				char *path_ea;
-				char *path_sp;
+	char		*path_no;
+	char		*path_so;
+	char		*path_we;
+	char		*path_ea;
+	char		*path_sp;
 }				t_textures;
 
 typedef struct	s_colors {
-				int rgb_s[3];
-				int rgb_f[3];
+	int			rgb_s[3];
+	int			rgb_f[3];
 }				t_colors;
 
 typedef struct	s_minilibx {
-				void *mlx;
-				void *window;
+	void		*mlx;
+	void		*window;
 }				t_minilix;
 
 typedef struct	s_img {
-				void *img;
-				int *addr;
-				int hei;
-				int wid;
-				int sz;
-				int endian;
-				int bpp;
+	void		*img;
+	int			*addr;
+	int			hei;
+	int			wid;
+	int			sz;
+	int			endian;
+	int			bpp;
 }				t_img;
 
 typedef struct	s_sprite {
-				void *img;
-				int *addr;
-				int hei;
-				int wid;
-				int sz;
-				int endian;
-				int bpp;
-				double posx;
-				double posy;
-				int draw_starty;
-				int draw_startx;
-				int draw_endy;
-				int draw_endx;
-				int h;
-				int w;
-				int screenx;
-				double *zbuf;
-				int color;
+	void		*img;
+	int			*addr;
+	int			hei;
+	int			wid;
+	int			sz;
+	int			endian;
+	int			bpp;
+	double		posx;
+	double		posy;
+	int			draw_starty;
+	int			draw_startx;
+	int			draw_endy;
+	int			draw_endx;
+	int			h;
+	int			w;
+	int			screenx;
+	double		*zbuf;
+	int			color;
 }				t_sprite;
 
 typedef struct	s_sprites {
-				double x;
-				double y;
-				int dist;
+	double		x;
+	double		y;
+	int			dist;
 }				t_sprites;
 
 typedef struct	s_mov {
-				int left;
-				int right;
-				int up;
-				int down;
-
-				double posx;
-				double posy;
-				double dirx;
-				double diry;
-				double planex;
-				double planey;
-				int mapx;
-				int mapy;
+	int			left;
+	int			right;
+	int			up;
+	int			down;
+	double		posx;
+	double		posy;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	int			mapx;
+	int			mapy;
 }				t_mov;
 
 typedef struct	s_camera {
-				int left;
-				int right;
-
-				double x;
+	int			left;
+	int			right;
+	double		x;
 }				t_camera;
 
 typedef struct	s_raycasting {
-				double dirx;
-				double diry;
-				double sidex;
-				double sidey;
-				double deltax;
-				double deltay;
-				double perp;
-				int stepx;
-				int stepy;
-				double step;
-				int hit;
-				int side;
-				int lineh;
-				int texnum;
-				int x;
-				int y;
-				double pos;
-}				t_raycasting;
+	double		dirx;
+	double		diry;
+	double		sidex;
+	double		sidey;
+	double		deltax;
+	double		deltay;
+	double		perp;
+	int			stepx;
+	int			stepy;
+	double		step;
+	int			hit;
+	int			side;
+	int			lineh;
+	int			texnum;
+	int			x;
+	int			y;
+	double		pos;
+}				t_raycaster;
 
 typedef struct	s_draw {
-				int start;
-				int end;
-				double wallx;
-				double wally;
-				int repaint;
+	int			start;
+	int			end;
+	double		wallx;
+	double		wally;
+	int			repaint;
 }				t_draw;
 
 typedef struct s_check {
-				int res;
-				int texno;
-				int texso;
-				int texwe;
-				int texea;
-				int texsp;
-				int sky;
-				int floor;
-				int map;
-				int player;
-} t_check;
+	int			res;
+	int			texno;
+	int			texso;
+	int			texwe;
+	int			texea;
+	int			texsp;
+	int			sky;
+	int			floor;
+	int			map;
+	int			player;
+}				t_check;
 
 
 typedef struct	s_cub {
-				int	nrows;
-				int	bmp;
-				char *line;
-				char **map;
-				t_resolution res;
-				t_textures tex;
-				t_colors col;
-				t_minilix libx;
-				t_img win;
-				t_img twall[MAX_TEXTURES];
-				t_sprite sp;
-				t_sprites *sprites;
-				t_mov		mov;
-				t_camera	cam;
-				t_raycasting ray;
-				t_draw draw;
-				t_check check;
+	int			nrows;
+	int			bmp;
+	char		*line;
+	char		**map;
+	t_render	res;
+	t_textures	tex;
+	t_colors	col;
+	t_minilix	libx;
+	t_img		win;
+	t_img		twall[MAX_TEXTURES];
+	t_sprite	sp;
+	t_sprites	*sprites;
+	t_mov		mov;
+	t_camera	cam;
+	t_raycaster ray;
+	t_draw		draw;
+	t_check		check;
 }				t_cub;
 
 void			info_tex(char *line, t_cub *info);
