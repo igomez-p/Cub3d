@@ -37,11 +37,11 @@ static char	*path_tex(char *line, t_cub *c, int nchar)
 		clean_exit(c, "The texture extension must be .xpm\n", 1);
 
 	clean_exit(c, "Repeated texture\n", 1);
-	return NULL;
+	return (NULL);
 }
 
 
-static int vertical_text(char *line, t_cub *info)
+static int	vertical_text(char *line, t_cub *info)
 {
 	if (!ft_strncmp(line, "NO", 2) && !info->check.texno)
 	{
@@ -65,7 +65,7 @@ static int vertical_text(char *line, t_cub *info)
 	return (0);
 }
 
-static int horizontal_text(char *line, t_cub *info)
+static int	horizontal_text(char *line, t_cub *info)
 {
 	if (!ft_strncmp(line, "WE", 2) && !info->check.texwe)
 	{
@@ -104,7 +104,7 @@ void		info_tex(char *line, t_cub *info)
 		clean_exit(info, "Duplicate sprite texture identifier\n", 1);
 }
 
-int     is_texture(char *line)
+int			is_texture(char *line)
 {
 	char *aux;
 

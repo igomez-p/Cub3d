@@ -14,13 +14,13 @@
 #include "../inc/cub.h"
 
 
-void remove_spaces(char **line)
+void		remove_spaces(char **line)
 {
 	while (**line && **line == SPACE)
 		*line = *line + 1;
 }
 
-int empty_line(char *line)
+static int	empty_line(char *line)
 {
 	int i;
 
@@ -33,7 +33,7 @@ int empty_line(char *line)
 	return (1);
 }
 
-void check_extension(char *filename)
+void		check_extension(char *filename)
 {
 	int len;
 
@@ -42,7 +42,7 @@ void check_extension(char *filename)
 		clean_exit(NULL, "The file extension must be .cub\n", 1);
 }
 
-void	find_id(t_cub *info, char *line, char **stc)
+void		find_id(t_cub *info, char *line, char **stc)
 {
 	if (!empty_line(line) && check_identifiers(info) == TOTAL_INFO)
 		clean_exit(info, "No information allowed after the map\n", 1);
@@ -68,7 +68,7 @@ void	find_id(t_cub *info, char *line, char **stc)
 		clean_exit(info, "Unrecognized identifier\n", 1);
 }
 
-void	read_cub(char *filename, t_cub *info)
+void		read_cub(char *filename, t_cub *info)
 {
 	int	fd;
 	char	*line;

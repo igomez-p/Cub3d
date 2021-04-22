@@ -64,7 +64,7 @@
 #ifdef	MAC_SYSTEM
 	# include "keycode_mac.h"
 #elif	LINUX_SYSTEM
-	# include "keycode.h" //# include "keycode_linux.h"
+	# include "keycode_linux.h"
 #endif
 
 typedef struct	s_resolution {
@@ -190,6 +190,7 @@ typedef struct s_check {
 				int sky;
 				int floor;
 				int map;
+				int player;
 } t_check;
 
 
@@ -216,7 +217,7 @@ void			info_tex(char *line, t_cub *info);
 void			info_res(char *line, t_cub *info);
 void			info_color(char *line, t_cub *info);
 char			*info_map(char *line, char *stc, t_cub *cub);
-void			search_player(t_cub *cub);
+void			search_player(t_cub *c);
 void			init_struct(t_cub *info);
 void    		init_mlx_func(t_cub *c);
 void			read_cub(char *filename, t_cub *info);
@@ -244,7 +245,6 @@ int				check_text(t_cub *c, char *text);
 void			remove_spaces(char **line);
 int				check_identifiers(t_cub *c);
 int     		is_texture(char *line);
-int				empty_line(char *line);
 int				error_tex_elements(char *line);
 int				error_res_elements(char *line);
 void			error_rgb_elements(t_cub *info, char *s);

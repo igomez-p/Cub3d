@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-static void init_file_vble(t_cub *info)
+static void	init_file_vble(t_cub *info)
 {
 	info->res.x = 0;
 	info->res.y = 0;
@@ -31,7 +31,7 @@ static void init_file_vble(t_cub *info)
 	info->bmp = 0;
 }
 
-static void init_mov_vble(t_cub *info)
+static void	init_mov_vble(t_cub *info)
 {
 	info->mov.left = 0;
 	info->mov.right = 0;
@@ -51,7 +51,7 @@ static void init_mov_vble(t_cub *info)
 	info->cam.x = 0.0;
 }
 
-void init_raycast_vble(t_cub *info)
+void		init_raycast_vble(t_cub *info)
 {
 	info->ray.dirx = 0.0;
 	info->ray.diry = 0.0;
@@ -80,7 +80,7 @@ void init_raycast_vble(t_cub *info)
 	info->cam.x = 0.0;
 }
 
-static void init_tex_vble(t_cub *c)
+static void	init_tex_vble(t_cub *c)
 {
 	int x;
 
@@ -99,7 +99,7 @@ static void init_tex_vble(t_cub *c)
 	init_sp_vble(c);
 }
 
-void	init_struct(t_cub *info)
+void		init_struct(t_cub *info)
 {
 	init_file_vble(info);
 	init_mov_vble(info);
@@ -123,4 +123,5 @@ void	init_struct(t_cub *info)
 	info->check.floor = 0;
 	info->check.sky = 0;
 	info->check.map = 0;
+	info->check.player = 0;
 }

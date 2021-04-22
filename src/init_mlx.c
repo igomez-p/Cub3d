@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-void init_sp_vble(t_cub *c)
+void		init_sp_vble(t_cub *c)
 {
 	c->sp.img = NULL;
 	c->sp.addr = NULL;
@@ -35,7 +35,7 @@ void init_sp_vble(t_cub *c)
 	c->sp.zbuf = NULL;
 }
 
-static void check_xpm(t_cub *c)
+static void	check_xpm(t_cub *c)
 {
 	int	x;
 
@@ -57,7 +57,7 @@ static void check_xpm(t_cub *c)
 												&c->sp.sz, &c->sp.endian);
 }
 
-static void xpm2image(t_cub *c)
+static void	xpm2image(t_cub *c)
 {
 	c->twall[NO].img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_no,
 									&c->twall[NO].wid, &c->twall[NO].hei);
@@ -73,7 +73,7 @@ static void xpm2image(t_cub *c)
 	check_xpm(c);
 }
 
-static void resize_window(t_cub *c, int bmp)
+static void	resize_window(t_cub *c, int bmp)
 {
 	if (c->res.x > c->win.wid && bmp)
 		c->win.wid = c->res.x;
@@ -86,7 +86,7 @@ static void resize_window(t_cub *c, int bmp)
 		c->win.hei = c->res.y;
 }
 
-void    init_mlx_func(t_cub *c)
+void		init_mlx_func(t_cub *c)
 {
 	if (!(c->libx.mlx = mlx_init()))
 		clean_exit(c, "MLX was not initialized\n", 1);

@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-static int		write_bmp_header(t_cub *c, int fd, int filesize)
+static int	write_bmp_header(t_cub *c, int fd, int filesize)
 {
 	int				i;
 	unsigned char	bmpfileheader[BMP_HEADER_BYTES];
@@ -42,7 +42,7 @@ static int		write_bmp_header(t_cub *c, int fd, int filesize)
 	return (!(write(fd, bmpfileheader, BMP_HEADER_BYTES) < 0));
 }
 
-static int		write_bmp_data(t_cub *c, int file, int pad)
+static int	write_bmp_data(t_cub *c, int file, int pad)
 {
 	const unsigned char	zero[3] = {0, 0, 0};
 	int					y;
@@ -67,7 +67,7 @@ static int		write_bmp_data(t_cub *c, int file, int pad)
 	return (1);
 }
 
-static int		write_bmp(t_cub *c, int fd, int filesize, int pad)
+static int	write_bmp(t_cub *c, int fd, int filesize, int pad)
 {
 	if (!write_bmp_header(c, fd, filesize))
 	{
@@ -84,7 +84,7 @@ static int		write_bmp(t_cub *c, int fd, int filesize, int pad)
 	return (1);
 }
 
-int				save_bmp(t_cub *c)
+int			save_bmp(t_cub *c)
 {
 	int	filesize;
 	int	file;

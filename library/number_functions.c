@@ -46,7 +46,5 @@ int			ft_atoi(const char *str)
 	}
 	if (num * sig > 2147483647)
 		return (-1);
-	//else if ((long int)(num * sig) < -2147483648)
-	//	return (0);
 	return (num * sig);
 }

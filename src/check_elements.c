@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-int	error_tex_elements(char *line)
+int			error_tex_elements(char *line)
 {
 	int i;
 	int extension;
@@ -34,7 +34,7 @@ int	error_tex_elements(char *line)
 	return (0);
 }
 
-int error_res_elements(char *line)
+int			error_res_elements(char *line)
 {
 	int i;
 
@@ -49,7 +49,7 @@ int error_res_elements(char *line)
 	return (0);
 }
 
-void error_rgb_elements(t_cub *info, char *s)
+void		error_rgb_elements(t_cub *info, char *s)
 {
 	int i;
 
@@ -75,12 +75,12 @@ void error_rgb_elements(t_cub *info, char *s)
 	}
 }
 
-static int is_empty(char c)
+static int	is_empty(char c)
 {
 	return (((int)c >= 9 && (int)c <= 13) || c == SPACE);
 }
 
-void check_map_wall(t_cub *c)
+void		check_map_wall(t_cub *c)
 {
 	int x;
 	int y;

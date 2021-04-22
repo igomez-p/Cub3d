@@ -13,17 +13,17 @@
 
 #include "../inc/cub.h"
 
-static int rgb2int(int r, int g, int b)
+static int	rgb2int(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | b);
 }
 
-void	my_mlx_pixel_put(t_cub *c, int x, int y, int color)
+void		my_mlx_pixel_put(t_cub *c, int x, int y, int color)
 {
 	c->win.addr[c->win.wid * y + x] = color;
 }
 
-void free_map(t_cub *c)
+void		free_map(t_cub *c)
 {
 	int i;
 
@@ -42,7 +42,7 @@ void free_map(t_cub *c)
 	}
 }
 
-void	paint_sky_floor(t_cub *c)
+void		paint_sky_floor(t_cub *c)
 {
 	int	x;
 	int	y;
@@ -65,7 +65,7 @@ void	paint_sky_floor(t_cub *c)
 	}
 }
 
-int draw(t_cub *c)
+int			draw(t_cub *c)
 {
 	int x;
 

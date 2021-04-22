@@ -6,7 +6,7 @@
 #    By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 15:29:03 by igomez-p          #+#    #+#              #
-#    Updated: 2021/04/18 19:09:33 by igomez-p         ###   ########.fr        #
+#    Updated: 2021/04/22 21:10:44 by igomez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,7 @@ SRC = cub.c				\
 	  library/str_functions.c	\
 	  library/number_functions.c\
 
-
-LIB = minilibx-$(OS)/libmlx.a \
-	minilibx-Linux/libmlx_Linux.a
-#library/libft_$(OS).a \
-	  
+LIB = minilibx-$(OS)/libmlx.a
 
 OS  = $(shell uname -s)
 

@@ -37,7 +37,7 @@ static void	sort_sprite(t_cub *c)
 	}
 }
 
-void	search_sprites(t_cub *c)
+void		search_sprites(t_cub *c)
 {
 	int x;
 	int y;
@@ -66,7 +66,7 @@ void	search_sprites(t_cub *c)
 	}
 }
 
-static void sp_draw(t_cub *c)
+static void	sp_draw(t_cub *c)
 {
 	c->sp.draw_starty = -c->sp.h / 2 + c->win.hei / 2;
 	if (c->sp.draw_starty < 0)
@@ -83,7 +83,7 @@ static void sp_draw(t_cub *c)
 		c->sp.draw_endx = c->win.wid - 1;
 }
 
-static void sprite_loop(t_cub *c, double ty)
+static void	sprite_loop(t_cub *c, double ty)
 {
 	int x;
 	int y;
@@ -111,7 +111,7 @@ static void sprite_loop(t_cub *c, double ty)
 	}
 }
 
-void sprite2screen(t_cub *c)
+void		sprite2screen(t_cub *c)
 {
 	double idet;
 	double tx;

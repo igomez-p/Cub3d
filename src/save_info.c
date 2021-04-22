@@ -38,7 +38,7 @@ static int	save_int(char **line)
 	return (n);
 }
 
-void	info_res(char *line, t_cub *info)
+void		info_res(char *line, t_cub *info)
 {
 	remove_spaces(&line);
 	if (!ft_strncmp(line, "R", 1) && !info->check.res)
@@ -60,7 +60,7 @@ void	info_res(char *line, t_cub *info)
 		clean_exit(info, "Repeated resolution identifier\n", 1);
 }
 
-static void info_color_sky(char *line, t_cub *info)
+static void	info_color_sky(char *line, t_cub *info)
 {
 	if (!ft_strncmp(line, "C", 1) && !info->check.sky)
 	{
@@ -83,7 +83,7 @@ static void info_color_sky(char *line, t_cub *info)
 		clean_exit(info, "Repeated ceiling color identifier\n", 1);
 }
 
-void	info_color(char *line, t_cub *info)
+void		info_color(char *line, t_cub *info)
 {
 	error_rgb_elements(info, line);
 	remove_spaces(&line);
@@ -110,7 +110,7 @@ void	info_color(char *line, t_cub *info)
 	info_color_sky(line, info);
 }
 
-void refill_map(t_cub *c)
+void		refill_map(t_cub *c)
 {
 	int w;
 	char **map;

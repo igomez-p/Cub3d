@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-static int is_char_valid(char c)
+static int	is_char_valid(char c)
 {
 	return (c == EMPTY || c == WALL || c == OBJECT || c == SPACE || c == NORTH
 			|| c == SOUTH || c == WEST || c == EAST);
@@ -65,7 +65,7 @@ static char	*fill_map(char *line)
 	return (aux);
 }
 
-char	*info_map(char *line, char *stc, t_cub *cub)
+char		*info_map(char *line, char *stc, t_cub *cub)
 {
 	char	*aux;
 
@@ -86,7 +86,7 @@ char	*info_map(char *line, char *stc, t_cub *cub)
 	return (stc);
 }
 
-int map_dimensions(t_cub *c)
+int			map_dimensions(t_cub *c)
 {
 	int max;
 	int i;
@@ -104,5 +104,5 @@ int map_dimensions(t_cub *c)
 		i++;
 	}
 	c->nrows = i;
-	return max;
+	return (max);
 }

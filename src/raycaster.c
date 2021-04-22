@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-static void ray_pos_dir(t_cub *c, int x)
+static void	ray_pos_dir(t_cub *c, int x)
 {
 	c->cam.x = 2 * x / (double)c->win.wid - 1;
 	c->ray.dirx = c->mov.dirx + c->mov.planex * c->cam.x;
@@ -26,7 +26,7 @@ static void ray_pos_dir(t_cub *c, int x)
 	c->ray.deltay = fabs(1 / c->ray.diry);
 }
 
-static void dda(t_cub *c)
+static void	dda(t_cub *c)
 {
 	while (c->ray.hit == 0)
 	{
@@ -53,7 +53,7 @@ static void dda(t_cub *c)
 						c->ray.diry;
 }
 
-static void draw_calculus(t_cub *c)
+static void	draw_calculus(t_cub *c)
 {
 	c->ray.lineh = (int)((double)c->win.hei / c->ray.perp);
 
@@ -82,7 +82,7 @@ static void draw_calculus(t_cub *c)
 	}
 }
 
-static void draw_textures(t_cub *c, int x)
+static void	draw_textures(t_cub *c, int x)
 {
 	int i;
 
@@ -106,7 +106,7 @@ static void draw_textures(t_cub *c, int x)
 	c->sp.zbuf[x] = c->ray.perp;
 }
 
-int raycaster(t_cub *c, int x)
+int			raycaster(t_cub *c, int x)
 {
 	init_raycast_vble(c);
 	ray_pos_dir(c, x);
@@ -115,5 +115,5 @@ int raycaster(t_cub *c, int x)
 	draw_calculus(c);
 	draw_textures(c, x);
 
-    return 1;
+    return (1);
 }

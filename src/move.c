@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-void step_initial_side(t_cub *c)
+void		step_initial_side(t_cub *c)
 {
 	if(c->ray.dirx < 0)
 	{
@@ -38,7 +38,7 @@ void step_initial_side(t_cub *c)
 	}
 }
 
-static void move_player(t_cub *c, double speed, int sg, int plane)
+static void	move_player(t_cub *c, double speed, int sg, int plane)
 {
 	double dx;
 	double dy;
@@ -56,7 +56,7 @@ static void move_player(t_cub *c, double speed, int sg, int plane)
 		c->mov.posy += sg * dy * speed;
 }
 
-int move_keys(t_cub *c, double speed)
+int			move_keys(t_cub *c, double speed)
 {
 	if(c->mov.up)
 		move_player(c, speed, 1, 0);
@@ -70,7 +70,7 @@ int move_keys(t_cub *c, double speed)
 	return (c->mov.up || c->mov.down || c->mov.left || c->mov.right);
 }
 
-static void rotate_cam(t_cub *c, double speed)
+static void	rotate_cam(t_cub *c, double speed)
 {
 	double oldDirX = c->mov.dirx;
 	c->mov.dirx = c->mov.dirx * cos(speed) - c->mov.diry * sin(speed);
@@ -80,7 +80,7 @@ static void rotate_cam(t_cub *c, double speed)
 	c->mov.planey = oldPlaneX * sin(speed) + c->mov.planey * cos(speed);
 }
 
-int rotate_keys(t_cub *c, double speed)
+int			rotate_keys(t_cub *c, double speed)
 {
 	if(c->cam.right)
 		rotate_cam(c, -speed);

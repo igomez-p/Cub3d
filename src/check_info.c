@@ -13,7 +13,7 @@
 
 #include "../inc/cub.h"
 
-int check_resolution(char *num)
+int			check_resolution(char *num)
 {
 	int len;
 	int i;
@@ -34,7 +34,7 @@ int check_resolution(char *num)
 	return (1);
 }
 
-int check_text(t_cub *c, char *text)
+int			check_text(t_cub *c, char *text)
 {
 	int len;
 
@@ -54,14 +54,14 @@ int check_text(t_cub *c, char *text)
 	return (1);
 }
 
-int check_identifiers(t_cub *c)
+int			check_identifiers(t_cub *c)
 {
 	return (c->check.texno + c->check.texso + c->check.texwe + 
 			c->check.texea + c->check.texsp + c->check.res +
 			c->check.floor + c->check.sky + c->check.map);
 }
 
-static void player_dir(t_cub *c, int x, int y)
+static void	player_dir(t_cub *c, int x, int y)
 {
 	c->mov.diry = 0.0;
 	c->mov.dirx = 0.0;
@@ -78,26 +78,33 @@ static void player_dir(t_cub *c, int x, int y)
 	c->mov.planey = -c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
 }
 
-void search_player(t_cub *cub)
+void		search_player(t_cub *c)
 {
-	int k = 0;
-	while (cub->map[k])
+	int k;
+	int i;
+
+	k = -1;
+	while (c->map[++k])
 	{
-		int i = 0;
-		while (cub->map[k][i])
+		i = -1;
+		while (c->map[k][++i])
 		{
-			if (cub->map[k][i] == NORTH || cub->map[k][i] == SOUTH ||
-				cub->map[k][i] == WEST || cub->map[k][i] == EAST)
+			if (c->map[k][i] == NORTH || c->map[k][i] == SOUTH ||
+				c->map[k][i] == WEST || c->map[k][i] == EAST)
 			{
-				cub->mov.posx = k + 0.5;
-				cub->mov.posy = i + 0.5;
-				player_dir(cub, k, i);
-				cub->map[k][i] = EMPTY;
-				return ;
+				if (!c->check.player)
+				{
+					c->mov.posx = k + 0.5;
+					c->mov.posy = i + 0.5;
+					player_dir(c, k, i);
+					c->map[k][i] = EMPTY;
+					c->check.player = 1;
+				}
+				else
+					clean_exit(c, "Only one player allowed\n", 1);
 			}
-			i++;
 		}
-		k++;
 	}
-	clean_exit(cub, "Player not found\n", 1);
+	if (!c->check.player)
+		clean_exit(c, "Player not found\n", 1);
 }

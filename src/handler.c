@@ -6,13 +6,13 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/21 23:56:30 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/22 20:46:18 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-int key_press_handler(int key, t_cub *c)
+int			key_press_handler(int key, t_cub *c)
 {
 	if (key == (int)KEY_W)
 		c->mov.up = 1;
@@ -29,10 +29,10 @@ int key_press_handler(int key, t_cub *c)
 	else if (key == (int)KEY_ESCAPE)
 		exit_handler(c);
 
-    return 1;
+    return (1);
 }
 
-int key_release_handler(int key, t_cub *c)
+int			key_release_handler(int key, t_cub *c)
 {
 	if (key == (int)KEY_W)
 		c->mov.up = 0;
@@ -49,16 +49,16 @@ int key_release_handler(int key, t_cub *c)
 	else if (key == (int)KEY_ESCAPE)
 		exit_handler(c);
 
-    return 1;
+    return (1);
 }
 
-int	exit_handler(t_cub *c)
+int			exit_handler(t_cub *c)
 {
 	clean_exit(c, "Closing program...\n", 0);
 	return (0);
 }
 
-static void destroy_textures(t_cub *c)
+static void	destroy_textures(t_cub *c)
 {
 	if (c->twall[NO].img)
 		mlx_destroy_image(c->libx.mlx, c->twall[NO].img);
@@ -85,7 +85,7 @@ static void destroy_textures(t_cub *c)
 	free_map(c);
 }
 
-void	clean_exit(t_cub *c, char *str, int error)
+void		clean_exit(t_cub *c, char *str, int error)
 {
 	int	len;
 
