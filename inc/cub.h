@@ -15,22 +15,47 @@
 # ifndef CUB_H
 # define CUB_H
 
-# define SPACE	' '
-# define EMPTY	'0'
-# define WALL 	'1'
-# define OBJECT	'2'
-# define NORTH	'N'
-# define SOUTH	'S'
-# define WEST	'W'
-# define EAST	'E'
-# define NO		1
-# define SO		0
-# define EA		3
-# define WE		2
-# define MAX_TEXTURES	4
-# define MAX_LEN	10
-# define TOTAL_IDS	8
-# define TOTAL_INFO	9
+# define SPACE				' '
+# define EMPTY				'0'
+# define WALL				'1'
+# define OBJECT				'2'
+# define NORTH				'N'
+# define SOUTH				'S'
+# define WEST				'W'
+# define EAST				'E'
+# define NO					1
+# define SO					0
+# define EA					3
+# define WE					2
+# define MAX_TEXTURES		4
+# define MAX_LEN			10
+# define TOTAL_IDS			8
+# define TOTAL_INFO			9
+# define VIEW_ANGLE			32.5
+# define SQUARES_SEC		0.06
+# define RADIANS_SEC		0.02
+# define AND_ING			8355711
+# define FRAME_TIME			1000.0
+# define BYTE				256
+# define BMP_HEADER_BYTES	54
+# define DATA_INIT			54
+# define BMP_HEADER_SIZE	40
+# define NUM_PLANES			1
+# define HORIZ_RESOLUTION	24
+
+#ifdef	MAC_SYSTEM
+	#include "../minilibx-Darwin/mlx.h"
+#elif	LINUX_SYSTEM
+	# include "../minilibx-Linux/mlx.h"
+#endif
+
+
+#ifdef	MAC_SYSTEM
+	# include "keycode_mac.h"
+#elif	LINUX_SYSTEM
+	# include "keycode_linux.h"
+#endif
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -39,33 +64,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <math.h>
-
 # include "libft.h"
-
-#ifdef	MAC_SYSTEM
-	#include "../minilibx-Darwin/mlx.h"
-#elif	LINUX_SYSTEM
-	# include "../minilibx-Linux/mlx.h"
-#endif
-
-#define VIEW_ANGLE	32.5
-#define SQUARES_SEC 0.06
-#define RADIANS_SEC 0.02
-#define AND_ING     8355711
-#define FRAME_TIME  1000.0
-#define BYTE	256
-
-#define BMP_HEADER_BYTES    54
-#define DATA_INIT           54
-#define BMP_HEADER_SIZE     40
-#define NUM_PLANES          1
-#define HORIZ_RESOLUTION    24
-
-#ifdef	MAC_SYSTEM
-	# include "keycode_mac.h"
-#elif	LINUX_SYSTEM
-	# include "keycode_linux.h"
-#endif
 
 typedef struct	s_resolution {
 				int x;
@@ -86,8 +85,8 @@ typedef struct	s_colors {
 }				t_colors;
 
 typedef struct	s_minilibx {
-				void	*mlx;
-				void	*window;
+				void *mlx;
+				void *window;
 }				t_minilix;
 
 typedef struct	s_img {
@@ -98,7 +97,7 @@ typedef struct	s_img {
 				int sz;
 				int endian;
 				int bpp;
-} t_img;
+}				t_img;
 
 typedef struct	s_sprite {
 				void *img;
@@ -114,19 +113,18 @@ typedef struct	s_sprite {
 				int draw_startx;
 				int draw_endy;
 				int draw_endx;
-
 				int h;
 				int w;
-				int		screenx;
+				int screenx;
 				double *zbuf;
 				int color;
-} t_sprite;
+}				t_sprite;
 
-typedef struct s_sprites {
+typedef struct	s_sprites {
 				double x;
 				double y;
 				int dist;
-} t_sprites;
+}				t_sprites;
 
 typedef struct	s_mov {
 				int left;
@@ -165,7 +163,6 @@ typedef struct	s_raycasting {
 				int hit;
 				int side;
 				int lineh;
-
 				int texnum;
 				int x;
 				int y;
@@ -195,11 +192,13 @@ typedef struct s_check {
 
 
 typedef struct	s_cub {
+				int	nrows;
+				int	bmp;
+				char *line;
+				char **map;
 				t_resolution res;
 				t_textures tex;
 				t_colors col;
-				char **map;
-				int	nrows;
 				t_minilix libx;
 				t_img win;
 				t_img twall[MAX_TEXTURES];
@@ -209,7 +208,6 @@ typedef struct	s_cub {
 				t_camera	cam;
 				t_raycasting ray;
 				t_draw draw;
-				int	bmp;
 				t_check check;
 }				t_cub;
 

@@ -27,6 +27,7 @@ static void	init_file_vble(t_cub *info)
 	ft_bzero(info->col.rgb_s, 3);
 	ft_bzero(info->col.rgb_f, 3);
 
+	info->line = NULL;
 	info->map = NULL;
 	info->bmp = 0;
 }
