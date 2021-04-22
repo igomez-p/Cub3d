@@ -247,5 +247,6 @@ void			error_rgb_elements(t_cub *info, char *s);
 void			check_map_wall(t_cub *c);
 int				map_dimensions(t_cub *c);
 int				count_sprites(t_cub *c);
+void			ft_split(char const *s, char z, t_cub *c);
 
 #endif

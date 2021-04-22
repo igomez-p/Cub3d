@@ -34,7 +34,6 @@ size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 int					ft_atoi(const char *str);
 char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char *s1, char const *s2);
-char				**ft_split(char const *s, char c);
 char				*ft_swap(char *l, char *buf);
 int					get_next_line(int fd, char **line);
 

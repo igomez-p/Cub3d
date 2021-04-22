@@ -12,6 +12,7 @@
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
+#include "../inc/cub.h"
 #include <stdlib.h>
 
 static int	cont_char(char const *s, char c)
@@ -55,30 +56,28 @@ static char	*ft_word(char const *s, char c, int i)
 	return (w);
 }
 
-char		**ft_split(char const *s1, char c)
+void		ft_split(char const *s1, char z, t_cub *c)
 {
-	char	**m;
 	int		i;
 	int		k;
 
 	if (!s1)
-		return (NULL);
-	m = (char **)malloc(sizeof(char *) * (cont_char(s1, c) + 1));
-	if (!m)
-		return (NULL);
+		return ;
+	c->map = (char **)malloc(sizeof(char *) * (cont_char(s1, z) + 1));
+	if (!c->map)
+		return ;
 	i = 0;
 	k = 0;
-	while (i <= (int)ft_strlen(s1) && cont_char(s1, c))
+	while (i <= (int)ft_strlen(s1) && cont_char(s1, z))
 	{
-		if (ft_strlen(ft_word(s1, c, i)))
+		if (ft_strlen(ft_word(s1, z, i)))
 		{
-			m[k] = ft_word(s1, c, i);
-			i += (ft_strlen(m[k]) + 1);
+			c->map[k] = ft_word(s1, z, i);
+			i += (ft_strlen(c->map[k]) + 1);
 			k++;
 		}
 		else
 			i++;
 	}
-	m[k] = NULL;
-	return (m);
+	c->map[k] = NULL;
 }

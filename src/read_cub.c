@@ -61,7 +61,7 @@ void		find_id(t_cub *c, /*char *line,*/ char **stc)
 		clean_exit(c, "Identifiers missing\n", 1);
 	else if (empty_line(c->line) && *stc != NULL)
 	{
-		c->map = ft_split(*stc, '\n');
+		/*c->map = */ft_split(*stc, '\n', c);
 		c->check.map = 1;
 	}
 	else if (!empty_line(c->line))
@@ -89,7 +89,7 @@ void		read_cub(char *filename, t_cub *info)
 		if (!empty_line(info->line) && check_identifiers(info) == TOTAL_INFO)
 			clean_exit(info, "No information allowed after the map\n", 1);
 
-		info->map = ft_split(stc_line, '\n');
+		/*info->map = */ft_split(stc_line, '\n', info);
 		info->check.map = 1;
 		free(stc_line);
 		close (fd);
