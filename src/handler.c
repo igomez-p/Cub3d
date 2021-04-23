@@ -108,11 +108,6 @@ void		clean_exit(t_cub *c, char *str, int error)
 		destroy_textures(c);
 		if (c->line != NULL)
 			free(c->line);
-		//if (c->sp.zbuf != NULL)
-		//	free(c->sp.zbuf);
-		//if (c->stc != NULL)
-		//	free(c->stc);
 	}
-	//system("leaks cub3D");
 	exit(1);
 }

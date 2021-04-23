@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,14 +6,22 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/17 19:26:45 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:08:09 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef CUB_H
 # define CUB_H
-
+# ifdef	MAC_SYSTEM
+#  include "../minilibx-Darwin/mlx.h"
+# elif	LINUX_SYSTEM
+#  include "../minilibx-Linux/mlx.h"
+# endif
+# ifdef	MAC_SYSTEM
+#  include "keycode_mac.h"
+# elif	LINUX_SYSTEM
+#  include "keycode_linux.h"
+# endif
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -24,20 +31,6 @@
 # include <string.h>
 # include <math.h>
 # include "libft.h"
-
-# ifdef	MAC_SYSTEM
-	# include "../minilibx-Darwin/mlx.h"
-# elif	LINUX_SYSTEM
-	# include "../minilibx-Linux/mlx.h"
-# endif
-
-
-# ifdef	MAC_SYSTEM
-	# include "keycode_mac.h"
-# elif	LINUX_SYSTEM
-	# include "keycode_linux.h"
-# endif
-
 # define SPACE				' '
 # define EMPTY				'0'
 # define WALL				'1'
@@ -66,12 +59,12 @@
 # define NUM_PLANES			1
 # define HORIZ_RESOLUTION	24
 
-typedef struct	s_render {
+typedef struct s_render {
 	int			x;
 	int			y;
 }				t_render;
 
-typedef struct	s_textures {
+typedef struct s_textures {
 	char		*path_no;
 	char		*path_so;
 	char		*path_we;
@@ -79,17 +72,17 @@ typedef struct	s_textures {
 	char		*path_sp;
 }				t_textures;
 
-typedef struct	s_colors {
+typedef struct s_colors {
 	int			rgb_s[3];
 	int			rgb_f[3];
 }				t_colors;
 
-typedef struct	s_minilibx {
+typedef struct s_minilibx {
 	void		*mlx;
 	void		*window;
 }				t_minilix;
 
-typedef struct	s_img {
+typedef struct s_img {
 	void		*img;
 	int			*addr;
 	int			hei;
@@ -99,7 +92,7 @@ typedef struct	s_img {
 	int			bpp;
 }				t_img;
 
-typedef struct	s_sprite {
+typedef struct s_sprite {
 	void		*img;
 	int			*addr;
 	int			hei;
@@ -120,13 +113,13 @@ typedef struct	s_sprite {
 	int			color;
 }				t_sprite;
 
-typedef struct	s_sprites {
+typedef struct s_sprites {
 	double		x;
 	double		y;
 	int			dist;
 }				t_sprites;
 
-typedef struct	s_mov {
+typedef struct s_mov {
 	int			left;
 	int			right;
 	int			up;
@@ -141,13 +134,13 @@ typedef struct	s_mov {
 	int			mapy;
 }				t_mov;
 
-typedef struct	s_camera {
+typedef struct s_camera {
 	int			left;
 	int			right;
 	double		x;
 }				t_camera;
 
-typedef struct	s_raycasting {
+typedef struct s_raycasting {
 	double		dirx;
 	double		diry;
 	double		sidex;
@@ -167,7 +160,7 @@ typedef struct	s_raycasting {
 	double		pos;
 }				t_raycaster;
 
-typedef struct	s_draw {
+typedef struct s_draw {
 	int			start;
 	int			end;
 	double		wallx;
@@ -188,12 +181,10 @@ typedef struct s_check {
 	int			player;
 }				t_check;
 
-
-typedef struct	s_cub {
+typedef struct s_cub {
 	int			nrows;
 	int			bmp;
 	char		*line;
-	//char		*stc;
 	char		**map;
 	t_render	res;
 	t_textures	tex;
@@ -205,7 +196,7 @@ typedef struct	s_cub {
 	t_sprites	*sprites;
 	t_mov		mov;
 	t_camera	cam;
-	t_raycaster ray;
+	t_raycaster	ray;
 	t_draw		draw;
 	t_check		check;
 }				t_cub;
@@ -214,16 +205,15 @@ void			info_tex(char *line, t_cub *info);
 void			info_res(char *line, t_cub *info);
 void			info_color(char *line, t_cub *info);
 char			*info_map(char *line, char *stc, t_cub *cub);
-//void info_map(t_cub *cub);
 void			search_player(t_cub *c);
 void			init_struct(t_cub *info);
-void    		init_mlx_func(t_cub *c);
+void			init_mlx_func(t_cub *c);
 void			read_cub(char *filename, t_cub *info);
 int				key_press_handler(int key, t_cub *c);
 int				key_release_handler(int key, t_cub *c);
 int				exit_handler(t_cub *c);
 void			clean_exit(t_cub *c, char *str, int error);
-int 			paint_game(t_cub *c);
+int				paint_game(t_cub *c);
 void			step_initial_side(t_cub *c);
 int				move_keys(t_cub *c, double speed);
 int				rotate_keys(t_cub *c, double speed);
@@ -242,7 +232,7 @@ int				check_resolution(char *num);
 int				check_text(t_cub *c, char *text);
 void			remove_spaces(char **line);
 int				check_identifiers(t_cub *c);
-int     		is_texture(char *line);
+int				is_texture(char *line);
 int				error_tex_elements(char *line);
 int				error_res_elements(char *line);
 void			error_rgb_elements(t_cub *info, char *s);

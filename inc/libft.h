@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:11:22 by igomez-p          #+#    #+#             */
-/*   Updated: 2020/02/13 18:58:20 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:10:57 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +21,12 @@
 
 # define BUFFER_SIZE	32
 
-void	            ft_bzero(void *s, size_t n);
+void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 size_t				ft_strlen(const char *s);
 int					ft_isdigit(int c);
-int                 ft_isprint(int c);
+int					ft_isprint(int c);
 char				*ft_strchr(const char *s, int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
