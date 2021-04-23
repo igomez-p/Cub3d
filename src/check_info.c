@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,16 +6,16 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:58:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 20:43:35 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:45:38 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-int			check_resolution(char *num)
+int	check_resolution(char *num)
 {
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	while (num[i])
@@ -30,13 +29,12 @@ int			check_resolution(char *num)
 		return (0);
 	if (len == MAX_LEN && ft_strncmp(num, "214748364", 9) && num[len - 1] > '7')
 		return (0);
-
 	return (1);
 }
 
-int			check_text(t_cub *c, char *text)
+int	check_text(t_cub *c, char *text)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(text);
 	if (c->tex.path_no && !ft_strncmp(c->tex.path_no, text, len))
@@ -47,18 +45,16 @@ int			check_text(t_cub *c, char *text)
 		return (0);
 	if (c->tex.path_ea && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-
 	if (ft_strncmp(&text[len - 4], ".xpm", 4))
 		return (-1);
-
 	return (1);
 }
 
-int			check_identifiers(t_cub *c)
+int	check_identifiers(t_cub *c)
 {
-	return (c->check.texno + c->check.texso + c->check.texwe + 
-			c->check.texea + c->check.texsp + c->check.res +
-			c->check.floor + c->check.sky + c->check.map);
+	return (c->check.texno + c->check.texso + c->check.texwe
+		+ c->check.texea + c->check.texsp + c->check.res
+		+ c->check.floor + c->check.sky + c->check.map);
 }
 
 static void	player_dir(t_cub *c, int x, int y)
@@ -73,15 +69,14 @@ static void	player_dir(t_cub *c, int x, int y)
 		c->mov.diry = 1.0;
 	else if (c->map[x][y] == WEST)
 		c->mov.diry = -1.0;
-
 	c->mov.planex = c->mov.diry * ((VIEW_ANGLE * M_PI) / 180);
 	c->mov.planey = -c->mov.dirx * ((VIEW_ANGLE * M_PI) / 180);
 }
 
-void		search_player(t_cub *c)
+void	search_player(t_cub *c)
 {
-	int k;
-	int i;
+	int	k;
+	int	i;
 
 	k = -1;
 	while (c->map[++k])
@@ -89,22 +84,19 @@ void		search_player(t_cub *c)
 		i = -1;
 		while (c->map[k][++i])
 		{
-			if (c->map[k][i] == NORTH || c->map[k][i] == SOUTH ||
-				c->map[k][i] == WEST || c->map[k][i] == EAST)
+			if (c->map[k][i] == NORTH || c->map[k][i] == SOUTH
+			|| c->map[k][i] == WEST || c->map[k][i] == EAST)
 			{
-				if (!c->check.player)
-				{
-					c->mov.posx = k + 0.5;
-					c->mov.posy = i + 0.5;
-					player_dir(c, k, i);
-					c->map[k][i] = EMPTY;
-					c->check.player = 1;
-				}
-				else
-					clean_exit(c, "Only one player allowed\n", 1);
+				c->mov.posx = k + 0.5;
+				c->mov.posy = i + 0.5;
+				player_dir(c, k, i);
+				c->map[k][i] = EMPTY;
+				c->check.player++;
 			}
 		}
 	}
 	if (!c->check.player)
 		clean_exit(c, "Player not found\n", 1);
+	if (c->check.player > 1)
+		clean_exit(c, "Only one player allowed\n", 1);
 }
