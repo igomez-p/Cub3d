@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:55:15 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/21 19:55:15 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:24:30 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +58,15 @@ void	ft_bzero(void *s, size_t n)
 		aux[i] = 0;
 		i++;
 	}
+}
+
+char	*ft_swap(char *l, char *buf)
+{
+	char	*temp;
+
+	temp = ft_strjoin(l, buf);
+	free(l);
+	l = ft_strdup(temp);
+	free(temp);
+	return (l);
 }

@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:55:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/21 19:55:02 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:13:47 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +16,8 @@
 
 static int	cont_char(char const *s, char c)
 {
-	int i;
-	int cont;
+	int	i;
+	int	cont;
 
 	i = 0;
 	cont = 0;
@@ -56,7 +55,7 @@ static char	*ft_word(char const *s, char c, int i)
 	return (w);
 }
 
-void		ft_split(char const *s1, char z, t_cub *c)
+void	ft_split(char const *s1, char z, t_cub *c)
 {
 	int		i;
 	int		k;
@@ -83,30 +82,4 @@ void		ft_split(char const *s1, char z, t_cub *c)
 		free(aux);
 	}
 	c->map[k] = NULL;
-}/*
-void		ft_split(char z, t_cub *c)
-{
-	int		i;
-	int		k;
-
-	if (!c->stc)
-		return ;
-	c->map = (char **)malloc(sizeof(char *) * (cont_char(c->stc, z) + 1));
-	if (!c->map)
-		return ;
-	i = 0;
-	k = 0;
-	while (i <= (int)ft_strlen(c->stc) && cont_char(c->stc, z))
-	{
-		if (ft_strlen(ft_word(c->stc, z, i)))
-		{
-			c->map[k] = ft_word(c->stc, z, i);
-			i += (ft_strlen(c->map[k]) + 1);
-			k++;
-		}
-		else
-			i++;
-	}
-	c->map[k] = NULL;
 }
-*/

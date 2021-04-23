@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igomez-p <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:50:00 by igomez-p          #+#    #+#             */
-/*   Updated: 2019/12/12 17:54:36 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 19:24:10 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,36 +75,38 @@ static char	*ft_newstatic(char *aux, char *l, char **line)
 	return (l);
 }
 
-char	*ft_swap(char *l, char *buf)
+static void	auxiliar(int fd, char *b, char **stc)
 {
-	char *temp;
+	int		nbytes;
+	char	*aux;
 
-	temp = ft_strjoin(l, buf);
-	free(l);
-	l = ft_strdup(temp);
-	free(temp);
-	return (l);
+	nbytes = read(fd, b, BUFFER_SIZE);
+	while (nbytes > 0)
+	{
+		b[nbytes] = '\0';
+		*stc = ft_swap(*stc, b);
+		aux = ft_strchr(*stc, '\n');
+		if (aux != NULL)
+			break ;
+		nbytes = read(fd, b, BUFFER_SIZE);
+	}
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*l;
 	char		*b;
-	int			nbytes;
 	char		*aux;
 
-	l = (!l) ? ft_strdup("") : l;
-	if (!(b = malloc(BUFFER_SIZE + 1)) || fd < 0 || BUFFER_SIZE <= 0 || !line)
+	if (!l)
+		l = ft_strdup("");
+	b = malloc(BUFFER_SIZE + 1);
+	if (!b || fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	while ((nbytes = read(fd, b, BUFFER_SIZE)) > 0)
-	{
-		b[nbytes] = '\0';
-		l = ft_swap(l, b);
-		if ((aux = ft_strchr(l, '\n')) != NULL)
-			break;
-	}
+	auxiliar(fd, b, &l);
 	free(b);
-	if ((aux = ft_strchr(l, '\n')) != NULL)
+	aux = ft_strchr(l, '\n');
+	if (aux != NULL)
 	{
 		l = ft_newstatic(aux, l, line);
 		if (l != NULL)
