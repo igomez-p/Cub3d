@@ -60,6 +60,7 @@ void		ft_split(char const *s1, char z, t_cub *c)
 {
 	int		i;
 	int		k;
+	char	*aux;
 
 	if (!s1)
 		return ;
@@ -70,9 +71,36 @@ void		ft_split(char const *s1, char z, t_cub *c)
 	k = 0;
 	while (i <= (int)ft_strlen(s1) && cont_char(s1, z))
 	{
-		if (ft_strlen(ft_word(s1, z, i)))
+		aux = ft_word(s1, z, i);
+		if (ft_strlen(aux))
 		{
-			c->map[k] = ft_word(s1, z, i);
+			c->map[k] = ft_strdup(aux);
+			i += (ft_strlen(c->map[k]) + 1);
+			k++;
+		}
+		else
+			i++;
+		free(aux);
+	}
+	c->map[k] = NULL;
+}/*
+void		ft_split(char z, t_cub *c)
+{
+	int		i;
+	int		k;
+
+	if (!c->stc)
+		return ;
+	c->map = (char **)malloc(sizeof(char *) * (cont_char(c->stc, z) + 1));
+	if (!c->map)
+		return ;
+	i = 0;
+	k = 0;
+	while (i <= (int)ft_strlen(c->stc) && cont_char(c->stc, z))
+	{
+		if (ft_strlen(ft_word(c->stc, z, i)))
+		{
+			c->map[k] = ft_word(c->stc, z, i);
 			i += (ft_strlen(c->map[k]) + 1);
 			k++;
 		}
@@ -81,3 +109,4 @@ void		ft_split(char const *s1, char z, t_cub *c)
 	}
 	c->map[k] = NULL;
 }
+*/

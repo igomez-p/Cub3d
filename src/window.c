@@ -30,13 +30,12 @@ void		free_map(t_cub *c)
 	i = c->nrows;
 	if (c->map)
 	{
-		while (i > 0) 
+		while (i >= 0)
 		{
 			free(c->map[i]);
 			c->map[i] = NULL;
 			i--;
 		}
-
 		free(c->map);
 		c->map = NULL;
 	}
@@ -84,5 +83,6 @@ int			draw(t_cub *c)
 		c->draw.repaint = move_keys(c, SQUARES_SEC);
 		c->draw.repaint |= rotate_keys(c, RADIANS_SEC);
 	}
+	free(c->sp.zbuf);
 	return (1);
 }

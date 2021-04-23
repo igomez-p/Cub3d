@@ -6,8 +6,8 @@
    SO ./images/redbrick.xpm
 EA ./images/colorstone.xpm
 WE ./images/wood.xpm
- S  ./images/barrel.xpm  
- 
+ S  ./images/barrel.xpm
+
 F   220,100,21
 
 

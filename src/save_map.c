@@ -84,7 +84,27 @@ char		*info_map(char *line, char *stc, t_cub *cub)
 	free(aux);
 
 	return (stc);
-}
+}/*
+void info_map(t_cub *cub)
+{
+	char	*aux;
+
+	if (!cub->stc)
+	{
+		cub->stc = fill_map(cub->line);
+		if (!cub->stc)
+			clean_exit(cub, "Wrong map\n", 1);
+		return ;//(cub->stc);
+	}
+	aux = fill_map(cub->line);
+	if (!aux)
+		clean_exit(cub, "Wrong map\n", 1);
+
+	cub->stc = ft_swap(cub->stc, aux);
+	free(aux);
+
+	//return (stc);
+}*/
 
 int			map_dimensions(t_cub *c)
 {
