@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:30:06 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/21 19:30:06 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:09:16 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +20,6 @@ static int	write_bmp_header(t_cub *c, int fd, int filesize)
 	i = 0;
 	while (i < BMP_HEADER_BYTES)
 		bmpfileheader[i++] = (unsigned char)(0);
-
 	ft_memcpy(bmpfileheader, "BM", 2);
 	bmpfileheader[2] = filesize % BYTE;
 	bmpfileheader[3] = (filesize >> 8) % BYTE;
@@ -84,7 +82,7 @@ static int	write_bmp(t_cub *c, int fd, int filesize, int pad)
 	return (1);
 }
 
-int			save_bmp(t_cub *c)
+int	save_bmp(t_cub *c)
 {
 	int	filesize;
 	int	file;
@@ -97,7 +95,8 @@ int			save_bmp(t_cub *c)
 	draw(c);
 	pad = (4 - (c->win.wid * 3) % 4) % 4;
 	filesize = BMP_HEADER_BYTES + (3 * (c->win.wid + pad) * c->win.hei);
-	if ((file = open("screenshot.bmp", flags, 0644)) < 0)
+	file = open("screenshot.bmp", flags, 0644);
+	if (file < 0)
 	{
 		clean_exit(c, "Screenshot could not be opened\n", 1);
 		return (0);

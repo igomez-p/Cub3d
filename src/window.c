@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 14:31:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 19:07:06 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:20:38 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +17,14 @@ static int	rgb2int(int r, int g, int b)
 	return ((r << 16) | (g << 8) | b);
 }
 
-void		my_mlx_pixel_put(t_cub *c, int x, int y, int color)
+void	my_mlx_pixel_put(t_cub *c, int x, int y, int color)
 {
 	c->win.addr[c->win.wid * y + x] = color;
 }
 
-void		free_map(t_cub *c)
+void	free_map(t_cub *c)
 {
-	int i;
+	int	i;
 
 	i = c->nrows;
 	if (c->map)
@@ -41,7 +40,7 @@ void		free_map(t_cub *c)
 	}
 }
 
-void		paint_sky_floor(t_cub *c)
+void	paint_sky_floor(t_cub *c)
 {
 	int	x;
 	int	y;
@@ -56,7 +55,7 @@ void		paint_sky_floor(t_cub *c)
 		x = -1;
 		while (++x < c->win.wid)
 		{
-			if (y < c->win.hei/2)
+			if (y < c->win.hei / 2)
 				my_mlx_pixel_put(c, x, y, sky_color);
 			else
 				my_mlx_pixel_put(c, x, y, floor_color);
@@ -64,9 +63,9 @@ void		paint_sky_floor(t_cub *c)
 	}
 }
 
-int			draw(t_cub *c)
+int	draw(t_cub *c)
 {
-	int x;
+	int	x;
 
 	c->sp.zbuf = malloc(sizeof(double) * c->win.wid);
 	if (c->draw.repaint)

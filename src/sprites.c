@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 15:09:50 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/17 15:34:25 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:19:38 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +14,10 @@
 
 static void	sort_sprite(t_cub *c)
 {
-	int s;
-	int z;
-	int total;
-	t_sprites tmp;
+	int			s;
+	int			z;
+	int			total;
+	t_sprites	tmp;
 
 	total = count_sprites(c);
 	s = -1;
@@ -37,32 +36,31 @@ static void	sort_sprite(t_cub *c)
 	}
 }
 
-void		search_sprites(t_cub *c)
+void	search_sprites(t_cub *c)
 {
-	int x;
-	int y;
-	int s;
+	int	x;
+	int	y;
+	int	s;
 
 	c->sprites = malloc(sizeof(t_sprite) * (count_sprites(c)));
 	s = 0;
-	x = 0;
-	while (c->map[x])
+	x = -1;
+	while (c->map[++x])
 	{
-		y = 0;
-		while (c->map[x][y])
+		y = -1;
+		while (c->map[x][++y])
 		{
 			if (c->map[x][y] == OBJECT)
 			{
 				c->sprites[s].x = x + 0.5;
 				c->sprites[s].y = y + 0.5;
-				c->sprites[s].dist = ((c->mov.posx - c->sprites[s].x) * 
-					(c->mov.posx - c->sprites[s].x) + (c->mov.posy - 
-					c->sprites[s].y) * (c->mov.posy - c->sprites[s].y));
+				c->sprites[s].dist = ((c->mov.posx - c->sprites[s].x)
+						* (c->mov.posx - c->sprites[s].x) + (c->mov.posy
+							- c->sprites[s].y) * (c->mov.posy
+							- c->sprites[s].y));
 				s++;
 			}
-			y++;
 		}
-		x++;
 	}
 }
 
@@ -74,7 +72,6 @@ static void	sp_draw(t_cub *c)
 	c->sp.draw_endy = c->sp.h / 2 + c->win.hei / 2;
 	if (c->sp.draw_endy >= c->win.hei)
 		c->sp.draw_endy = c->win.hei - 1;
-
 	c->sp.draw_startx = -c->sp.w / 2 + c->sp.screenx;
 	if (c->sp.draw_startx < 0)
 		c->sp.draw_startx = 0;
@@ -85,23 +82,23 @@ static void	sp_draw(t_cub *c)
 
 static void	sprite_loop(t_cub *c, double ty)
 {
-	int x;
-	int y;
-	int texx;
-	int texy;
-	int d;
+	int	x;
+	int	y;
+	int	texx;
+	int	texy;
+	int	d;
 
 	x = c->sp.draw_startx - 1;
 	while (++x < c->sp.draw_endx)
 	{
-		texx = (int)(BYTE * (x - (-c->sp.w / 2 + c->sp.screenx)) * 
-				c->sp.wid / c->sp.w) / BYTE;
+		texx = (int)(BYTE * (x - (-c->sp.w / 2 + c->sp.screenx))
+				* c->sp.wid / c->sp.w) / BYTE;
 		if (ty >= 0 && x >= 0 && x <= c->win.wid && ty < c->sp.zbuf[x])
 		{
 			y = c->sp.draw_starty - 1;
 			while (++y < c->sp.draw_endy)
 			{
-				d = y * BYTE - c->win.hei * (BYTE/2) + c->sp.h * (BYTE/2);
+				d = y * BYTE - c->win.hei * (BYTE / 2) + c->sp.h * (BYTE / 2);
 				texy = abs(((d * c->sp.hei) / c->sp.h) / BYTE);
 				c->sp.color = c->sp.addr[c->sp.wid * texy + texx];
 				if ((c->sp.color & 0x00FFFFFF) != 0)
@@ -111,13 +108,13 @@ static void	sprite_loop(t_cub *c, double ty)
 	}
 }
 
-void		sprite2screen(t_cub *c)
+void	sprite2screen(t_cub *c)
 {
-	double idet;
-	double tx;
-	double ty;
-	int s;
-	int total;
+	double	idet;
+	double	tx;
+	double	ty;
+	int		s;
+	int		total;
 
 	total = count_sprites(c);
 	s = -1;
@@ -126,7 +123,8 @@ void		sprite2screen(t_cub *c)
 	{
 		c->sp.posx = (double)c->sprites[s].x - c->mov.posx;
 		c->sp.posy = (double)c->sprites[s].y - c->mov.posy;
-		idet = 1.0 / (c->mov.planex * c->mov.diry - c->mov.dirx * c->mov.planey);
+		idet = 1.0 / (c->mov.planex * c->mov.diry - c->mov.dirx
+				* c->mov.planey);
 		tx = idet * (c->mov.diry * c->sp.posx - c->mov.dirx * c->sp.posy);
 		ty = idet * (-c->mov.planey * c->sp.posx + c->mov.planex * c->sp.posy);
 		c->sp.screenx = (int)((c->win.wid / 2) * (1 + tx / ty));

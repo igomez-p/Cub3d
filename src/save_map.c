@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 17:32:17 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:13:37 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +15,13 @@
 static int	is_char_valid(char c)
 {
 	return (c == EMPTY || c == WALL || c == OBJECT || c == SPACE || c == NORTH
-			|| c == SOUTH || c == WEST || c == EAST);
+		|| c == SOUTH || c == WEST || c == EAST);
 }
 
 static int	len_line(char *line)
 {
-	int i;
-	int cont;
+	int	i;
+	int	cont;
 
 	i = 0;
 	cont = 0;
@@ -46,12 +45,11 @@ static char	*fill_map(char *line)
 	aux = NULL;
 	k = len_line(line);
 	if (k == -1)
-		return NULL;
+		return (NULL);
 	if ((int)ft_strlen(line) == k)
 		return (ft_strdup(line));
 	else
 		aux = malloc(k + 1);
-
 	if (!aux)
 		return (NULL);
 	p = -1;
@@ -61,11 +59,11 @@ static char	*fill_map(char *line)
 		if (line[p])
 			aux[++k] = line[p];
 	}
-	aux[k+1] = '\0';
+	aux[k + 1] = '\0';
 	return (aux);
 }
 
-char		*info_map(char *line, char *stc, t_cub *cub)
+char	*info_map(char *line, char *stc, t_cub *cub)
 {
 	char	*aux;
 
@@ -79,38 +77,16 @@ char		*info_map(char *line, char *stc, t_cub *cub)
 	aux = fill_map(line);
 	if (!aux)
 		clean_exit(cub, "Wrong map\n", 1);
-
 	stc = ft_swap(stc, aux);
 	free(aux);
-
 	return (stc);
-}/*
-void info_map(t_cub *cub)
+}
+
+int	map_dimensions(t_cub *c)
 {
-	char	*aux;
-
-	if (!cub->stc)
-	{
-		cub->stc = fill_map(cub->line);
-		if (!cub->stc)
-			clean_exit(cub, "Wrong map\n", 1);
-		return ;//(cub->stc);
-	}
-	aux = fill_map(cub->line);
-	if (!aux)
-		clean_exit(cub, "Wrong map\n", 1);
-
-	cub->stc = ft_swap(cub->stc, aux);
-	free(aux);
-
-	//return (stc);
-}*/
-
-int			map_dimensions(t_cub *c)
-{
-	int max;
-	int i;
-	int len;
+	int	max;
+	int	i;
+	int	len;
 
 	max = ft_strlen(c->map[0]);
 	i = 1;
@@ -120,7 +96,6 @@ int			map_dimensions(t_cub *c)
 		len = ft_strlen(c->map[i]);
 		if (len > max)
 			max = len;
-
 		i++;
 	}
 	c->nrows = i;

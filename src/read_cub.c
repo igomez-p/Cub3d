@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,14 +6,13 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:08:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 19:08:55 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:02:13 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-
-void		remove_spaces(char **line)
+void	remove_spaces(char **line)
 {
 	while (**line && **line == SPACE)
 		*line = *line + 1;
@@ -22,27 +20,26 @@ void		remove_spaces(char **line)
 
 static int	empty_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] == SPACE)
 		i++;
-
 	if (line[i])
 		return (0);
 	return (1);
 }
 
-void		check_extension(char *filename)
+void	check_extension(char *filename)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(filename);
 	if (ft_strncmp(&filename[len - 4], ".cub", 4) != 0)
 		clean_exit(NULL, "The file extension must be .cub\n", 1);
 }
 
-void		find_id(t_cub *c, char **stc)
+void	find_id(t_cub *c, char **stc)
 {
 	if (!empty_line(c->line) && check_identifiers(c) == TOTAL_INFO)
 		clean_exit(c, "No information allowed after the map\n", 1);
@@ -68,12 +65,13 @@ void		find_id(t_cub *c, char **stc)
 		clean_exit(c, "Unrecognized identifier\n", 1);
 }
 
-void		read_cub(char *filename, t_cub *info)
+void	read_cub(char *filename, t_cub *info)
 {
-	int	fd;
+	int			fd;
 	static char	*stc_line = NULL;
 
-	if ((fd = open(filename, O_RDONLY)) == -1)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
 		clean_exit(info, "File could not be opened\n", 1);
 	else
 	{
@@ -88,7 +86,6 @@ void		read_cub(char *filename, t_cub *info)
 			stc_line = info_map(info->line, stc_line, info);
 		if (!empty_line(info->line) && check_identifiers(info) == TOTAL_INFO)
 			clean_exit(info, "No information allowed after the map\n", 1);
-
 		ft_split(stc_line, '\n', info);
 		info->check.map = 1;
 		free(stc_line);

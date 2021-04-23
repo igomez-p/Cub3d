@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:21:03 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/18 19:33:39 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 20:11:25 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +37,7 @@ static int	save_int(char **line)
 	return (n);
 }
 
-void		info_res(char *line, t_cub *info)
+void	info_res(char *line, t_cub *info)
 {
 	remove_spaces(&line);
 	if (!ft_strncmp(line, "R", 1) && !info->check.res)
@@ -56,7 +55,8 @@ void		info_res(char *line, t_cub *info)
 		if (info->res.x < 30 || info->res.y < 30)
 			clean_exit(info, "Screen resolution too small\n", 1);
 		info->check.res = 1;
-	} else if (!ft_strncmp(line, "R", 1) && info->check.res)
+	}
+	else if (!ft_strncmp(line, "R", 1) && info->check.res)
 		clean_exit(info, "Repeated resolution identifier\n", 1);
 }
 
@@ -83,7 +83,7 @@ static void	info_color_sky(char *line, t_cub *info)
 		clean_exit(info, "Repeated ceiling color identifier\n", 1);
 }
 
-void		info_color(char *line, t_cub *info)
+void	info_color(char *line, t_cub *info)
 {
 	error_rgb_elements(info, line);
 	remove_spaces(&line);
@@ -106,27 +106,26 @@ void		info_color(char *line, t_cub *info)
 	}
 	else if (!ft_strncmp(line, "F", 1) && info->check.floor)
 		clean_exit(info, "Repeated floor color identifier\n", 1);
-	
 	info_color_sky(line, info);
 }
 
-void		refill_map(t_cub *c)
+void	refill_map(t_cub *c)
 {
-	int w;
-	char **map;
-	int k;
+	int		w;
+	char	**map;
+	int		k;
+	int		len;
 
 	w = map_dimensions(c);
-	map = malloc((c->nrows+1)*sizeof(char *));
+	map = malloc((c->nrows + 1) * sizeof(char *));
 	k = -1;
 	while (c->map[++k])
 	{
-		map[k] = malloc((w+1)*sizeof(char));
-		int len = ft_strlen(c->map[k]);
+		map[k] = malloc((w + 1) * sizeof(char));
+		len = ft_strlen(c->map[k]);
 		ft_memcpy(map[k], c->map[k], len);
 		if (len < w)
-			ft_memset(&map[k][len], ' ', w-len);
-
+			ft_memset(&map[k][len], ' ', w - len);
 		map[k][w] = '\0';
 	}
 	map[k] = NULL;
