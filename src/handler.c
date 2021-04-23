@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/22 23:58:38 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/23 10:25:17 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void		clean_exit(t_cub *c, char *str, int error)
 			free(c->line);
 		if (c->sp.zbuf != NULL)
 			free(c->sp.zbuf);
+		//if (c->stc != NULL)
+		//	free(c->stc);
 	}
 	//system("leaks cub3d");
 	exit(1);

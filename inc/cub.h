@@ -193,6 +193,7 @@ typedef struct	s_cub {
 	int			nrows;
 	int			bmp;
 	char		*line;
+	//char		*stc;
 	char		**map;
 	t_render	res;
 	t_textures	tex;

@@ -42,7 +42,7 @@ void		check_extension(char *filename)
 		clean_exit(NULL, "The file extension must be .cub\n", 1);
 }
 
-void		find_id(t_cub *c, /*char *line,*/ char **stc)
+void		find_id(t_cub *c, char **stc)
 {
 	if (!empty_line(c->line) && check_identifiers(c) == TOTAL_INFO)
 		clean_exit(c, "No information allowed after the map\n", 1);
