@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:27:07 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 19:41:48 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:22:18 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,42 @@ void	error_rgb_elements(t_cub *info, char *s)
 	}
 }
 
-static int	is_empty(char c)
+static int	is_empty(t_cub *c, int x, int y)
 {
-	return (((int)c >= 9 && (int)c <= 13) || c == SPACE);
+	if (x < 0 || y < 0 || x >= c->nrows)
+		return (1);
+	return (((int)c->map[x][y] >= 9 && (int)c->map[x][y] <= 13) 
+		|| c->map[x][y] == SPACE || !c->map[x][y]);
+}
+
+void	check_map_wall(t_cub *c)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	while (c->map[++x])
+	{
+		y = -1;
+		while (c->map[x][++y])
+		{
+			if (c->map[x][y] == EMPTY || c->map[x][y] == OBJECT)
+			{
+				if (is_empty(c, x - 1, y - 1) || is_empty(c, x - 1, y)
+				|| is_empty(c, x - 1, y + 1) || is_empty(c, x, y - 1)
+				|| is_empty(c, x, y + 1) || is_empty(c, x + 1, y - 1)
+				|| is_empty(c, x + 1, y) || is_empty(c, x, y + 1))
+				{
+					clean_exit(c, "The map must be surrounded by walls\n", 1);
+				}
+			}
+		}
+	}
+}
+
+/*static int	is_empty(char c)
+{
+	return (((int)c >= 9 && (int)c <= 13) || c == SPACE || !c);
 }
 
 void	check_map_wall(t_cub *c)
@@ -93,5 +126,6 @@ void	check_map_wall(t_cub *c)
 				}
 			}
 		}
+		printf("\n");
 	}
-}
+}*/

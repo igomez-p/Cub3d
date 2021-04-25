@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 20:13:37 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:52:12 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_char_valid(char c)
 {
 	return (c == EMPTY || c == WALL || c == OBJECT || c == SPACE || c == NORTH
-		|| c == SOUTH || c == WEST || c == EAST);
+		|| c == WEST || c == SOUTH || c == EAST);
 }
 
 static int	len_line(char *line)
