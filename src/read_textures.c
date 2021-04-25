@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:29:25 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 20:07:45 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:32:39 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	is_texture(char *line)
 	if (aux && aux[1] == 'A')
 		return (1);
 	aux = ft_strchr(line, 'S');
-	if (aux)
+	if (aux && aux[1] == SPACE)
 		return (1);
 	return (0);
 }
