@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:29:25 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/25 19:32:39 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 00:37:16 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static char	*path_tex(char *line, t_cub *c, int nchar)
 	int	i;
 
 	i = nchar;
-	while (line[i] == SPACE)
+	while (line[i] == SPACE || line[i] == '\t')
 		i++;
 	line = line + i;
 	i = ft_strlen(line) - 1;
-	while (line[i] == SPACE)
+	while (line[i] == SPACE || line[i] == '\t')
 	{
 		line[i] = '\0';
 		i--;
 	}
-	if (error_tex_elements(line))
+	if (error_tex_elements(line) == 1)
 		clean_exit(c, "Too many elements in texture\n", 1);
 	if (check_text(c, line) == 1)
 		return (ft_strdup(line));

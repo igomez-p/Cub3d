@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 15:09:50 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 20:19:38 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/27 20:04:15 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	sort_sprite(t_cub *c)
 		z = -1;
 		while (++z < total)
 		{
-			if (c->sprites[s].dist < c->sprites[z].dist)
+			if (c->sprites[s].dist > c->sprites[z].dist)
 			{
 				tmp = c->sprites[s];
 				c->sprites[s] = c->sprites[z];
@@ -118,6 +118,7 @@ void	sprite2screen(t_cub *c)
 
 	total = count_sprites(c);
 	s = -1;
+	search_sprites(c);
 	sort_sprite(c);
 	while (++s < total)
 	{

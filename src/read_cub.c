@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:08:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/25 19:33:36 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/27 23:25:58 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	remove_spaces(char **line)
 {
-	while (**line && **line == SPACE)
+	while (**line && (**line == SPACE || **line == '\t'))
 		*line = *line + 1;
 }
 
@@ -23,7 +23,7 @@ static int	empty_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && line[i] == SPACE)
+	while (line[i] && (line[i] == SPACE || line[i] == '\t'))
 		i++;
 	if (line[i])
 		return (0);
@@ -75,7 +75,6 @@ void	read_cub(char *filename, t_cub *info)
 		clean_exit(info, "File could not be opened\n", 1);
 	else
 	{
-		info->line = 0;
 		while (get_next_line(fd, &info->line) > 0)
 		{
 			find_id(info, &stc_line);
@@ -87,8 +86,10 @@ void	read_cub(char *filename, t_cub *info)
 		if (!empty_line(info->line) && check_identifiers(info) == TOTAL_INFO)
 			clean_exit(info, "No information allowed after the map\n", 1);
 		ft_split(stc_line, '\n', info);
-		info->check.map = 1;
 		free(stc_line);
 		close (fd);
+		if (!info->map)
+			clean_exit(info, "There is no map\n", 1);
+		info->check.map = 1;
 	}
 }

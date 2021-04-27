@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/25 19:17:36 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/27 23:16:16 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define TOTAL_IDS			8
 # define TOTAL_INFO			9
 # define VIEW_ANGLE			32.5
-# define SQUARES_SEC		0.06
-# define RADIANS_SEC		0.02
+# define SQUARES_SEC		0.09
+# define RADIANS_SEC		0.03
 # define AND_ING			8355711
 # define FRAME_TIME			1000.0
 # define BYTE				256

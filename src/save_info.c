@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:21:03 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/25 18:30:55 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/27 23:52:19 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	save_int(char **line)
 	char	caracter[2];
 	int		n;
 
-	n = 0;
+	n = -1;
 	num = ft_strdup("");
 	while (!ft_isdigit((int)**line) && **line)
 		*line = *line + 1;
@@ -31,8 +31,6 @@ static int	save_int(char **line)
 	}
 	if (check_resolution(num))
 		n = ft_atoi(num);
-	if (n < 0)
-		n = 0;
 	free(num);
 	return (n);
 }
@@ -48,7 +46,7 @@ void	info_res(char *line, t_cub *info)
 			clean_exit(info, "Characters not allowed in resolution\n", 1);
 		info->res.x = save_int(&line);
 		info->res.y = save_int(&line);
-		if (save_int(&line) != 0)
+		if (save_int(&line) >= 0)
 			clean_exit(info, "Too many elements in resolution\n", 1);
 		if (info->res.x <= 0 || info->res.y <= 0)
 			clean_exit(info, "Wrong screen resolution\n", 1);
@@ -75,7 +73,7 @@ static void	info_color_sky(char *line, t_cub *info)
 		info->col.rgb_s[2] = save_int(&line);
 		if (!(info->col.rgb_s[2] >= 0 && info->col.rgb_s[2] <= 255))
 			clean_exit(info, "Wrong B ceiling value\n", 1);
-		if (save_int(&line) > 0)
+		if (save_int(&line) >= 0)
 			clean_exit(info, "Too many elements in ceiling color\n", 1);
 		info->check.sky = 1;
 	}
@@ -100,7 +98,7 @@ void	info_color(char *line, t_cub *info)
 		info->col.rgb_f[2] = save_int(&line);
 		if (!(info->col.rgb_f[2] >= 0 && info->col.rgb_f[2] <= 255))
 			clean_exit(info, "Wrong B floor value\n", 1);
-		if (save_int(&line) > 0)
+		if (save_int(&line) >= 0)
 			clean_exit(info, "Too many elements in floor color\n", 1);
 		info->check.floor = 1;
 	}

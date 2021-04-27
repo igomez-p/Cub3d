@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:58:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/25 18:50:54 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 01:04:41 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	check_text(t_cub *c, char *text)
 	len = ft_strlen(text);
 	if (c->tex.path_no && !ft_strncmp(c->tex.path_no, text, len))
 		return (0);
-	if (c->tex.path_so && !ft_strncmp(c->tex.path_no, text, len))
+	if (c->tex.path_so && !ft_strncmp(c->tex.path_so, text, len))
 		return (0);
-	if (c->tex.path_we && !ft_strncmp(c->tex.path_no, text, len))
+	if (c->tex.path_we && !ft_strncmp(c->tex.path_we, text, len))
 		return (0);
-	if (c->tex.path_ea && !ft_strncmp(c->tex.path_no, text, len))
+	if (c->tex.path_ea && !ft_strncmp(c->tex.path_ea, text, len))
 		return (0);
 	if (ft_strncmp(&text[len - 4], ".xpm", 4))
 		return (-1);
