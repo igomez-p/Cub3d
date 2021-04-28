@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 19:30:33 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:39:09 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_cub {
 	int			bmp;
 	char		*line;
 	char		**map;
+	//char		**aux;
 	t_render	res;
 	t_textures	tex;
 	t_colors	col;
@@ -243,6 +244,7 @@ void			ft_split(char const *s, char z, t_cub *c);
 int				ft_isspace(char c);
 int				all_textures(t_cub *c);
 void			xpm2image(t_cub *c);
-//void			free_stc_exit(t_cub *c, char *txt, char *stc);
+void			free_str_exit(t_cub *c, char *txt, char *str);
+void			check_open_tex(t_cub *c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:52:45 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 19:13:34 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:37:03 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	main(int argc, char *argv[])
 	init_struct(&cub);
 	check_argc(&cub, argc, argv[2]);
 	check_extension(argv[1]);
-	cub.libx.mlx = mlx_init();
-	if (!cub.libx.mlx)
-		clean_exit(&cub, "MLX was not initialized\n", 1);
+	//cub.libx.mlx = mlx_init();
+	//if (!cub.libx.mlx)
+	//	clean_exit(&cub, "MLX was not initialized\n", 1);
 	read_cub(argv[1], &cub);
 	refill_map(&cub);
 	check_map_wall(&cub);

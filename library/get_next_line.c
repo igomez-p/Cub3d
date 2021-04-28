@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:50:00 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 19:24:10 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:52:58 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static char	*ft_newstatic(char *aux, char *l, char **line)
 	l = NULL;
 	l = ft_strdup(aux2);
 	free(aux2);
+	aux2 = NULL;
 	return (l);
 }
 
@@ -112,6 +113,7 @@ int	get_next_line(int fd, char **line)
 		if (l != NULL)
 			return (1);
 	}
+	free(*line);
 	*line = ft_strdup(l);
 	free(l);
 	return (0);

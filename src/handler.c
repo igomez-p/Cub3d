@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 19:47:42 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:19:21 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	clean_exit(t_cub *c, char *str, int error)
 		destroy_textures(c);
 		if (c->line != NULL)
 			free(c->line);
+		if (c->sprites)
+			free(c->sprites);
 	}
 	exit(1);
 }

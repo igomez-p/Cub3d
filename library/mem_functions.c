@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:55:15 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 19:24:30 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:51:16 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ char	*ft_swap(char *l, char *buf)
 	free(l);
 	l = ft_strdup(temp);
 	free(temp);
+	temp = NULL;
 	return (l);
 }

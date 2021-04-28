@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:27:57 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 19:52:51 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:37:32 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	init_file_vble(t_cub *info)
 	ft_bzero(info->col.rgb_f, 3);
 	info->line = NULL;
 	info->map = NULL;
+	//info->aux = NULL;
+	info->sprites = NULL;
 	info->bmp = 0;
 }
 

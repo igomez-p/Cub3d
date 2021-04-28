@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:55:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/27 11:04:09 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:09:15 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	ft_split(char const *s1, char z, t_cub *c)
 		else
 			i++;
 		free(aux);
+		aux = NULL;
 	}
 	c->map[k] = NULL;
 }

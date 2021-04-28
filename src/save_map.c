@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 19:26:24 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 20:15:03 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*fill_map(char *line)
 	if ((int)ft_strlen(line) == k)
 		return (ft_strdup(line));
 	else
-		aux = malloc(k + 1);
+		aux = (char *)malloc(sizeof(char)*(k + 1));
 	if (!aux)
 		return (NULL);
 	p = -1;
