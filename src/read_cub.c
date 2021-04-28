@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:08:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/27 23:25:58 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:27:17 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	remove_spaces(char **line)
 {
-	while (**line && (**line == SPACE || **line == '\t'))
+	while (**line && ft_isspace(**line))
 		*line = *line + 1;
 }
 
@@ -23,7 +23,7 @@ static int	empty_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && (line[i] == SPACE || line[i] == '\t'))
+	while (line[i] && ft_isspace(line[i]))
 		i++;
 	if (line[i])
 		return (0);
@@ -41,6 +41,8 @@ void	check_extension(char *filename)
 
 void	find_id(t_cub *c, char **stc)
 {
+	if (all_textures(c))
+		xpm2image(c);
 	if (!empty_line(c->line) && check_identifiers(c) == TOTAL_INFO)
 		clean_exit(c, "No information allowed after the map\n", 1);
 	else if (ft_strchr(c->line, 'R'))

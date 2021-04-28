@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:29:25 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 00:37:16 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:25:22 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static char	*path_tex(char *line, t_cub *c, int nchar)
 	int	i;
 
 	i = nchar;
-	while (line[i] == SPACE || line[i] == '\t')
+	while (ft_isspace(line[i]))
 		i++;
 	line = line + i;
 	i = ft_strlen(line) - 1;
-	while (line[i] == SPACE || line[i] == '\t')
+	while (ft_isspace(line[i]))
 	{
 		line[i] = '\0';
 		i--;
@@ -120,7 +120,7 @@ int	is_texture(char *line)
 	if (aux && aux[1] == 'A')
 		return (1);
 	aux = ft_strchr(line, 'S');
-	if (aux && aux[1] == SPACE)
+	if (aux && ft_isspace(aux[1]))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 15:18:11 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/27 19:53:11 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:13:44 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	check_xpm(t_cub *c)
 				&c->sp.sz, &c->sp.endian);
 }
 
-static void	xpm2image(t_cub *c)
+void	xpm2image(t_cub *c)
 {
 	c->twall[NO].img = mlx_xpm_file_to_image(c->libx.mlx, c->tex.path_no,
 			&c->twall[NO].wid, &c->twall[NO].hei);
@@ -84,10 +84,10 @@ static void	resize_window(t_cub *c, int bmp)
 
 void	init_mlx_func(t_cub *c)
 {
-	c->libx.mlx = mlx_init();
+	/*c->libx.mlx = mlx_init();
 	if (!c->libx.mlx)
 		clean_exit(c, "MLX was not initialized\n", 1);
-	xpm2image(c);
+	xpm2image(c);*/
 	mlx_get_screen_size(c->libx.mlx, &c->win.wid, &c->win.hei);
 	resize_window(c, c->bmp);
 	if (!c->bmp)

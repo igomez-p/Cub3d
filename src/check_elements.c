@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:27:07 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 01:02:00 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:24:29 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	error_res_elements(char *line)
 	i = 0;
 	if (line[i] == 'R')
 		i++;
-	while (line[i] && (ft_isdigit(line[i]) || line[i] == SPACE))
+	while (line[i] && (ft_isdigit(line[i]) || ft_isspace(line[i])))
 		i++;
 	if (line[i])
 		return (1);
@@ -58,7 +58,7 @@ void	error_rgb_elements(t_cub *info, char *s)
 	i = 0;
 	if (s[i] == 'F' || s[i] == 'C')
 		i++;
-	while (s[i] && (ft_isdigit(s[i]) || s[i] == SPACE || s[i] == ','))
+	while (s[i] && (ft_isdigit(s[i]) || ft_isspace(s[i]) || s[i] == ','))
 	{
 		if (s[i] == ',' && !ft_isdigit(s[i + 1]))
 			clean_exit(info, "Invalid RGB format\n", 1);

@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/27 23:16:16 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/28 19:30:33 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,5 +240,9 @@ void			check_map_wall(t_cub *c);
 int				map_dimensions(t_cub *c);
 int				count_sprites(t_cub *c);
 void			ft_split(char const *s, char z, t_cub *c);
+int				ft_isspace(char c);
+int				all_textures(t_cub *c);
+void			xpm2image(t_cub *c);
+//void			free_stc_exit(t_cub *c, char *txt, char *stc);
 
 #endif

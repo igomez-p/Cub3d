@@ -6,7 +6,7 @@
 #    By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 15:29:03 by igomez-p          #+#    #+#              #
-#    Updated: 2021/04/22 21:10:44 by igomez-p         ###   ########.fr        #
+#    Updated: 2021/04/28 19:15:25 by igomez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC = cub.c				\
 	  src/sprites.c		\
 	  src/check_info.c	\
 	  src/check_elements.c \
+	  src/aux_read.c \
 	  library/ft_split.c \
 	  library/get_next_line.c \
 	  library/mem_functions.c	\
