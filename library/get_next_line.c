@@ -6,11 +6,12 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:50:00 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 19:52:58 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:25:26 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
+#include "../inc/cub.h"
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
@@ -93,28 +94,29 @@ static void	auxiliar(int fd, char *b, char **stc)
 	}
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, char **b, char **l)
 {
-	static char	*l;
-	char		*b;
+	//static char	*l;
+	//char		*b;
 	char		*aux;
 
-	if (!l)
-		l = ft_strdup("");
-	b = malloc(BUFFER_SIZE + 1);
-	if (!b || fd < 0 || BUFFER_SIZE <= 0 || !line)
+	if (!*l)
+		*l = ft_strdup("");
+	*b = malloc(BUFFER_SIZE + 1);
+	if (!*b || fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	auxiliar(fd, b, &l);
-	free(b);
-	aux = ft_strchr(l, '\n');
+	auxiliar(fd, *b, l);
+	free(*b);
+	aux = ft_strchr(*l, '\n');
 	if (aux != NULL)
 	{
-		l = ft_newstatic(aux, l, line);
-		if (l != NULL)
+		*l = ft_newstatic(aux, *l, line);
+		if (*l != NULL)
 			return (1);
 	}
 	free(*line);
-	*line = ft_strdup(l);
-	free(l);
+	*line = ft_strdup(*l);
+	free(*l);
+	*l = NULL;
 	return (0);
 }

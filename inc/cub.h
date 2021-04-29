@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 22:38:43 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:00:53 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,12 +181,17 @@ typedef struct s_check {
 	int			player;
 }				t_check;
 
+typedef struct s_read {
+	char		*b;
+	char		*l;
+	char		*stc;
+}				t_read;
+
 typedef struct s_cub {
 	int			nrows;
 	int			bmp;
 	char		*line;
 	char		**map;
-	//char		**aux;
 	t_render	res;
 	t_textures	tex;
 	t_colors	col;
@@ -200,6 +205,7 @@ typedef struct s_cub {
 	t_raycaster	ray;
 	t_draw		draw;
 	t_check		check;
+	t_read		r;
 }				t_cub;
 
 void			info_tex(char *line, t_cub *info);

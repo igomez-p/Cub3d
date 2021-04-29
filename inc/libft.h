@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:11:22 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/23 19:10:57 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:22:39 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int					ft_atoi(const char *str);
 char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char *s1, char const *s2);
 char				*ft_swap(char *l, char *buf);
-int					get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line, char **b, char **l);
 
 #endif

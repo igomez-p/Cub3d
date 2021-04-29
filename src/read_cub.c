@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:08:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 22:52:34 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:33:24 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	find_id(t_cub *c, char **stc)
 	else if (empty_line(c->line) && *stc != NULL)
 	{
 		ft_split(*stc, '\n', c);
-		c->check.map = 1;
+		//c->check.map = 1;
 	}
 	else if (!empty_line(c->line))
 		free_str_exit(c, "Unrecognized identifier\n", *stc);
@@ -77,7 +77,7 @@ void	read_cub(char *filename, t_cub *info)
 		clean_exit(info, "Cub file could not be opened\n", 1);
 	else
 	{
-		while (get_next_line(fd, &info->line) > 0)
+		while (get_next_line(fd, &info->line, &info->r.b, &info->r.l) > 0)
 		{
 			find_id(info, &stc_line);
 			free(info->line);
@@ -85,7 +85,7 @@ void	read_cub(char *filename, t_cub *info)
 		}
 		if (info->line != NULL && ft_strchr(info->line, '1'))
 			stc_line = info_map(info->line, stc_line, info);
-		if (!empty_line(info->line) && check_identifiers(info) >= TOTAL_IDS)
+		if (!empty_line(info->line) && check_identifiers(info) > TOTAL_IDS)
 			free_str_exit(info, "No information allowed after the map\n", stc_line);
 		ft_split(stc_line, '\n', info);
 		free(stc_line);
