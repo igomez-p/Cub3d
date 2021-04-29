@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:21:03 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/27 23:52:19 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:33:23 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ void	refill_map(t_cub *c)
 	int		len;
 
 	w = map_dimensions(c);
-	map = malloc((c->nrows + 1) * sizeof(char *));
+	map = (char **)malloc((c->nrows + 1) * sizeof(char *));
 	k = -1;
 	while (c->map[++k])
 	{
-		map[k] = malloc((w + 1) * sizeof(char));
+		map[k] = (char *)malloc((w + 1) * sizeof(char));
 		len = ft_strlen(c->map[k]);
 		ft_memcpy(map[k], c->map[k], len);
 		if (len < w)

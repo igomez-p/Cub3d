@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 18:19:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 20:23:09 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:49:08 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,8 @@ void	clean_exit(t_cub *c, char *str, int error)
 			free(c->line);
 		if (c->sprites)
 			free(c->sprites);
-		//if (c->sp.zbuf)
-		//	free(c->sp.zbuf);
 		if (c->r.l)
 			free(c->r.l);
-		if (c->r.stc != NULL)
-			free(c->r.stc);
 	}
 	exit(1);
 }
