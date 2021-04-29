@@ -6,13 +6,13 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/24 16:59:04 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 20:15:03 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:06:19 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-static int	is_char_valid(char c)
+int	is_char_valid(char c)
 {
 	return (c == EMPTY || c == WALL || c == OBJECT || ft_isspace(c) 
 		|| c == NORTH || c == WEST || c == SOUTH || c == EAST);

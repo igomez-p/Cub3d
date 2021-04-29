@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:55:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 19:19:52 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:53:39 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,22 @@ static char	*ft_word(char const *s, char c, int i)
 	return (w);
 }
 
-void	ft_split(char const *s1, char z, t_cub *c)
+void	ft_split(char **s1, char z, t_cub *c)
 {
 	int		i;
 	int		k;
 	char	*aux;
 
-	if (!s1)
+	if (!*s1)
 		return ;
-	c->map = (char **)malloc(sizeof(char *) * (cont_char(s1, z) + 1));
+	c->map = (char **)malloc(sizeof(char *) * (cont_char(*s1, z) + 1));
 	if (!c->map)
 		return ;
 	i = 0;
 	k = 0;
-	while (i <= (int)ft_strlen(s1) && cont_char(s1, z))
+	while (i <= (int)ft_strlen(*s1) && cont_char(*s1, z))
 	{
-		aux = ft_word(s1, z, i);
+		aux = ft_word(*s1, z, i);
 		if (ft_strlen(aux))
 		{
 			c->map[k] = ft_strdup(aux);

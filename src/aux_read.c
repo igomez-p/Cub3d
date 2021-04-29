@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:49:15 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 19:33:29 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 20:21:14 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,22 @@ void    check_open_tex(t_cub *c)
     if (fd < 0)
         clean_exit(c, "Fail to open texture\n", 1);
     close(fd);
+}
+
+int check_bad_end(t_cub *c)
+{
+    int i;
+
+    i = -1;
+    while (c->line[++i])
+    {
+        if (!is_char_valid(c->line[i]))
+            break;
+    }
+    if (!empty_line(c->line) && check_identifiers(c) >= TOTAL_IDS
+        && (c->line[i] && !is_char_valid(c->line[i])))
+    {
+        return (1);
+    }
+    return (0);
 }

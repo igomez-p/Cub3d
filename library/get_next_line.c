@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 16:50:00 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 19:25:26 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:44:50 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ static void	auxiliar(int fd, char *b, char **stc)
 
 int	get_next_line(int fd, char **line, char **b, char **l)
 {
-	//static char	*l;
-	//char		*b;
 	char		*aux;
 
 	if (!*l)
