@@ -6,7 +6,7 @@
 #    By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/06 15:29:03 by igomez-p          #+#    #+#              #
-#    Updated: 2021/04/28 19:15:25 by igomez-p         ###   ########.fr        #
+#    Updated: 2021/04/30 18:33:37 by igomez-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,8 +63,7 @@ $(NAME): $(OBJ)
 
 clean:
 		make -C minilibx-$(OS) clean
-		rm -rf $(OBJ) 
-		#libmlx.a libft.a 
+		rm -rf $(OBJ)
 
 fclean: clean
 		make -C minilibx-$(OS) clean
