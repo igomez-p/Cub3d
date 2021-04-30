@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:29:25 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/30 18:01:28 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/30 18:18:31 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	vertical_text(char *line, t_cub *info)
 	if (!ft_strncmp(line, "NO", 2) && !info->check.texno)
 	{
 		info->tex.path_no = path_tex(line, info, 2);
-		if (line[2] != SPACE || !info->tex.path_no)
+		if (!ft_isspace(line[2]) || !info->tex.path_no)
 			clean_exit(info, "Wrong north texture\n", 1);
 		info->check.texno = 1;
 		return (1);
@@ -51,7 +51,7 @@ static int	vertical_text(char *line, t_cub *info)
 	else if (!ft_strncmp(line, "SO", 2) && !info->check.texso)
 	{
 		info->tex.path_so = path_tex(line, info, 2);
-		if (line[2] != SPACE || !info->tex.path_so)
+		if (!ft_isspace(line[2]) || !info->tex.path_so)
 			clean_exit(info, "Wrong south texture\n", 1);
 		info->check.texso = 1;
 		return (1);
@@ -66,7 +66,7 @@ static int	horizontal_text(char *line, t_cub *info)
 	if (!ft_strncmp(line, "WE", 2) && !info->check.texwe)
 	{
 		info->tex.path_we = path_tex(line, info, 2);
-		if (line[2] != SPACE || !info->tex.path_we)
+		if (!ft_isspace(line[2]) || !info->tex.path_we)
 			clean_exit(info, "Wrong west texture\n", 1);
 		info->check.texwe = 1;
 		return (1);
@@ -76,7 +76,7 @@ static int	horizontal_text(char *line, t_cub *info)
 	else if (!ft_strncmp(line, "EA", 2) && !info->check.texea)
 	{
 		info->tex.path_ea = path_tex(line, info, 2);
-		if (line[2] != SPACE || !info->tex.path_ea)
+		if (!ft_isspace(line[2]) || !info->tex.path_ea)
 			clean_exit(info, "Wrong east texture\n", 1);
 		info->check.texea = 1;
 		return (1);
@@ -95,7 +95,7 @@ void	info_tex(char *line, t_cub *info)
 	if (!done && !ft_strncmp(line, "S", 1) && !info->check.texsp)
 	{
 		info->tex.path_sp = path_tex(line, info, 1);
-		if (line[1] != SPACE || !info->tex.path_sp)
+		if (!ft_isspace(line[1]) || !info->tex.path_sp)
 			clean_exit(info, "Wrong sprite texture\n", 1);
 		info->check.texsp = 1;
 	}
