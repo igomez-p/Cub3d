@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:21:03 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 20:33:23 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/30 17:55:58 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ static void	info_color_sky(char *line, t_cub *info)
 
 void	info_color(char *line, t_cub *info)
 {
-	error_rgb_elements(info, line);
 	remove_spaces(&line);
+	error_rgb_elements(info, line);
 	if (!ft_strncmp(line, "F", 1) && !info->check.floor)
 	{
 		if (line[1] != SPACE)

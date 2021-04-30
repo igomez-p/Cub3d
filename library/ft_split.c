@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:55:02 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 22:55:23 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/30 17:44:38 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ void	ft_split(char **s1, char z, t_cub *c)
 		if (ft_strlen(aux))
 		{
 			c->map[k] = ft_strdup(aux);
-			i += (ft_strlen(c->map[k]) + 1);
-			k++;
+			i += (ft_strlen(c->map[k++]) + 1);
 		}
 		else
 			i++;
