@@ -6,16 +6,21 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:08:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/30 17:39:22 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/30 18:08:45 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub.h"
 
-void	remove_spaces(char **line)
+void	remove_spaces(t_cub *c, char **line)
 {
 	while (**line && ft_isspace(**line))
 		*line = *line + 1;
+	if (**line != 'R' && **line != 'N' && **line != 'S' && **line != 'E'
+		&& **line != 'W' && **line != 'F' && **line != 'C')
+	{
+		clean_exit(c, "Unidentified character\n", 1);
+	}
 }
 
 int	empty_line(char *line)

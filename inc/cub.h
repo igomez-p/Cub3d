@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 18:51:44 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/29 20:20:33 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/30 18:01:06 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ int				save_bmp(t_cub *c);
 void			check_extension(char *filename);
 int				check_resolution(char *num);
 int				check_text(t_cub *c, char *text);
-void			remove_spaces(char **line);
+void			remove_spaces(t_cub *c, char **line);
 int				check_identifiers(t_cub *c);
 int				is_texture(char *line);
 int				error_tex_elements(char *line);

@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 19:29:25 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/28 19:25:22 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/04/30 18:01:28 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	info_tex(char *line, t_cub *info)
 {
 	int	done;
 
-	remove_spaces(&line);
+	remove_spaces(info, &line);
 	done = vertical_text(line, info) || horizontal_text(line, info);
 	if (!done && !ft_strncmp(line, "S", 1) && !info->check.texsp)
 	{
