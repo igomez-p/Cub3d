@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 18:49:15 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/30 17:23:36 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:48:01 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	all_textures(t_cub *c)
 
 void	free_str_exit(t_cub *c, char *txt, char *str)
 {
+	refill_map(c);
 	if (str != NULL)
 		free(str);
 	clean_exit(c, txt, 1);

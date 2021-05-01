@@ -6,7 +6,7 @@
 /*   By: igomez-p <ire.go.pla@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 19:08:54 by igomez-p          #+#    #+#             */
-/*   Updated: 2021/04/30 18:08:45 by igomez-p         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:47:21 by igomez-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	find_id(t_cub *c)
 	}
 	else if (ft_strchr(c->line, '1') && check_identifiers(c) < TOTAL_IDS)
 		clean_exit(c, "Identifiers missing\n", 1);
-	else if (empty_line(c->line) && c->r.stc != NULL)
+	else if (empty_line(c->line) && c->r.stc != NULL && !c->check.map)
 	{
 		ft_split(&c->r.stc, '\n', c);
 		c->check.map = 1;
